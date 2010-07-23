@@ -13,9 +13,9 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
 # set standard text editor: emacs!
-export EDITOR='emacsclient -t'
-export VISUAL='emacsclient -t'
-export ALTERNATE_EDITOR='emacs -nw'
+export EDITOR='emacs -nw'
+export VISUAL='emacs -nw'
+export ALTERNATE_EDITOR='emacs'
 
 # change directory path variable
 export CDPATH=.:..
