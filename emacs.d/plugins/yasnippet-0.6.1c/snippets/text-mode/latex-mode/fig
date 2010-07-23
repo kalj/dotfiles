@@ -1,0 +1,10 @@
+#contributor : Karl Ljungkvist <k.ljungkvist@gmail.com>
+#name : fig
+# --
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=${1:0.7}\textwidth]{$2}
+  \caption{$3}
+  \label{$4}
+\end{figure}

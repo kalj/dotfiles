@@ -1,0 +1,12 @@
+hardstatus alwayslastline "%{+r} %-w%{+bu I}%n-%t%{-}%+w %= %{+ b}| %D %d %LM %{+b I}%c "
+
+caption splitonly " %{B}%n %t%{-}"
+
+escape 
+
+nethack on
+
+vbell off
+
+startup_message off
+

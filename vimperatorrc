@@ -1,0 +1,105 @@
+" Window title
+" set titlestring=Firefox
+
+" Editor, C-i invokes it in text fields
+set editor='emacsclient -c'
+
+" Default search keyword. Has to be changed since 'g' is google
+set defsearch='g'
+
+" Command line and search patterns history
+set history=10000
+
+" Show pattern matches as you type
+set incsearch
+
+
+" Hilight previous search pattern matches
+set hlsearch
+
+" Override ignorecase if pattern has uppercase chars
+set smartcase
+
+" Show completions and use AwesomeBar (+search plugins)
+set complete=sl
+set wildoptions=auto
+
+" Ex commands output in a new tab by default (prefs, addons...)
+set newtab=all
+
+
+
+" Key mappings
+
+
+" Search with C-k
+noremap <C-k> :open g 
+
+" Focus the address bar with C-l
+map <C-l> o
+
+" M-x enters command mode
+noremap <A-x> :
+
+" Emacs navigation in command line and insert mode
+cmap <C-f> <Right>
+cmap <C-b> <Left>
+cmap <A-b> <C-Left>
+cmap <A-f> <C-Right>
+
+cmap <C-n> <Tab>
+cmap <C-p> <S-Tab>
+
+cmap <C-j> <CR>
+
+
+" Switch hints to ' and " respectively, for right hand usage
+noremap \' f
+noremap \" F
+
+
+" Use C-v and M-v for jump scrolling
+noremap <C-v> <C-d>
+noremap <A-v> <C-u>
+
+" C-v was pass-next, remap to bind with default keys
+noremap <C-q> <C-v>
+
+
+" Copy the current URL to the clipboard with M-w
+noremap <A-w> y
+"
+" Copy selected text to the clipboard with C-w 
+noremap <C-w> Y
+
+" Paste the current clipboard selection to a new buffer with C-y
+noremap <C-y> P
+
+
+" C-g as cancel (C-q is stop)
+cmap <C-g> <Esc>
+imap <C-g> <Esc>
+noremap <C-g> <Esc>
+
+" Avoid Find dialog when canceling a started command, C-x C-g
+noremap <C-x><C-g> <Esc>
+
+
+" Kill the buffer with C-x k
+noremap <C-x>k d
+
+" Undo close tab with C-/ (also with C-Shift-t, as C-t is new tab)
+noremap <C-/> u
+
+" Exit and save the session with C-x C-c
+noremap <C-x><C-c> ZZ
+
+" Buffer lists with C-x b and C-x C-b
+noremap <C-x>b b
+noremap <C-x><C-b> B
+
+
+" M-Up/Dn toggles the toolbar and scrollbars
+map <A-Down> :set go+=brT<CR>
+map <A-Up> :set go-=brT<CR>
+
