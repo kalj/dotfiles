@@ -219,7 +219,7 @@ alias emd='emacs --daemon'
 # various abrevations/shorcuts
 alias hemsida='lftp -u kalj0193 home.student.uu.se'
 alias ciplogin='ssh kalle@ciplogin.physik.uni-freiburg.de'
-alias bashrc='emt ~/.bashrc'
+alias bashrc="$EDITOR ~/.bashrc"
 alias calc='bc -l'
 
 
