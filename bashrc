@@ -13,9 +13,9 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
 # set standard text editor: emacs!
-export EDITOR='emt'
-export VISUAL='emt'
-export ALTERNATE_EDITOR='emx'
+export EDITOR='emacsclient -t'
+export VISUAL='emacsclient -t'
+export ALTERNATE_EDITOR='emacs -nw'
 
 # change directory path variable
 export CDPATH=.:..
@@ -99,7 +99,9 @@ case "$TERM" in
 esac
 
 
-########### Greeting
+#==============================================================================
+# Greeting
+#==============================================================================
 
 # printHeader () {
 
@@ -122,7 +124,9 @@ esac
 
 # }
 
-# Alias definitions.
+#==============================================================================
+# Aliases
+#==============================================================================
 
 alias ls='ls --group-directories-first'
 
@@ -210,7 +214,7 @@ alias psgrep='ps -A | grep'
 alias rmake='make clean && make'
 
 # emacs
-# alias emx='emacs -nw' # i want to break this habit!
+alias emx='emacs -nw'
 alias smx='sudo \emacs -nw'
 alias emc='emacsclient -c -n'
 alias emt='emacsclient -t'
@@ -221,12 +225,32 @@ alias hemsida='lftp -u kalj0193 home.student.uu.se'
 alias ciplogin='ssh kalle@ciplogin.physik.uni-freiburg.de'
 alias bashrc="$EDITOR ~/.bashrc"
 alias calc='bc -l'
+alias go='gnome-open'
 
+# apt commands
+alias ainstall='sudo apt-get install'
+alias apurge='sudo apt-get purge'
+alias aremove='sudo apt-get remove'
+alias aclean='sudo apt-get autoremove && sudo apt-get autoclean'
+alias aupgrade='sudo apt-get dist-upgrade'
+alias aupdate='sudo apt-get update'
+alias asearch='apt-cache search'
+alias ashow='apt-cache show'
+alias dpgrep='dpkg -l | grep'
+
+# pacman
+alias supd='sudo pacman -Syu'
+
+# ssh
+alias sshx='ssh -c arcfour,blowfish-cbc -X -C'
+
+# Transmission BitTorrent client
+alias torr='transmission-remote'
 
 # shortcuts to openoffice.org
 alias oocalc='soffice -calc'
 alias oowrite='soffice -writer'
 
-alias supd='sudo pacman -Syu'
-
-alias sshx='ssh -c arcfour,blowfish-cbc -X -C'
+# matlab: remove splash screen at startup
+# alias matlab='matlab -nosplash'
+# alias mlab='matlab -nodesktop'
