@@ -43,7 +43,7 @@ Emacs*font:				Monospace-10
 
 Emacsclient*toolBar:			off
 
-!! night mode
+!! 'night mode'
 Emacs.background:			black
 Emacs.foreground:			lightgrey
 Emacs.modeline*attributeForeground:	black
