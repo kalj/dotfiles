@@ -1,5 +1,5 @@
-; .emacs --
-; Last changed: <2010-07-20 11:48:45 CEST>
+; emacs --
+; Last changed: <2010-07-23 21:45:30 CEST>
 
 ;;-----------------------------------------------------------------------------
 ;; general behavior/appearance mods
@@ -23,13 +23,13 @@
 ;; framework doesn't get this and still uses it...
 (tool-bar-mode -1)
 
-;; remove the scrollbar - NOT handled in .Xdefaults
+;; remove the scrollbar - handled in .Xdefaults
 ;; (scroll-bar-mode -1)
 
-;; remove menu bar when in terminal mode!
-(if (not window-system)
-    (menu-bar-mode -1)
-  nil)
+;; remove menu bar (handled in Xresources)
+;; (if (not window-system)
+    ;; (menu-bar-mode -1)
+  ;; nil)
 
 ;; Change title bar to ~/file-path if the current buffer is a
 ;; real file or buffer name if it is just a buffer.
