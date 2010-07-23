@@ -37,7 +37,6 @@ URxvt.urgentOnBell:  			true
 Xft*dpi: 				80
 
 Emacs*toolBar:				off
-Emacs*menuBar:				off
 Emacs*verticalScrollBars:		off
 Emacs*font:				Monospace-10
 

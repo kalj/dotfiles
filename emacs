@@ -1,5 +1,5 @@
 ; emacs --
-; Last changed: <2010-07-23 21:45:30 CEST>
+; Last changed: <2010-07-23 21:49:44 CEST>
 
 ;;-----------------------------------------------------------------------------
 ;; general behavior/appearance mods
@@ -26,9 +26,9 @@
 ;; remove the scrollbar - handled in .Xdefaults
 ;; (scroll-bar-mode -1)
 
-;; remove menu bar (handled in Xresources)
+;; remove menu bar (can't be handled in Xresources, since should hold for -nw also)
 ;; (if (not window-system)
-    ;; (menu-bar-mode -1)
+    (menu-bar-mode -1)
   ;; nil)
 
 ;; Change title bar to ~/file-path if the current buffer is a
