@@ -131,8 +131,7 @@ esac
 alias ls='ls --group-directories-first'
 
 # enable color support of ls et al
-# NOTE: in ubuntu this was /usr/bin/dircolors
-if [ -x /bin/dircolors ]; then
+if [ -x /bin/dircolors ] || [ -x /usr/bin/dircolors ]; then
     eval $(dircolors -b)    
     [ -e "$HOME/.dircolors" ] && eval $(dircolors -b $HOME/.dircolors)
     
