@@ -68,7 +68,7 @@ esac
 
 # if unicode, set a fancy prompt 
 case "$LANG" in
-    *UTF-8)
+    *UTF-8|*utf8)
     	PS1="┌[\h \w]\n└${USER_COLOR}\u${NORMAL} \$ "
     	;;
     *)
