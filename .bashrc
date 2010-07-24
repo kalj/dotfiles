@@ -15,7 +15,7 @@ shopt -s checkwinsize
 # set standard text editor: emacs!
 export EDITOR='emacs -nw'
 export VISUAL='emacs -nw'
-export ALTERNATE_EDITOR='emacs'
+export ALTERNATE_EDITOR='\emacs -q'
 
 # change directory path variable
 export CDPATH=.:..
@@ -214,7 +214,7 @@ alias rmake='make clean && make'
 
 # emacs
 alias emx='emacs -nw'
-alias smx='sudo \emacs -nw'
+alias smx='sudo emacs -nw'
 alias emc='emacsclient -c -n'
 alias emt='emacsclient -t'
 alias emd='emacs --daemon'
