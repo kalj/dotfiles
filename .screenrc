@@ -10,3 +10,4 @@ vbell off
 
 startup_message off
 
+bind o focus
