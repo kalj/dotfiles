@@ -164,7 +164,6 @@ then inserts a comment at the end of the line."
 
 (global-set-key [f5] 'my-initial-split)
 
-
 ;; compile code using f12 and f11
 (global-set-key [f12] 'compile)
 (global-set-key [f11] 'recompile)
@@ -175,6 +174,17 @@ then inserts a comment at the end of the line."
 ;; From anrxc: Menu bar toggle, as in his vimperator setup 
 (global-set-key (kbd "<M-down>") 'menu-bar-mode)
 (global-set-key (kbd "<M-up>") 'menu-bar-mode)
+
+;;-----------------------------------------------------------------------------
+;; Encoding systems
+;;-----------------------------------------------------------------------------
+
+(prefer-coding-system 'utf-8)
+(set-language-environment 'utf-8)
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
 
 ;;-----------------------------------------------------------------------------
 ;; Backup and autosave folders
