@@ -20,6 +20,8 @@ export ALTERNATE_EDITOR='\emacs -q'
 # change directory path variable
 export CDPATH=.:..
 
+export PAGER=less
+
 # Set default GPG key
 export GPGKEY=1D2D3381
 
@@ -204,6 +206,10 @@ fix-perms ()  {
     find "$1" -type f -exec chmod 644 {} \;
 }
 
+fix-perms-restr ()  {
+    find "$1" -type d -exec chmod 700 {} \;
+    find "$1" -type f -exec chmod 600 {} \;
+}
 
 # system information
 alias df='df -h'
