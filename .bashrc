@@ -22,9 +22,6 @@ export CDPATH=.:..
 
 export PAGER=less
 
-# Set default GPG key
-export GPGKEY=1D2D3381
-
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... and ignore same sucessive entries.
 export HISTCONTROL=ignoredups
