@@ -72,7 +72,7 @@ case "$LANG" in
     	;;
     *)
 	# without funny characters
-	PS1="|\h: \w\n|${USER_COLOR}\u${NORMAL} \$ "
+	PS1="|[\h \w]\n|${USER_COLOR}\u${NORMAL} \$ "
 	;;
     # *)
     # 	# fail-safe
