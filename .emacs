@@ -130,6 +130,8 @@
 (global-set-key (kbd "M-S-f") 'forward-word)
 (global-set-key (kbd "M-S-b") 'backward-word)
 
+;; Activation of vi-mode
+;; (global-set-key (kbd "C-z") 'vi-mode)
 
 ;; Improve the comment-dwim command. Partially with help from here:
 ;; http://www.emacswiki.org/emacs/CommentingCode
@@ -246,6 +248,7 @@ then inserts a comment at the end of the line."
 (load "haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;;-----------------------------------------------------------------------------
