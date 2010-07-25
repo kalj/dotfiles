@@ -1,4 +1,6 @@
+!! -----------------------------------------------------------------------------
 !! (u)xterm
+!! -----------------------------------------------------------------------------
 XTerm*reverseVideo: 			True
 UXTerm*reverseVideo: 			True
 
@@ -11,20 +13,22 @@ UXTerm*backarrowKey:			false
 XTerm*ttyModes:				erase ^?
 UXTerm*ttyModes:			erase ^?
 
+!! -----------------------------------------------------------------------------
+!! urxvt
+!! -----------------------------------------------------------------------------
+
 ! urxvt*reverseVideo: 			True
 
-! URxvt.transparent: true
-! URxvt.shading: 50 
+! URxvt.transparent: 			true
+! URxvt.shading: 				50 
 
 URxvt*depth:				32
-urxvt*background: rgba:0111/0111/0111/dddd
+urxvt*background:			rgba:0111/0111/0111/dddd
 
-URxvt.iso14755_52: false
-URxvt.background: black
-URxvt.foreground: white
+URxvt.iso14755_52: 			false
+URxvt.background: 			black
+URxvt.foreground: 			white
 
-
-!! urxvt
 urxvt*scrollBar: 			Off
 URxvt.perl-ext:				default,matcher
 URxvt.urlLauncher:     			/usr/bin/firefox
@@ -33,18 +37,24 @@ URxvt.urgentOnBell:  			true
 
 ! Urxvt.secondaryScroll:  true    ! Enable Shift-PageUp/Down in screen
 
-
-Xft*dpi: 				80
+!! -----------------------------------------------------------------------------
+!! Emacs
+!! -----------------------------------------------------------------------------
 
 Emacs*toolBar:				off
 Emacs*verticalScrollBars:		off
-Emacs*font:				Monospace-10
+Emacs*font:				Monospace-9
 
 Emacsclient*toolBar:			off
 
-!! 'night mode'
-Emacs.background:			black
-Emacs.foreground:			lightgrey
+!! 'day mode'
+Emacs.background:			white
+Emacs.foreground:			black
 Emacs.modeline*attributeForeground:	black
-Emacs.cursorColor: 			lightgrey
+Emacs.cursorColor:			black
 
+!! 'night mode'
+! Emacs.background:			black
+! Emacs.foreground:			lightgrey
+! Emacs.modeline*attributeForeground:	black
+! Emacs.cursorColor: 			lightgrey
