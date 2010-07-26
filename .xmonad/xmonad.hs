@@ -2,28 +2,7 @@
 -- xmonad config file.
 --
 
-import XMonad
-
-import qualified XMonad.StackSet as W
-
--- import XMonad.Layout.SimplestFloat
-
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig
-import System.IO
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.SetWMName
-
-import XMonad.Actions.CycleWS
-
-import XMonad.Prompt    
-import XMonad.Prompt.Shell
-
-import XMonad.Hooks.UrgencyHook
-
-    
+-- Configuration names
 -- {
 --       -- simple stuff
 --         terminal           = myTerminal,
@@ -47,13 +26,31 @@ import XMonad.Hooks.UrgencyHook
 --         startupHook        = myStartupHook
 --     }
 
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Util.EZConfig
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.SetWMName
+import XMonad.Actions.CycleWS
+
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run(spawnPipe)
+import System.IO
+import XMonad.Prompt    
+import XMonad.Prompt.Shell
+import XMonad.Hooks.UrgencyHook
 
 
---   xmonad $ defaultConfig
+-- =============================================================================
+-- Misc. variables
+-- =============================================================================
 
--- commands
+myTerminal = "urxvtc"
+myModMask = mod4Mask
 
-myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+-- =============================================================================
+-- Commands and key bindings
+-- =============================================================================
 
 sshotCmd="scrot '%F-%T_$wx$h_scrot.png' -e 'mv $f ~/media/pics/sshots/'"
 dmenuCmd="exe=`dmenu_path | dmenu -nb '#000' -nf '#AAA' -sb '#AAA' -sf '#000'"++
@@ -67,21 +64,12 @@ pwroff = "sudo poweroff"
 rboot = "sudo reboot"
 lckscrn = "xscreensaver-command -lock"
 
-
--- myTerminal = "uxterm"
-myTerminal = "urxvtc"
-
-
 myXPConfig = defaultXPConfig { position = Top
                              -- , font = "xft:Bitstream Vera Sans Mono:pixelsize=10"
                              , font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
                              , height = 15
                              }
              
-          
--- Keys
-myModMask = mod4Mask
-            
 myKeys = [ ("M-b", sendMessage ToggleStruts)
          , ("<Print>", spawn sshotCmd)
          , ("C-<Print>", spawn  $ "sleep 0.2; "++ sshotCmd ++ " -s" )
@@ -105,53 +93,57 @@ myKeys = [ ("M-b", sendMessage ToggleStruts)
          , ("M-`", spawn myTerminal)
          , ("M-<F3>", spawn "firefox")
          , ("M-<F4>", spawn "thunderbird")
-         , ("M-0", windows $ W.greedyView "0")
-         , ("M-S-0", windows $ W.shift "0")
-         -- , [((m .|. modm, xK_0), windows $ f "0")
-         --        | (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-           
-         ]         
+         ]
+
 -- XF86Sleep
 -- XF86ScreenSaver
 -- XF86HomePage
 -- Help
-    
-         -- , ("M-m", sendMessage $ JumpToLayout "Full")     
 
-
+-- =============================================================================
+-- Layout Hook
+-- =============================================================================
 myLayoutHook = avoidStruts ( layoutHook defaultConfig)
--- myLayoutHook = avoidStruts ( ( layoutHook defaultConfig ) ||| simplestFloat )
 
+-- =============================================================================
+-- Manage Hook
+-- =============================================================================
 
 myManageHook = composeAll
-               [ className =? "Namoroka" --> doShift "1"
-               , className =? "Lanikai" --> doShift "9"
-               , className =? "Thunderbird" --> doShift "9"                              
+               [ className =? "Firefox" --> doShift "1"
+               , className =? "Namoroka" --> doShift "1"
                , className =? "Pidgin" --> doShift "8"
+               , className =? "Lanikai" --> doShift "9"
+               , className =? "Thunderbird" --> doShift "9"
                , manageDocks
                ]
 
+
+-- =============================================================================
+-- Log hook
+-- =============================================================================
+
+myLogHook xmproc = dynamicLogWithPP $ xmobarPP
+                   { ppOutput = hPutStrLn xmproc
+                   , ppTitle = xmobarColor "green" "" . shorten 80
+                   , ppUrgent = xmobarColor "yellow" "red" . xmobarStrip
+                   }
+
+-- =============================================================================
+-- Main
+-- =============================================================================
+
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
-  -- dzproc <- spawnPipe "dzen2"
-  xmonad $ withUrgencyHook NoUrgencyHook defaultConfig 
-             { manageHook = myManageHook <+> manageHook defaultConfig
-             , layoutHook = myLayoutHook
-             -- , logHook = dynamicLogWithPP $ dzenPP
-             --             { ppOutput = hPutStrLn dzproc
-             --                          }
-                         -- , ppTitle = dzenColor "green" "" . shorten 50
-                         -- }
-             , logHook = dynamicLogWithPP $ xmobarPP
-                         { ppOutput = hPutStrLn xmproc
-                         , ppTitle = xmobarColor "green" "" . shorten 80
-                         , ppUrgent = xmobarColor "yellow" "red" . xmobarStrip
-                         }
-             , modMask            = myModMask
-             , terminal           = myTerminal
-             , normalBorderColor  = "#222222"
-             , focusedBorderColor = "#705022"
-             , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
-             -- , startupHook	  = return () >> checkKeymap myConfig myKeys
-             , workspaces         = myWorkspaces
-             } `additionalKeysP` myKeys
+  xmonad $ withUrgencyHook NoUrgencyHook
+         defaultConfig {
+         modMask            = myModMask
+       , terminal           = myTerminal
+       , normalBorderColor  = "#222222"
+       , focusedBorderColor = "#705022"
+       , manageHook = myManageHook <+> manageHook defaultConfig
+       , layoutHook = myLayoutHook
+       , logHook = myLogHook xmproc
+       , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
+       } `additionalKeysP` myKeys
+
