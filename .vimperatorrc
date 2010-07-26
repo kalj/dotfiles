@@ -100,6 +100,6 @@ noremap <C-x><C-b> B
 
 
 " M-Up/Dn toggles the toolbar and scrollbars
-map <A-Down> :set go+=brT<CR>
-map <A-Up> :set go-=brT<CR>
+map <A-Down> :set go+=mbrT<CR>
+map <A-Up> :set go-=mbrT<CR>
 
