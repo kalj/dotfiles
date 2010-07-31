@@ -46,6 +46,8 @@ cmap <C-f> <Right>
 cmap <C-b> <Left>
 cmap <A-b> <C-Left>
 cmap <A-f> <C-Right>
+imap <A-b> <C-Left>
+imap <A-f> <C-Right>
 
 cmap <C-n> <Tab>
 cmap <C-p> <S-Tab>
@@ -99,7 +101,7 @@ noremap <C-x>b b
 noremap <C-x><C-b> B
 
 
-" M-Up/Dn toggles the toolbar and scrollbars
-map <A-Down> :set go+=mbrT<CR>
-map <A-Up> :set go-=mbrT<CR>
+" M-Up/Dn toggles the toolbar and menubar
+map <A-Down> :set go+=mT<CR>
+map <A-Up> :set go-=mT<CR>
 
