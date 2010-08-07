@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @(#)make.py
 # @author Karl Ljungkvist
-# Last changed: <2010-07-24 11:49:40 CEST>
+# Last changed: <2010-08-07 11:35:48 CEST>
 
 
 import os
@@ -70,7 +70,8 @@ if __name__ == '__main__':
                # directory versioned
                '.vimperatorrc',
                '.viper',
-               '.Xresources']
+               '.Xresources',
+               '.gitconfig']
 
     setup(None,homefiles)
 
