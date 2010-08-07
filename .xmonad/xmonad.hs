@@ -33,77 +33,34 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.SetWMName
 import XMonad.Actions.CycleWS
 
-import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run(spawnPipe)
-import System.IO
-import XMonad.Prompt    
-import XMonad.Prompt.Shell
-import XMonad.Hooks.UrgencyHook
+import XMonad.Config.Gnome    
+import DBus
+import DBus.Connection
+import DBus.Message
+import Control.OldException
+import Control.Monad
 
 
 -- =============================================================================
 -- Misc. variables
 -- =============================================================================
 
-myTerminal = "urxvtc"
+myTerminal = "gnome-terminal"
 myModMask = mod4Mask
 
 -- =============================================================================
 -- Commands and key bindings
 -- =============================================================================
 
-sshotCmd="scrot '%F-%T_$wx$h_scrot.png' -e 'mv $f ~/media/pics/sshots/'"
-dmenuCmd="exe=`dmenu_path | dmenu -nb '#000' -nf '#AAA' -sb '#AAA' -sf '#000'"++
-          " -fn '-misc-fixed-*-*-*-*-12-*-*-*-*-*-*-*'` && eval \"exec $exe\""
-volmute = "amixer -q set Master toggle"
-volup = "amixer -q set Master 5%+"
-voldown = "amixer -q set Master 5%-"
-suspnd = "sudo pm-suspend"
-hibe = "sudo pm-hibernate"        
-pwroff = "sudo poweroff"         
-rboot = "sudo reboot"
-lckscrn = "xscreensaver-command -lock"
-
-myXPConfig = defaultXPConfig { position = Top
-                             -- , font = "xft:Bitstream Vera Sans Mono:pixelsize=10"
-                             , font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
-                             , height = 15
-                             }
-             
-myKeys = [ ("M-b", sendMessage ToggleStruts)
-         , ("<Print>", spawn sshotCmd)
-         , ("C-<Print>", spawn  $ "sleep 0.2; "++ sshotCmd ++ " -s" )
-         , ("M-a", spawn dmenuCmd)
-         , ("M-x", shellPrompt $ myXPConfig )
-         , ("<XF86AudioMute>", spawn volmute)
-         , ("<XF86AudioRaiseVolume>", spawn volup)
-         , ("<XF86AudioLowerVolume>", spawn voldown)
-         , ("<XF86Sleep>", spawn suspnd)
-         , ("C-S-<XF86Sleep>", spawn hibe)
-         , ("<XF86ScreenSaver>", spawn lckscrn)
-         , ("<XF86AudioPlay>", spawn "mpc toggle")
-         , ("<XF86AudioStop>", spawn "mpc stop")
-         , ("<XF86AudioNext>", spawn "mpc next")
-         , ("<XF86AudioPrev>", spawn "mpc prev")
-         , ("C-<XF86AudioNext>", spawn "mpc seek +1")
-         , ("C-<XF86AudioPrev>", spawn "mpc seek -1")
-         , ("C-S-<XF86AudioNext>", spawn "mpc seek +5")
-         , ("C-S-<XF86AudioPrev>", spawn "mpc seek -5")
+myKeys = [ ("M-a", gnomeRun)
+         , ("M-S-<KP_Enter>", spawn myTerminal)
          , ("M-<Tab>", toggleWS)
          , ("M-`", spawn myTerminal)
-         , ("M-<F3>", spawn "firefox")
-         , ("M-<F4>", spawn "thunderbird")
          ]
-
--- XF86Sleep
--- XF86ScreenSaver
--- XF86HomePage
--- Help
 
 -- =============================================================================
 -- Layout Hook
 -- =============================================================================
-myLayoutHook = avoidStruts ( layoutHook defaultConfig)
 
 -- =============================================================================
 -- Manage Hook
@@ -115,7 +72,6 @@ myManageHook = composeAll
                , className =? "Pidgin" --> doShift "8"
                , className =? "Lanikai" --> doShift "9"
                , className =? "Thunderbird" --> doShift "9"
-               , manageDocks
                ]
 
 
@@ -123,27 +79,54 @@ myManageHook = composeAll
 -- Log hook
 -- =============================================================================
 
-myLogHook xmproc = dynamicLogWithPP $ xmobarPP
-                   { ppOutput = hPutStrLn xmproc
-                   , ppTitle = xmobarColor "green" "" . shorten 80
-                   , ppUrgent = xmobarColor "yellow" "red" . xmobarStrip
-                   }
+pangoColor :: String -> String -> String
+pangoColor fg = wrap left right
+    where
+      left = "<span foreground=\"" ++ fg ++ "\">"
+      right = "</span>"
+
+sanitize :: String -> String
+sanitize [] = []
+sanitize (x:rest) | fromEnum x > 127 = "&#" ++ show (fromEnum x) ++ "; " ++ sanitize rest
+                  | otherwise 	   = x : sanitize rest
+
+myLogHook dbus = dynamicLogWithPP $ defaultPP {
+                   ppOutput		= \ str -> do
+                                            let str' = "<span font=\"Terminus 9 Bold\">" ++ str ++ "</span>"
+                                            msg <- newSignal "/org/xmonad/Log" "org.xmonad.Log" "Update"
+                                            addArgs msg [String str']
+                                            --If the send fails, ignore it.
+                                            send dbus msg 0 `catchDyn` (\ (DBus.Error _name _msg) -> return 0)
+                                            return ()
+                 , ppTitle = pangoColor "#003366" . shorten 100
+                 , ppCurrent = pangoColor "#006666" . wrap "[" "]"
+                 , ppVisible = pangoColor "#663366" . wrap "(" ")"
+                 , ppHidden = wrap " " " "
+                 , ppUrgent = pangoColor "red"
+                 }
 
 -- =============================================================================
 -- Main
 -- =============================================================================
 
-main = do
-  xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
-  xmonad $ withUrgencyHook NoUrgencyHook
-         defaultConfig {
-         modMask            = myModMask
-       , terminal           = myTerminal
-       , normalBorderColor  = "#222222"
-       , focusedBorderColor = "#705022"
-       , manageHook = myManageHook <+> manageHook defaultConfig
-       , layoutHook = myLayoutHook
-       , logHook = myLogHook xmproc
-       , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
-       } `additionalKeysP` myKeys
+-- This retry is really awkward, but sometimes DBus won't let us get our
+-- name unless we retry a couple times.
+getWellKnownName :: Connection -> IO ()
+getWellKnownName dbus = tryGetName `catchDyn` (\ (DBus.Error _ _) -> getWellKnownName dbus)
+    where tryGetName = do
+            namereq <- newMethodCall serviceDBus pathDBus interfaceDBus "RequestName"
+            addArgs namereq [String "org.xmonad.Log", Word32 5]
+            sendWithReplyAndBlock dbus namereq 0
+            return ()
 
+main = withConnection Session $ \ dbus -> do
+         putStrLn "Getting well-known name."
+         getWellKnownName dbus
+         putStrLn "Got name, starting XMonad."
+         xmonad $ gnomeConfig {
+                      modMask = myModMask
+                    , terminal = myTerminal
+                    , manageHook = myManageHook <+> manageHook gnomeConfig
+                    , logHook = myLogHook dbus
+                    , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"                                
+                    } `additionalKeysP` myKeys
