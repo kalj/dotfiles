@@ -1,0 +1,10 @@
+[user]
+        name = Karl Ljungkvist
+        email = k.ljungkvist@gmail.com
+
+[color]
+        ui = auto
+        branch = auto
+        diff = auto
+        status = auto
+
