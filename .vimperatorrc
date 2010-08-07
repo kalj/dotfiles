@@ -2,7 +2,7 @@
 " set titlestring=Firefox
 
 " Editor, C-i invokes it in text fields
-set editor='emacsclient -c'
+set editor='emacs'
 
 " Default search keyword. Has to be changed since 'g' is google
 set defsearch='g'
