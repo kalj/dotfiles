@@ -43,7 +43,7 @@ URxvt.urgentOnBell:  			true
 
 Emacs*toolBar:				off
 Emacs*verticalScrollBars:		off
-Emacs*font:				Monospace-8
+Emacs*font:				Liberation Mono-8
 
 Emacsclient*toolBar:			off
 
