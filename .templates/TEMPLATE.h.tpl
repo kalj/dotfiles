@@ -1,7 +1,7 @@
-/*
+/* -*- c-basic-offset:4; tab-width:4; indent-tabs-mode:nil -*-
  * @(#)TEMPLATE.h.tpl
  * @author (>>>USER_NAME<<<)
- * Last changed: <2009-01-26 09:37:27 CET>
+ * Last changed: <2010-08-09 13:10:31 CEST>
  *
  *   (>>>POINT<<<)
  */
