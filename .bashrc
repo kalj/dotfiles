@@ -210,7 +210,7 @@ fix-perms-restr ()  {
 
 # system information
 alias df='df -h'
-alias psgrep='ps -A | grep'
+alias psgrep='ps aux | grep'
 
 # programming etc
 alias rmake='make clean && make'
