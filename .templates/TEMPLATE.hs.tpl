@@ -1,0 +1,7 @@
+--
+-- @(#)TEMPLATE.hs.tpl
+-- @author (>>>USER_NAME<<<)
+-- Last changed: <2010-08-11 21:39:06 CEST>
+--
+-- (>>>POINT<<<)
+--
