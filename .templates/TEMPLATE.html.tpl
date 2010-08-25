@@ -12,7 +12,7 @@
     
     <hr>
     <address>
-      <a href="mailto:(>>>LOGIN_NAME<<<)@(>>>HOST_ADDR<<<)">(>>>USER_NAME<<<)</a>,
+      <a href="mailto:(>>>AUTHOR<<<)">(>>>USER_NAME<<<)</a>,
       (>>>DATE<<<)
     </address>
   </body>
