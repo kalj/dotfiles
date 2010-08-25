@@ -1,6 +1,6 @@
 /*
  * @(#)TEMPLATE.java.tpl
- * @author (>>>USER_NAME<<<)
+ * @author (>>>USER_NAME<<<) <(>>>AUTHOR<<<)>
  * Last changed: <2009-01-26 09:36:09 CET>
  *
  * (>>>POINT<<<)
