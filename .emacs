@@ -1,5 +1,5 @@
 ; .emacs --
-; Last changed: <2010-08-25 10:39:35 CEST>
+; Last changed: <2010-08-25 10:40:58 CEST>
 
 ;;-----------------------------------------------------------------------------
 ;; User variables
@@ -177,7 +177,7 @@ then inserts a comment at the end of the line."
 (global-set-key [f11] 'recompile)
 
 ;; Quicker access to go-to line
-(global-set-key (kbd "M-g") 'goto-line)
+;; (global-set-key (kbd "M-g") 'goto-line)
 
 ;; From anrxc: Menu bar toggle, as in his vimperator setup 
 (global-set-key (kbd "<M-down>") 'menu-bar-mode)
