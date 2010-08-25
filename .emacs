@@ -1,5 +1,5 @@
 ; .emacs --
-; Last changed: <2010-08-25 10:40:58 CEST>
+; Last changed: <2010-08-25 10:55:28 CEST>
 
 ;;-----------------------------------------------------------------------------
 ;; User variables
@@ -139,27 +139,29 @@
 ;; Activation of vi-mode
 ;; (global-set-key (kbd "C-z") 'vi-mode)
 
-;; Improve the comment-dwim command. Partially with help from here:
-;; http://www.emacswiki.org/emacs/CommentingCode
-(defun toggle-comment-line()
-  "Toggles the commentation of the current line."
-  (interactive "*")
-  (comment-or-uncomment-region (line-beginning-position)
-			       (line-end-position)))
-(defun my-comment-dwim (&optional arg)
-  "Improvement of the comment-dwim command.
+(when (> emacs-major-version 21)
+  ;; Improve the comment-dwim command. Partially with help from here:
+  ;; http://www.emacswiki.org/emacs/CommentingCode
+  (defun toggle-comment-line()
+    "Toggles the commentation of the current line."
+    (interactive "*")
+    (comment-or-uncomment-region (line-beginning-position)
+				 (line-end-position)))
+  (defun my-comment-dwim (&optional arg)
+    "Improvement of the comment-dwim command.
 If no region is selected and current line is not blank then run
 `toggle-comment-line' of current line, otherwise run
 `comment-dwim'. Replaces default behaviour of comment-dwim, which
 then inserts a comment at the end of the line."
-  (interactive "*P")
-  (comment-normalize-vars)
-  (if (and (not (region-active-p))
-	   (not (save-excursion (forward-line 0) (looking-at "^[ \t]*$"))))
-      (toggle-comment-line)
-    (comment-dwim arg)))
+    (interactive "*P")
+    (comment-normalize-vars)
+    (if (and (not (region-active-p))
+	     (not (save-excursion (forward-line 0) (looking-at "^[ \t]*$"))))
+	(toggle-comment-line)
+      (comment-dwim arg)))
 
-(global-set-key "\M-;" 'my-comment-dwim)
+  (global-set-key "\M-;" 'my-comment-dwim)
+  )
 
 ;; make the f* keys do something useful
 (defun my-initial-split()
