@@ -2,7 +2,6 @@
  * 
  * @(#)TEMPLATE.h.tpl
  * @author (>>>USER_NAME<<<) <(>>>AUTHOR<<<)>
- * Last changed: <2010-08-16 09:40:01 CEST>
  *
  *   (>>>POINT<<<)
  */

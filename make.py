@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 # @(#)make.py
 # @author Karl Ljungkvist
-# Last changed: <2010-08-07 11:35:48 CEST>
 
 
 import os

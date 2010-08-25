@@ -1,7 +1,6 @@
 #!/usr/bin/env perl
 # @(#)TEMPLATE.pm.tpl
 # @author (>>>USER_NAME<<<) <(>>>AUTHOR<<<)>
-# Last changed: <2010-08-25 10:31:42 CEST>
 
 package (>>>FILE_SANS<<<);
 

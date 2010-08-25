@@ -1,7 +1,5 @@
 % @(#)TEMPLATE.tex.tpl
-
 % @author (>>>USER_NAME<<<) <(>>>AUTHOR<<<)>
-% Last changed: <2010-03-22 11:16:21 CET>
 
 \documentclass[a4paper,11pt]{article}
 
