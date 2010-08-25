@@ -1,5 +1,4 @@
 ; .emacs --
-; Last changed: <2010-08-25 10:55:28 CEST>
 
 ;;-----------------------------------------------------------------------------
 ;; User variables
@@ -490,23 +489,6 @@ then inserts a comment at the end of the line."
 
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
-
-;;-----------------------------------------------------------------------------
-;; Turn on time-stamp updating
-;;-----------------------------------------------------------------------------
-
-;; Timestamp must be in first 8 lines of file and look like:
-;; 	Last changed: <>	or
-;; 	Last changed: ""
-(setq
- ;; use describe variable for info
- time-stamp-active t		;enable timestamps
- time-stamp-line-limit 30
- time-stamp-start "Last changed:[ 	]+\\\\?[\"<]+"
- time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S %Z" ; format of the stamp
- time-stamp-warn-inactive t)	;warn if unable
-
-(add-hook 'write-file-hooks 'time-stamp)
 
 ;;-----------------------------------------------------------------------------
 ;; Ediff
