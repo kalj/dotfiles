@@ -21,6 +21,8 @@
 \usepackage{amsfonts,mathrsfs,amssymb}
 \usepackage[squaren]{SIunits}
 
+\usepackage{subfig}
+\usepackage{url}
 \usepackage{multirow}
 % \usepackage{hyperref}
 % \usepackage{floatflt}
