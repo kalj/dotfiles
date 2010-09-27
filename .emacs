@@ -530,3 +530,12 @@ then inserts a comment at the end of the line."
 ;; 	 (destructuring-bind (hi lo ms) (current-time)
 ;; 	   (- (+ hi lo) (+ (first *emacs-load-start*)
 ;; 			   (second *emacs-load-start*)))))
+
+
+
+(defun command-line-diff (switch)
+  (let ((file1 (pop command-line-args-left))
+	(file2 (pop command-line-args-left)))
+    (ediff file1 file2)))
+
+(add-to-list 'command-switch-alist '("-diff" . command-line-diff))
