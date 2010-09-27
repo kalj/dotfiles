@@ -14,7 +14,7 @@ shopt -s checkwinsize
 
 # set standard text editor: emacs!
 export EDITOR='emacs -nw'
-export VISUAL='emacs -nw'
+export VISUAL="$EDITOR"
 export ALTERNATE_EDITOR='\emacs -q'
 
 # change directory path variable
