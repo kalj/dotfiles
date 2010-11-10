@@ -34,10 +34,10 @@ export HISTSIZE=1000
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
-
+# KL: /etc/profile sources /etc/profile.bash which sources /etc/bash.bashrc which does this.
+# if [ -f /etc/bash_completion ]; then
+#     . /etc/bash_completion
+# fi
 
 #==============================================================================
 # prompt
@@ -65,26 +65,22 @@ case "$TERM" in
 	;;
 esac
 
-# if unicode, set a fancy prompt 
+# if unicode, set a fancy prompt
 case "$LANG" in
-    *UTF-8|*utf8)
-    	PS1="┌[\h \w]\n└${USER_COLOR}\u${NORMAL} \$ "
-    	;;
-    *)
-	# without funny characters
-	PS1="|[\h \w]\n|${USER_COLOR}\u${NORMAL} \$ "
-	;;
+    # *UTF-8|*utf8)
+    #   PS1="┌[\h \w]\n└${USER_COLOR}\u${NORMAL} \$ "
+    #   ;;
     # *)
-    # 	# fail-safe
-    # 	PS1="|-\h-> \w\n|-\u \#\$ "
-    # 	;;
+    #   # without funny characters
+    #   PS1="|[\h \w]\n|${USER_COLOR}\u${NORMAL} \$ "
+    #   ;;
+    *)
+        PS1="[${USER_COLOR}\u${NORMAL}@\h \W]\$ "
+#       PS1="[\u@\h \W]\$ "
+        ;;
 esac
 
 # unset color_prompt force_color_prompt
-
-# Minimal prompt
-# PS1='[\u@\h \W]\$ '
-
 
 ##### Sets the prompt command. Updates title
 case "$TERM" in
@@ -131,9 +127,9 @@ alias ls='ls --group-directories-first'
 
 # enable color support of ls et al
 if [ -x /bin/dircolors ] || [ -x /usr/bin/dircolors ] || [ -x /it/sw/gnutools/bin/dircolors ]; then
-    eval $(dircolors -b)    
+    eval $(dircolors -b)
     [ -e "$HOME/.dircolors" ] && eval $(dircolors -b $HOME/.dircolors)
-    
+
     alias ls='ls --color=auto --group-directories-first'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -179,7 +175,7 @@ else printf "%.1f%s\t%s\n", $1/1024^4, "P", $2
 
 dus2 () {
 
-    \du -sh "$@" | 
+    \du -sh "$@" |
     while read row; do
 	echo "$row" | awk '{
 len=length($1)
@@ -252,6 +248,8 @@ alias torr='transmission-remote'
 # shortcuts to openoffice.org
 alias oocalc='soffice -calc'
 alias oowrite='soffice -writer'
+
+alias locate='locate -i'
 
 # matlab: remove splash screen at startup
 # alias matlab='matlab -nosplash'
