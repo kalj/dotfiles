@@ -79,6 +79,7 @@ myManageHook = composeAll
                [ className =? "Firefox" --> doShift "1"
                , className =? "Namoroka" --> doShift "1"
                , className =? "Pidgin" --> doShift "8"
+               , className =? "spotify.exe" --> doShift "8"
                , className =? "Lanikai" --> doShift "9"
                , className =? "Thunderbird" --> doShift "9"
                , manageDocks
