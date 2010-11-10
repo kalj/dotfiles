@@ -374,7 +374,16 @@ then inserts a comment at the end of the line."
 
 (setq-default TeX-PDF-mode t)
 
+(defun my-latex-mode-hook()
+  (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+  ;; (setq TeX-command-default "XeLaTeX")
+  (setq TeX-save-query nil)
+  ;; (setq TeX-show-compilation t)
+  )
 
+
+
+(add-hook 'LaTeX-mode-hook 'my-latex-mode-hook)
 
 ;;-----------------------------------------------------------------------------
 ;; use cperl-mode instead of perl-mode, or maybe not...
