@@ -75,7 +75,7 @@ if __name__ == '__main__':
     setup(None,homefiles)
 
     # emacs.d
-    emacsfiles=[ 'template.el', 'matlab.el', 'plugins']
+    emacsfiles=[ 'template.el', 'matlab.el', 'plugins', 'abc-mode.el']
     setup(".emacs.d",emacsfiles)
     
     # xmonad
