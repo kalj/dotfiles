@@ -218,6 +218,10 @@ alias emc='emacsclient -c -n'
 alias emt='emacsclient -t'
 alias emd='emacs --daemon'
 
+# less/man in separate window
+alias xless="xterm -e less"
+alias xman="xterm -e man"
+
 # various abrevations/shorcuts
 alias hemsida='lftp -u kalj0193 home.student.uu.se'
 alias ciplogin='ssh kalle@ciplogin.physik.uni-freiburg.de'
