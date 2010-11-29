@@ -37,13 +37,15 @@ import XMonad.Hooks.ManageHelpers
 import Data.Map
 import Maybe
 
+import XMonad.Config.Gnome
+
 -- =============================================================================
 -- Misc. variables
 -- =============================================================================
 
-myTerminal = "xterm"
+myTerminal = "gnome-terminal"
 myModMask = mod4Mask
-myRun     = ?
+myRun     = gnomeRun
 
 -- =============================================================================
 -- Commands and key bindings
@@ -55,7 +57,7 @@ myKeys = [ ("M-`", spawn myTerminal)
          , ("M-<F3>", spawn "firefox")
          , ("M-<F2>", spawn "thunderbird")
          , ("M-<F1>", spawn "pidgin")
-         , ("M-a", myRun)
+         -- , ("M-a", myRun)
          ]
 
 myKPEnterFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
@@ -105,10 +107,10 @@ myManageHook = composeAll
 -- =============================================================================
 
 main = do
-  xmonad $ defaultConfig {
+  xmonad $ gnomeConfig {
          modMask            = myModMask
        , terminal           = myTerminal
-       , manageHook = myManageHook <+> manageHook defaultConfig
+       , manageHook = myManageHook <+> manageHook gnomeConfig
        , layoutHook = myLayoutHook
        , logHook = takeTopFocus
        , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
