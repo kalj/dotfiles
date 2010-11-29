@@ -27,18 +27,11 @@
 --     }
 
 import XMonad
-import XMonad.Hooks.DynamicLog
 import XMonad.Util.EZConfig
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.SetWMName
 import XMonad.Actions.CycleWS
-
 import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run(spawnPipe)
-import System.IO
-import XMonad.Prompt
-import XMonad.Prompt.Shell
-import XMonad.Hooks.UrgencyHook
 
 
 -- =============================================================================
@@ -47,6 +40,7 @@ import XMonad.Hooks.UrgencyHook
 
 myTerminal = "xterm"
 myModMask = mod4Mask
+myRun     = ?
 
 -- =============================================================================
 -- Commands and key bindings
@@ -59,6 +53,7 @@ myKeys = [ ("M-`", spawn myTerminal)
          , ("M-<F3>", spawn "firefox")
          , ("M-<F4>", spawn "thunderbird")
          , ("M-<F5>", spawn "pidgin")
+         , ("M-a", myRun)
          ]
 
 -- XF86Sleep
@@ -78,10 +73,12 @@ myLayoutHook = avoidStruts ( layoutHook defaultConfig)
 myManageHook = composeAll
                [ className =? "Firefox" --> doShift "1"
                , className =? "Namoroka" --> doShift "1"
+               , className =? "Rhythmbox" --> doShift "7"
                , className =? "Pidgin" --> doShift "8"
                , className =? "spotify.exe" --> doShift "8"
                , className =? "Lanikai" --> doShift "9"
                , className =? "Thunderbird" --> doShift "9"
+               , className =? "Do" --> doIgnore
                , manageDocks
                ]
 
@@ -90,27 +87,17 @@ myManageHook = composeAll
 -- Log hook
 -- =============================================================================
 
-myLogHook xmproc = dynamicLogWithPP $ xmobarPP
-                   { ppOutput = hPutStrLn xmproc
-                   , ppTitle = xmobarColor "green" "" . shorten 80
-                   , ppUrgent = xmobarColor "yellow" "red" . xmobarStrip
-                   }
 
 -- =============================================================================
 -- Main
 -- =============================================================================
 
 main = do
-  xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
-  xmonad $ withUrgencyHook NoUrgencyHook
-         defaultConfig {
+  xmonad $ defaultConfig {
          modMask            = myModMask
        , terminal           = myTerminal
-       , normalBorderColor  = "#222222"
-       , focusedBorderColor = "#705022"
        , manageHook = myManageHook <+> manageHook defaultConfig
        , layoutHook = myLayoutHook
-       , logHook = myLogHook xmproc
        , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
        } `additionalKeysP` myKeys
 
