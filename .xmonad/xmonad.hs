@@ -75,7 +75,7 @@ myAddKPEnter = Data.Map.fromList . (\x -> x ++ (Maybe.mapMaybe myKPEnterFilter x
 -- =============================================================================
 -- Layout Hook
 -- =============================================================================
-myLayoutHook = avoidStruts ( layoutHook defaultConfig)
+myLayoutHook = avoidStruts ( layoutHook gnomeConfig)
 
 -- =============================================================================
 -- Manage Hook
@@ -112,9 +112,9 @@ main = do
        , terminal           = myTerminal
        , manageHook = myManageHook <+> manageHook gnomeConfig
        , layoutHook = myLayoutHook
-       , logHook = takeTopFocus
+       , logHook = logHook gnomeConfig >> takeTopFocus
        , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
-       , XMonad.keys = myAddKPEnter  . (XMonad.keys defaultConfig)
+       , XMonad.keys = myAddKPEnter  . (XMonad.keys gnomeConfig)
     } `additionalKeysP` myKeys
 
--- . (Data.Map.union (mkKeymap defaultConfig myKeys))
+-- . (Data.Map.union (mkKeymap gnomeConfig myKeys))
