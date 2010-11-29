@@ -290,7 +290,36 @@ then inserts a comment at the end of the line."
   ;; find-other-file key binding in c-mode
   (local-set-key (kbd "C-c o") 'ff-find-other-file)
   ;; Changes the indentation of substatement parantheses
-  (c-set-offset 'substatement-open 0))
+  (c-set-offset 'substatement-open 0)
+  (setq-default cc-other-file-alist '(
+				      ("\\.cc\\'"
+				       (".hh" ".h"))
+				      ("\\.hh\\'"
+				       (".cc" ".C"))
+				      ("\\.c\\'"
+				       (".h"))
+				      ("\\.h\\'"
+				       (".c" ".cc" ".C" ".CC" ".cxx" ".cpp"))
+				      ("\\.C\\'"
+				       (".H" ".hh" ".h"))
+				      ("\\.H\\'"
+				       (".C" ".CC" ".cpp"))
+				      ("\\.CC\\'"
+				       (".HH" ".H" ".hh" ".h"))
+				      ("\\.HH\\'"
+				       (".CC"))
+				      ("\\.c\\+\\+\\'"
+				       (".h++" ".hh" ".h"))
+				      ("\\.h\\+\\+\\'"
+				       (".c++"))
+				      ("\\.cpp\\'"
+				       (".hpp" ".hh" ".h" ".H"))
+				      ("\\.hpp\\'"
+				       (".cpp"))
+				      ("\\.cxx\\'"
+				       (".hxx" ".hh" ".h"))
+				      ("\\.hxx\\'"
+				       (".cxx")))))
 
 ;; realize
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
