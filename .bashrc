@@ -34,10 +34,11 @@ export HISTSIZE=1000
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-# KL: /etc/profile sources /etc/profile.bash which sources /etc/bash.bashrc which does this.
-# if [ -f /etc/bash_completion ]; then
-#     . /etc/bash_completion
-# fi
+# KL: /etc/profile sources /etc/profile.bash which sources /etc/bash.bashrc which does this. 
+# KL: No, that's not the case. Sopa.
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
 
 #==============================================================================
 # prompt
