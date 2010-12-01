@@ -90,7 +90,7 @@
 
 (delete-selection-mode t)
 
-(mouse-avoidance-mode 'exile)
+;; (mouse-avoidance-mode 'exile)
 
 ;; remove annoying tooltips!
 (tooltip-mode -1)
@@ -102,7 +102,7 @@
 (setq indent-tabs-mode nil)
 
 ;; Don't hide pointer when typing
-(setq make-pointer-invisible nil)
+;; (setq make-pointer-invisible nil)
 
 ;; Show column number in modeline
 (setq column-number-mode t)
@@ -176,6 +176,20 @@ then inserts a comment at the end of the line."
 ;; compile code using f12 and f11
 (global-set-key [f12] 'compile)
 (global-set-key [f11] 'recompile)
+
+;; Close the compilation window if there was no error at all.
+(setq compilation-exit-message-function
+      (lambda (status code msg)
+	;; If M-x compile exists with a 0
+	(when (and (eq status 'exit) (zerop code))
+	  ;; then bury the *compilation* buffer, so that C-x b doesn't go there
+  	  (bury-buffer "*compilation*")
+	  ;; and delete the window
+	  (delete-window (get-buffer-window (get-buffer "*compilation*"))))
+	;; and return to whatever were looking at before
+	;; (replace-buffer-in-windows "*compilation*"))
+	;; Always return the anticipated result of compilation-exit-message-function
+  	(cons msg code)))
 
 ;; Quicker access to go-to line
 ;; (global-set-key (kbd "M-g") 'goto-line)
