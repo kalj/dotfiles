@@ -6,7 +6,7 @@
 ;; User variables
 ;;-----------------------------------------------------------------------------
 
-(setq user-mail-address "k.ljungkvist@gmail.com")
+(setq user-mail-address "karl.ljungkvist@it.uu.se")
 
 ;;-----------------------------------------------------------------------------
 ;; general behavior/appearance mods
