@@ -32,6 +32,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.SetWMName
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 
 
 -- =============================================================================
@@ -79,6 +80,7 @@ myManageHook = composeAll
                , className =? "Lanikai" --> doShift "9"
                , className =? "Thunderbird" --> doShift "9"
                , className =? "Do" --> doIgnore
+               , composeOne [ isFullscreen -?> doFullFloat ]
                , manageDocks
                ]
 
