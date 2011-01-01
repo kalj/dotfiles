@@ -68,6 +68,9 @@ pwroff = "sudo poweroff"
 rboot = "sudo reboot"
 lckscrn = "xscreensaver-command -lock"
 
+toexternal = "/home/kalle/bin/to-x"
+tointernal = "/home/kalle/bin/from-x"
+
 myXPConfig = defaultXPConfig { position = Top
                              -- , font = "xft:Bitstream Vera Sans Mono:pixelsize=10"
                              , font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
@@ -112,6 +115,8 @@ myKeys = [ ("M-`", spawn myTerminal)
          , ("C-<XF86AudioPrev>", spawn "mpc seek -1")
          , ("C-S-<XF86AudioNext>", spawn "mpc seek +5")
          , ("C-S-<XF86AudioPrev>", spawn "mpc seek -5")
+         , ("C-M-<F4>", spawn toexternal)
+         , ("M-<F4>", spawn tointernal)
          ]
 
 myKPEnterFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
