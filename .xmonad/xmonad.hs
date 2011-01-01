@@ -51,8 +51,8 @@ myKeys = [ ("M-`", spawn myTerminal)
          , ("M-S-<KP_Enter>", spawn myTerminal)
          , ("M-<Tab>", toggleWS)
          , ("M-<F3>", spawn "firefox")
-         , ("M-<F4>", spawn "thunderbird")
-         , ("M-<F5>", spawn "pidgin")
+         , ("M-<F2>", spawn "thunderbird")
+         , ("M-<F1>", spawn "pidgin")
          , ("M-a", myRun)
          ]
 
