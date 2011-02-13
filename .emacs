@@ -135,6 +135,9 @@
 (global-set-key (kbd "M-S-f") 'forward-word)
 (global-set-key (kbd "M-S-b") 'backward-word)
 
+;; replace ispell-word by interactive ispell
+(global-set-key (kbd "M-$") 'ispell)
+
 ;; Activation of vi-mode
 ;; (global-set-key (kbd "C-z") 'vi-mode)
 
