@@ -72,15 +72,13 @@ myLayoutHook = avoidStruts ( layoutHook defaultConfig)
 -- =============================================================================
 
 myManageHook = composeAll
-               [ className =? "Firefox" --> doShift "1"
-               , className =? "Namoroka" --> doShift "1"
+               [ appName   =? "Navigator" --> doShift "1"
                , className =? "Rhythmbox" --> doShift "7"
                , appName   =? "spotify.exe" --> doShift "7"
                , className =? "Pidgin" --> doShift "8"
                , className =? "Empathy" --> doShift "8"
                , className =? "Skype" --> doShift "8"
-               , className =? "Lanikai" --> doShift "9"
-               , className =? "Thunderbird" --> doShift "9"
+               , appName   =? "Mail" --> doShift "9"
                , className =? "Do" --> doIgnore
                , composeOne [ isFullscreen -?> doFullFloat ]
                , manageDocks
