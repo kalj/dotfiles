@@ -33,7 +33,8 @@ import XMonad.Hooks.SetWMName
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-
+import Data.Map
+import Maybe
 
 -- =============================================================================
 -- Misc. variables
@@ -49,13 +50,19 @@ myRun     = ?
 
 
 myKeys = [ ("M-`", spawn myTerminal)
-         , ("M-S-<KP_Enter>", spawn myTerminal)
          , ("M-<Tab>", toggleWS)
          , ("M-<F3>", spawn "firefox")
          , ("M-<F2>", spawn "thunderbird")
          , ("M-<F1>", spawn "pidgin")
          , ("M-a", myRun)
          ]
+
+myKPEnterFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
+myKPEnterFilter ((bm,apa),x) = case apa of
+  xK_Return -> Just ((bm,xK_KP_Enter),x)
+  otherwise -> Nothing
+
+myAddKPEnter = Data.Map.fromList . (\x -> x ++ (Maybe.mapMaybe myKPEnterFilter x) ) . Data.Map.toList
 
 -- XF86Sleep
 -- XF86ScreenSaver
@@ -101,5 +108,7 @@ main = do
        , manageHook = myManageHook <+> manageHook defaultConfig
        , layoutHook = myLayoutHook
        , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
-       } `additionalKeysP` myKeys
+       , XMonad.keys = myAddKPEnter  . (XMonad.keys defaultConfig)
+    } `additionalKeysP` myKeys
 
+-- . (Data.Map.union (mkKeymap defaultConfig myKeys))
