@@ -10,10 +10,6 @@
 ;; general behavior/appearance mods
 ;;-----------------------------------------------------------------------------
 
-;; Try out viper-mode!
-;; (setq viper-mode t)
-;; (require 'viper)
-
 ;; (defvar *emacs-load-start* (current-time))
 
 ;; make org-mode default mode
@@ -258,6 +254,18 @@ then inserts a comment at the end of the line."
 ;; bind to keys
 (global-set-key "\C-c\C-r" 'reload-init-file)
 (global-set-key "\C-c\C-e" 'edit-init-file)
+
+;;-----------------------------------------------------------------------------
+;; vi emulation
+;;-----------------------------------------------------------------------------
+
+;; Try out viper-mode!
+;; (setq viper-mode t)
+;; (require 'viper)
+
+;; Activation of vi-mode
+(global-set-key (kbd "<escape>") 'vi-mode)
+;; (global-set-key (kbd "C-z") 'vi-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; first add ~/.emacs.d to load-path
