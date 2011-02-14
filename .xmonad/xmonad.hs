@@ -87,6 +87,7 @@ myManageHook = composeAll
                , className =? "Skype" --> doShift "8"
                , appName   =? "Mail" --> doShift "9"
                , className =? "Do" --> doIgnore
+               , className =? "Timer-applet" --> doFloat
                , composeOne [ isFullscreen -?> doFullFloat ]
                , manageDocks
                ]
