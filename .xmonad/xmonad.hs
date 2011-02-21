@@ -30,6 +30,7 @@ import XMonad
 import XMonad.Util.EZConfig
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.ICCCMFocus
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -108,6 +109,7 @@ main = do
        , terminal           = myTerminal
        , manageHook = myManageHook <+> manageHook defaultConfig
        , layoutHook = myLayoutHook
+       , logHook = takeTopFocus
        , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
        , XMonad.keys = myAddKPEnter  . (XMonad.keys defaultConfig)
     } `additionalKeysP` myKeys
