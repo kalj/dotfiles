@@ -34,9 +34,9 @@
 
 ;; Change title bar to ~/file-path if the current buffer is a
 ;; real file or buffer name if it is just a buffer.
-(setq frame-title-format 
-      '(:eval 
-        (if buffer-file-name 
+(setq frame-title-format
+      '(:eval
+        (if buffer-file-name
             (replace-regexp-in-string (getenv "HOME") "~"
 				      buffer-file-name)
           (buffer-name))))
@@ -50,7 +50,7 @@
 (defun my-black-mode ()
   (interactive)
   (set-face-foreground 'modeline "black")
-  (set-background-color "black") 
+  (set-background-color "black")
   (set-foreground-color "#c7c4c4")
   (set-cursor-color "#c7c4c4")
   )
@@ -58,7 +58,15 @@
 (defun my-white-mode ()
   (interactive)
   (set-face-foreground 'modeline "black")
-  (set-background-color "white") 
+  (set-background-color "white")
+  (set-foreground-color "black")
+  (set-cursor-color "black")
+  )
+
+(defun my-light-mode ()
+  (interactive)
+  (set-face-foreground 'modeline "black")
+  (set-background-color "#ffffe0")
   (set-foreground-color "black")
   (set-cursor-color "black")
   )
@@ -193,7 +201,7 @@ then inserts a comment at the end of the line."
 ;; Quicker access to go-to line
 ;; (global-set-key (kbd "M-g") 'goto-line)
 
-;; From anrxc: Menu bar toggle, as in his vimperator setup 
+;; From anrxc: Menu bar toggle, as in his vimperator setup
 (global-set-key (kbd "<M-down>") 'menu-bar-mode)
 (global-set-key (kbd "<M-up>") 'menu-bar-mode)
 
@@ -287,7 +295,7 @@ then inserts a comment at the end of the line."
 ;; org-mode customizations
 ;;-----------------------------------------------------------------------------
 
-;; (setq org-format-latex-header 
+;; (setq org-format-latex-header
 ;;       "\\documentclass[a4paper]{article}
 ;; \\usepackage[utf8]{inputenc}
 ;; \\usepackage[T1]{fontenc}
@@ -369,7 +377,7 @@ then inserts a comment at the end of the line."
 
 (autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
 (setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
-(setq matlab-mode-hook 
+(setq matlab-mode-hook
       '(lambda ()
 ;; 	 (setq matlab-indent-function t)       ; if you want function bodies
 ;; 					; indented
@@ -378,7 +386,7 @@ then inserts a comment at the end of the line."
 	 (local-unset-key (kbd "M-;"))
 	 (setq matlab-indent-level 4)
 	 ))
-      
+
 
 (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 
@@ -495,21 +503,21 @@ then inserts a comment at the end of the line."
 ;;   (setq ac-dwim t)
 ;;   (set-default 'ac-sources '(ac-source-yasnippet
 ;; 			     ac-source-abbrev ac-source-words-in-buffer))
-  
+
 ;;   (setq ac-modes
 ;; 	(append ac-modes
 ;; 		'(eshell-mode
 ;; 		  ;;org-mode
 ;; 		  )))
 ;;   ;; (add-to-list 'ac-trigger-commands 'org-self-insert-command)
-   
+
 ;;   (add-hook 'emacs-lisp-mode-hook
 ;; 	    (lambda ()
 ;; 	      (setq ac-sources '(ac-source-yasnippet
 ;; 				 ac-source-abbrev
 ;; 				 ac-source-words-in-buffer
 ;; 				 ac-source-symbols))))
-   
+
 ;;   (add-hook 'eshell-mode-hook
 ;;   	    (lambda ()
 ;;   	      (setq ac-sources '(ac-source-yasnippet
@@ -569,7 +577,7 @@ then inserts a comment at the end of the line."
 
 ;; Disable the ediff popup and integrate it instead (Xmonad doesn't handle this
 ;; very well).
-(setq ediff-window-setup-function 'ediff-setup-windows-plain) 
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 ;; Split horizontally by default
 (setq ediff-split-window-function 'split-window-horizontally)
 
