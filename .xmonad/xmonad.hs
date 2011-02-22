@@ -83,6 +83,7 @@ myManageHook = composeAll
                [ appName   =? "Navigator" --> doShift "1"
                , className =? "Rhythmbox" --> doShift "7"
                , appName   =? "spotify.exe" --> doShift "7"
+               , className =? "Spotify" --> doShift "7"
                , className =? "Pidgin" --> doShift "8"
                , className =? "Empathy" --> doShift "8"
                , className =? "Skype" --> doShift "8"
