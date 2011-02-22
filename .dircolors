@@ -183,6 +183,7 @@ EXEC 01;32
 # prog. source files
 .c 00;33
 .h 00;33
+.H 00;33
 .C 00;33
 .cpp 00;33
 .java 00;33
