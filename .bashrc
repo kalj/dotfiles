@@ -219,6 +219,9 @@ alias emc='emacsclient -c -n'
 alias emt='emacsclient -t'
 alias emd='emacs --daemon'
 
+# git
+alias gitfind='git ls-tree -r HEAD | grep -i'
+
 # less/man in separate window
 alias xless="xterm -e less"
 alias xman="xterm -e man"
