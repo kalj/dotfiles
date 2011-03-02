@@ -178,7 +178,8 @@ then inserts a comment at the end of the line."
   (switch-to-buffer-other-window nil)
   )
 
-(global-set-key [f5] 'my-initial-split)
+;; fix font colors
+(global-set-key [f5] 'font-lock-fontify-buffer)
 
 ;; compile code using f12 and f11
 (global-set-key [f12] 'compile)
