@@ -53,7 +53,7 @@ Emacs*font:				Monospace-9
 Emacsclient*toolBar:			off
 
 !! 'day mode'
-Emacs.background:			white
+Emacs.background:			#ffffe0
 Emacs.foreground:			black
 Emacs.modeline*attributeForeground:	black
 Emacs.cursorColor:			black
