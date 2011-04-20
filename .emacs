@@ -586,6 +586,17 @@ then inserts a comment at the end of the line."
 (setq ediff-split-window-function 'split-window-horizontally)
 
 ;;-----------------------------------------------------------------------------
+;; ediff command-line switch
+;;-----------------------------------------------------------------------------
+
+(defun command-line-diff (switch)
+  (let ((file1 (pop command-line-args-left))
+	(file2 (pop command-line-args-left)))
+    (ediff file1 file2)))
+
+(add-to-list 'command-switch-alist '("-diff" . command-line-diff))
+
+;;-----------------------------------------------------------------------------
 ;; Tramp mode
 ;;-----------------------------------------------------------------------------
 
@@ -622,11 +633,3 @@ then inserts a comment at the end of the line."
 ;; 	   (- (+ hi lo) (+ (first *emacs-load-start*)
 ;; 			   (second *emacs-load-start*)))))
 
-
-
-(defun command-line-diff (switch)
-  (let ((file1 (pop command-line-args-left))
-	(file2 (pop command-line-args-left)))
-    (ediff file1 file2)))
-
-(add-to-list 'command-switch-alist '("-diff" . command-line-diff))
