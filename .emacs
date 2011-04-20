@@ -124,6 +124,9 @@
 ;; Show unfinished keystrokes early
 (setq echo-keystrokes 0.1)
 
+;; ignore case when completing buffer names
+(setq read-buffer-completion-ignore-case 1)
+
 ;;-----------------------------------------------------------------------------
 ;; Global key bindings
 ;;-----------------------------------------------------------------------------
