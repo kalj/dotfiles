@@ -29,7 +29,7 @@
 
 %% figure-related stuff
 \usepackage{graphicx}
-\usepackage{subfig}
+\usepackage{subfigure}
 \usepackage{multirow}
 \usepackage{hyperref}
 % \usepackage{floatflt}
