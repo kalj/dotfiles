@@ -131,6 +131,10 @@
 ;; Global key bindings
 ;;-----------------------------------------------------------------------------
 
+;; move up or down a paragraph
+(global-set-key (kbd "C-M-n") 'forward-paragraph)
+(global-set-key (kbd "C-M-p") 'backward-paragraph)
+
 ;; Fix selection when moving around with caps lock enabled
 (global-set-key (kbd "C-S-p") 'previous-line)
 (global-set-key (kbd "C-S-n") 'next-line)
@@ -138,7 +142,6 @@
 (global-set-key (kbd "C-S-b") 'backward-char)
 (global-set-key (kbd "C-S-a") 'move-beginning-of-line)
 (global-set-key (kbd "C-S-e") 'move-end-of-line)
-
 (global-set-key (kbd "M-S-f") 'forward-word)
 (global-set-key (kbd "M-S-b") 'backward-word)
 
@@ -436,7 +439,7 @@ then inserts a comment at the end of the line."
 	    (cadr ispell-tex-skip-alists)))
 	   ))
 
-'(TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "xpdf") (output-html "xdg-open"))))
+(setq-default TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "xdg-open") (output-html "xdg-open"))))
 
 (setq-default TeX-PDF-mode t)
 
@@ -446,7 +449,6 @@ then inserts a comment at the end of the line."
   (setq TeX-save-query nil)
   ;; (setq TeX-show-compilation t)
   )
-
 
 
 (add-hook 'LaTeX-mode-hook 'my-latex-mode-hook)
@@ -633,3 +635,4 @@ then inserts a comment at the end of the line."
 ;; 	   (- (+ hi lo) (+ (first *emacs-load-start*)
 ;; 			   (second *emacs-load-start*)))))
 
+(setq indent-tabs-mode nil)
