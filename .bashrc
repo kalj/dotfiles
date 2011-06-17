@@ -17,9 +17,6 @@ export EDITOR='emacs -nw'
 export VISUAL="$EDITOR"
 export ALTERNATE_EDITOR='\emacs -q'
 
-# change directory path variable
-export CDPATH=.:..
-
 export PAGER=less
 
 # don't put duplicate lines in the history. See bash(1) for more options
