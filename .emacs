@@ -431,8 +431,11 @@ then inserts a comment at the end of the line."
 	       ("\\[" . "\\]")
 	       ;; ("\\\\verb\\\\|" . "\\\\|")
 	       ("\\\\eqref" ispell-tex-arg-end)
+	       ("\\\\secref" ispell-tex-arg-end)
+	       ("\\\\liref" ispell-tex-arg-end)
+	       ("\\\\fgref" ispell-tex-arg-end)
 	       ("\\\\tbref" ispell-tex-arg-end)
-	       ("\\\\apref" ispell-tex-arg-end)
+	       ("\\\\alref" ispell-tex-arg-end)
 	       ;; ("\\\\label" ispell-tex-arg-end)
 	       ;; ("\\\\" ispell-tex-arg-end)
 	       ))
@@ -636,3 +639,4 @@ then inserts a comment at the end of the line."
 ;; 			   (second *emacs-load-start*)))))
 
 (setq indent-tabs-mode nil)
+
