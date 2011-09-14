@@ -472,14 +472,14 @@ then inserts a comment at the end of the line."
 ;; slows things down...)
 
 
-; (add-to-list 'load-path
-; 	     "~/.emacs.d/plugins/yasnippet-0.6.1c")
+(add-to-list 'load-path
+	     "~/.emacs.d/plugins/yasnippet-0.6.1c")
 
-; (when (> emacs-major-version 21)
-;   (require 'yasnippet)
-;   (yas/initialize)
-;   (yas/load-directory "~/.emacs.d/plugins/yasnippet-0.6.1c/snippets")
-; )
+(when (> emacs-major-version 21)
+  (require 'yasnippet)
+  (yas/initialize)
+  (yas/load-directory "~/.emacs.d/plugins/yasnippet-0.6.1c/snippets")
+)
 
 ;; ;; [sic] Almost people hate rope to use `C-x p'.
 ;; (unless (boundp 'ropemacs-global-prefix)
