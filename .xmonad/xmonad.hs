@@ -91,6 +91,7 @@ myManageHook = composeAll
                , className =? "Skype" --> doShift "8"
                , appName   =? "Mail" --> doShift "9"
                , className =? "Do" --> doIgnore
+               , className =? "Gimp-2.6" --> doFloat
                , className =? "Timer-applet" --> doFloat
                , composeOne [ isFullscreen -?> doFullFloat ]
                , manageDocks
