@@ -202,6 +202,26 @@ fix-perms-restr ()  {
     find "$1" -type f -exec chmod 600 {} \;
 }
 
+
+make-completion-wrapper () {
+    local function_name="$2"
+    local arg_count=$(($#-3))
+    local comp_function_name="$1"
+    shift 2
+    local function="
+function $function_name {
+	((COMP_CWORD+=$arg_count))
+	COMP_WORDS=( "$@" \${COMP_WORDS[@]:1} )
+	"$comp_function_name"
+	return 0
+}"
+    eval "$function"
+    # echo $function_name
+    # echo "$function"
+}
+
+
+
 # system information
 alias df='df -h'
 alias psgrep='ps aux | grep'
@@ -231,13 +251,26 @@ alias go='gnome-open'
 
 # apt commands
 alias ainstall='sudo apt-get install'
+make-completion-wrapper _apt_get _ainstall apt-get install
+complete -F _ainstall ainstall
+
 alias apurge='sudo apt-get purge'
+make-completion-wrapper _apt_get _apurge apt-get purge
+complete -F _apurge apurge
+
 alias aremove='sudo apt-get remove'
 alias aclean='sudo apt-get autoremove && sudo apt-get autoclean'
 alias aupgrade='sudo apt-get dist-upgrade'
 alias aupdate='sudo apt-get update'
+
 alias asearch='apt-cache search'
+make-completion-wrapper _apt_cache _asearch apt-cache search
+complete -F _asearch asearch
+
 alias ashow='apt-cache show'
+make-completion-wrapper _apt_cache _ashow apt-cache show
+complete -F _ashow ashow
+
 alias dpgrep='dpkg -l | grep'
 
 # pacman
@@ -245,6 +278,7 @@ alias supd='sudo pacman -Syu'
 
 # ssh
 alias sshx='ssh -c arcfour,blowfish-cbc -X -C'
+complete -F _ssh sshx
 
 # Transmission BitTorrent client
 alias torr='transmission-remote'
