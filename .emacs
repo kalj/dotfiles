@@ -339,7 +339,7 @@ then inserts a comment at the end of the line."
 				      ("\\.c\\'"
 				       (".h"))
 				      ("\\.h\\'"
-				       (".c" ".cc" ".C" ".CC" ".cxx" ".cpp"))
+				       (".c" ".cc" ".C" ".CC" ".cxx" ".cpp" ".cu"))
 				      ("\\.C\\'"
 				       (".H" ".hh" ".h"))
 				      ("\\.H\\'"
@@ -359,7 +359,9 @@ then inserts a comment at the end of the line."
 				      ("\\.cxx\\'"
 				       (".hxx" ".hh" ".h"))
 				      ("\\.hxx\\'"
-				       (".cxx")))))
+				       (".cxx"))
+				      ("\\.cu\\'"
+				       (".h")))))
 
 ;; realize
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
@@ -368,6 +370,10 @@ then inserts a comment at the end of the line."
   ;; Changes the indentation of substatement parantheses
   (c-set-offset 'substatement-open 0))
 (add-hook 'java-mode-hook 'my-java-mode-hook)
+
+(autoload 'cuda-mode "cuda-mode.el" "Cuda mode." t)
+(setq auto-mode-alist (append '(("\\.cu$" . cuda-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("\\.cuh$" . cuda-mode)) auto-mode-alist))
 
 
 ;;-----------------------------------------------------------------------------

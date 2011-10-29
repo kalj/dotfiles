@@ -197,6 +197,8 @@ EXEC 01;32
 .el 00;33
 .pl 00;33
 .pm 00;33
+.cu 00;33
+.cuh 00;33
 
 # object files
 .o 00;32
