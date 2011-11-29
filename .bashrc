@@ -232,9 +232,11 @@ alias rmake='make clean && make'
 # emacs
 alias emx='emacs -nw'
 alias smx='sudo emacs -nw'
-alias emc='emacsclient -c -n'
-alias emt='emacsclient -t'
+alias emc="emacsclient -c -n -a ''"
+alias emt="emacsclient -t -a ''"
 alias emd='emacs --daemon'
+
+alias svim='sudo vim'
 
 # git
 alias gitfind='git ls-tree -r HEAD | grep -i'
