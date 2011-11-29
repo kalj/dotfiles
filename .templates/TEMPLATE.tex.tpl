@@ -45,12 +45,10 @@
   % ,otherkeywords={<, >, (,),;}
   % ,deletekeywords={and}
   % ,emph={<, >, (,),;}
-
   % ,emphstyle=\bfseries\color{codegrey}
   % ,basicstyle=\bfseries\footnotesize\ttfamily
   % ,keywordstyle=\color{blue}
   % ,commentstyle=\color{codegreen}
-
   ,frame=tb
   ,texcl
   ,mathescape=true

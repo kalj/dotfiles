@@ -12,5 +12,5 @@ Z: Karl Ljungkvist, <date>
 D: <skivreferenser>
 K: A
 % V:1
-c2 |: c2Bc 
+c2 |: c2Bc
 % V:2

@@ -1,6 +1,7 @@
-### Makefile.tpl - (>>>POINT<<<)
+### Makefile.tpl - 
 ## 
 ## Author: Karl Ljungkvist
 
+(>>>POINT<<<)
 
 ### (>>>FILE<<<) ends here
