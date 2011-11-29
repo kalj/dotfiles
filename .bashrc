@@ -17,6 +17,9 @@ export EDITOR='emacs -nw'
 export VISUAL="$EDITOR"
 export ALTERNATE_EDITOR='\emacs -q'
 
+# mail address
+export EMAIL="k.ljungkvist@gmail.com"
+
 export PAGER=less
 
 # don't put duplicate lines in the history. See bash(1) for more options
