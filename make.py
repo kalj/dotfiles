@@ -70,7 +70,11 @@ if __name__ == '__main__':
                '.vimperatorrc',
                '.viper',
                '.Xresources',
-               '.gitconfig']
+               '.gitconfig',
+               '.aspell.en.pws',
+               '.aspell.en.prepl',
+               '.aspell.sv.pws'
+               ]
 
     setup(None,homefiles)
 
