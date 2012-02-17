@@ -408,6 +408,7 @@ then inserts a comment at the end of the line."
 ;; 	 (turn-on-auto-fill)
 	 (local-unset-key (kbd "M-;"))
 	 (setq matlab-indent-level 4)
+         (local-set-key (kbd "C-j") 'matlab-return)
 	 ))
 
 
