@@ -90,7 +90,7 @@
 % \thispagestyle{empty}
 
 \title{}
-\author{Karl Ljungkvist\\ 861012-1439\\kalj0193@student.uu.se}
+\author{(>>>USER_NAME<<<) \\(>>>AUTHOR<<<)}
 \date{}
 
 \begin{document}
