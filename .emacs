@@ -103,7 +103,17 @@
 (setq default-fill-column 80)
 
 ;; Only use spaces for indentation
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
+
+;; if evil tabs show up anyway, mark them out for execution
+(add-hook 'font-lock-mode-hook
+	  (lambda ()
+	    (font-lock-add-keywords
+	     nil
+	     '(("\t" 0 'trailing-whitespace prepend)))))
+
+;; trailing whitespaces are also evil
+(setq-default show-trailing-whitespace t)
 
 ;; Don't hide pointer when typing
 ;; (setq make-pointer-invisible nil)
@@ -644,5 +654,4 @@ then inserts a comment at the end of the line."
 ;; 	   (- (+ hi lo) (+ (first *emacs-load-start*)
 ;; 			   (second *emacs-load-start*)))))
 
-(setq indent-tabs-mode nil)
 
