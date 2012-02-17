@@ -227,7 +227,7 @@ function $function_name {
 
 # system information
 alias df='df -h'
-alias psgrep='ps aux | grep'
+alias psgrep='ps aux | grep -i'
 
 # programming etc
 alias rmake='make clean && make'
