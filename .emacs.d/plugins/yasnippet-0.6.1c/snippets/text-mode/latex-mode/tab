@@ -1,0 +1,19 @@
+#contributor : Karl Ljungkvist <k.ljungkvist@gmail.com>
+#name : tab
+# --
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|l|l|}
+  % BEGIN RECEIVE ORGTBL ${1:tablabel}
+  % END RECEIVE ORGTBL $1
+  \end{tabular}
+  \caption{\emph{${2:Description}}}
+  \label{tab:${3:table}}
+\end{table}
+
+\begin{comment}
+  #+ORGTBL: SEND $1 orgtbl-to-latex :splice t :skip 0 :efmt "$%s \\cdot 10^{%s}$"
+|$0 | |
+\end{comment}
+

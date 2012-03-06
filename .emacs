@@ -457,7 +457,8 @@ then inserts a comment at the end of the line."
                ;; ("\\\\" ispell-tex-arg-end)
                ))
             (cadr ispell-tex-skip-alists)))
-           ))
+     (add-to-list 'LaTeX-verbatim-environments "comment")
+     ))
 
 (setq-default TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "xdg-open") (output-html "xdg-open"))))
 
@@ -468,6 +469,7 @@ then inserts a comment at the end of the line."
   ;; (setq TeX-command-default "XeLaTeX")
   (setq TeX-save-query nil)
   ;; (setq TeX-show-compilation t)
+  (orgtbl-mode)
   )
 
 
