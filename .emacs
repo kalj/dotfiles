@@ -38,7 +38,7 @@
       '(:eval
         (if buffer-file-name
             (replace-regexp-in-string (getenv "HOME") "~"
-				      buffer-file-name)
+                                      buffer-file-name)
           (buffer-name))))
 
 ;; default font and size - handled in .Xdefaults
@@ -107,10 +107,10 @@
 
 ;; if evil tabs show up anyway, mark them out for execution
 (add-hook 'font-lock-mode-hook
-	  (lambda ()
-	    (font-lock-add-keywords
-	     nil
-	     '(("\t" 0 'trailing-whitespace prepend)))))
+          (lambda ()
+            (font-lock-add-keywords
+             nil
+             '(("\t" 0 'trailing-whitespace prepend)))))
 
 ;; trailing whitespaces are also evil
 (setq-default show-trailing-whitespace t)
@@ -168,7 +168,7 @@
     "Toggles the commentation of the current line."
     (interactive "*")
     (comment-or-uncomment-region (line-beginning-position)
-				 (line-end-position)))
+                                 (line-end-position)))
   (defun my-comment-dwim (&optional arg)
     "Improvement of the comment-dwim command.
 If no region is selected and current line is not blank then run
@@ -178,8 +178,8 @@ then inserts a comment at the end of the line."
     (interactive "*P")
     (comment-normalize-vars)
     (if (and (not (region-active-p))
-	     (not (save-excursion (forward-line 0) (looking-at "^[ \t]*$"))))
-	(toggle-comment-line)
+             (not (save-excursion (forward-line 0) (looking-at "^[ \t]*$"))))
+        (toggle-comment-line)
       (comment-dwim arg)))
 
   (global-set-key "\M-;" 'my-comment-dwim)
@@ -204,16 +204,16 @@ then inserts a comment at the end of the line."
 ;; Close the compilation window if there was no error at all.
 (setq compilation-exit-message-function
       (lambda (status code msg)
-	;; If M-x compile exists with a 0
-	(when (and (eq status 'exit) (zerop code))
-	  ;; then bury the *compilation* buffer, so that C-x b doesn't go there
-  	  (bury-buffer "*compilation*")
-	  ;; and delete the window
-	  (delete-window (get-buffer-window (get-buffer "*compilation*"))))
-	;; and return to whatever were looking at before
-	;; (replace-buffer-in-windows "*compilation*"))
-	;; Always return the anticipated result of compilation-exit-message-function
-  	(cons msg code)))
+        ;; If M-x compile exists with a 0
+        (when (and (eq status 'exit) (zerop code))
+          ;; then bury the *compilation* buffer, so that C-x b doesn't go there
+          (bury-buffer "*compilation*")
+          ;; and delete the window
+          (delete-window (get-buffer-window (get-buffer "*compilation*"))))
+        ;; and return to whatever were looking at before
+        ;; (replace-buffer-in-windows "*compilation*"))
+        ;; Always return the anticipated result of compilation-exit-message-function
+        (cons msg code)))
 
 ;; Quicker access to go-to line
 ;; (global-set-key (kbd "M-g") 'goto-line)
@@ -342,36 +342,36 @@ then inserts a comment at the end of the line."
   ;; Changes the indentation of substatement parantheses
   (c-set-offset 'substatement-open 0)
   (setq-default cc-other-file-alist '(
-				      ("\\.cc\\'"
-				       (".hh" ".h"))
-				      ("\\.hh\\'"
-				       (".cc" ".C"))
-				      ("\\.c\\'"
-				       (".h"))
-				      ("\\.h\\'"
-				       (".c" ".cc" ".C" ".CC" ".cxx" ".cpp" ".cu"))
-				      ("\\.C\\'"
-				       (".H" ".hh" ".h"))
-				      ("\\.H\\'"
-				       (".C" ".CC" ".cpp"))
-				      ("\\.CC\\'"
-				       (".HH" ".H" ".hh" ".h"))
-				      ("\\.HH\\'"
-				       (".CC"))
-				      ("\\.c\\+\\+\\'"
-				       (".h++" ".hh" ".h"))
-				      ("\\.h\\+\\+\\'"
-				       (".c++"))
-				      ("\\.cpp\\'"
-				       (".hpp" ".hh" ".h" ".H"))
-				      ("\\.hpp\\'"
-				       (".cpp"))
-				      ("\\.cxx\\'"
-				       (".hxx" ".hh" ".h"))
-				      ("\\.hxx\\'"
-				       (".cxx"))
-				      ("\\.cu\\'"
-				       (".h")))))
+                                      ("\\.cc\\'"
+                                       (".hh" ".h"))
+                                      ("\\.hh\\'"
+                                       (".cc" ".C"))
+                                      ("\\.c\\'"
+                                       (".h"))
+                                      ("\\.h\\'"
+                                       (".c" ".cc" ".C" ".CC" ".cxx" ".cpp" ".cu"))
+                                      ("\\.C\\'"
+                                       (".H" ".hh" ".h"))
+                                      ("\\.H\\'"
+                                       (".C" ".CC" ".cpp"))
+                                      ("\\.CC\\'"
+                                       (".HH" ".H" ".hh" ".h"))
+                                      ("\\.HH\\'"
+                                       (".CC"))
+                                      ("\\.c\\+\\+\\'"
+                                       (".h++" ".hh" ".h"))
+                                      ("\\.h\\+\\+\\'"
+                                       (".c++"))
+                                      ("\\.cpp\\'"
+                                       (".hpp" ".hh" ".h" ".H"))
+                                      ("\\.hpp\\'"
+                                       (".cpp"))
+                                      ("\\.cxx\\'"
+                                       (".hxx" ".hh" ".h"))
+                                      ("\\.hxx\\'"
+                                       (".cxx"))
+                                      ("\\.cu\\'"
+                                       (".h")))))
 
 ;; realize
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
@@ -391,7 +391,7 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (add-hook 'f90-mode-hook '(lambda ()
-			    (local-unset-key (kbd "C-j"))))
+                            (local-unset-key (kbd "C-j"))))
 
 
 ;;-----------------------------------------------------------------------------
@@ -402,14 +402,14 @@ then inserts a comment at the end of the line."
 (setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
 (setq matlab-mode-hook
       '(lambda ()
-;; 	 (setq matlab-indent-function t)       ; if you want function bodies
-;; 					; indented
-;; 	 (setq fill-column 76)         ; where auto-fill should wrap
-;; 	 (turn-on-auto-fill)
-	 (local-unset-key (kbd "M-;"))
-	 (setq matlab-indent-level 4)
+;;       (setq matlab-indent-function t)       ; if you want function bodies
+;;                                      ; indented
+;;       (setq fill-column 76)         ; where auto-fill should wrap
+;;       (turn-on-auto-fill)
+         (local-unset-key (kbd "M-;"))
+         (setq matlab-indent-level 4)
          (local-set-key (kbd "C-j") 'matlab-return)
-	 ))
+         ))
 
 
 (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
@@ -441,23 +441,23 @@ then inserts a comment at the end of the line."
      (define-key LaTeX-math-keymap "/" 'LaTeX-math-frac)
      (define-key LaTeX-math-keymap "2" 'LaTeX-math-sqrt)
      (setq ispell-tex-skip-alists
-	   (list
-	    (append
-	     (car ispell-tex-skip-alists) ;tell ispell to ignore content of this:
-	     '(
-	       ("\\[" . "\\]")
-	       ;; ("\\\\verb\\\\|" . "\\\\|")
-	       ("\\\\eqref" ispell-tex-arg-end)
-	       ("\\\\secref" ispell-tex-arg-end)
-	       ("\\\\liref" ispell-tex-arg-end)
-	       ("\\\\fgref" ispell-tex-arg-end)
-	       ("\\\\tbref" ispell-tex-arg-end)
-	       ("\\\\alref" ispell-tex-arg-end)
-	       ;; ("\\\\label" ispell-tex-arg-end)
-	       ;; ("\\\\" ispell-tex-arg-end)
-	       ))
-	    (cadr ispell-tex-skip-alists)))
-	   ))
+           (list
+            (append
+             (car ispell-tex-skip-alists) ;tell ispell to ignore content of this:
+             '(
+               ("\\[" . "\\]")
+               ;; ("\\\\verb\\\\|" . "\\\\|")
+               ("\\\\eqref" ispell-tex-arg-end)
+               ("\\\\secref" ispell-tex-arg-end)
+               ("\\\\liref" ispell-tex-arg-end)
+               ("\\\\fgref" ispell-tex-arg-end)
+               ("\\\\tbref" ispell-tex-arg-end)
+               ("\\\\alref" ispell-tex-arg-end)
+               ;; ("\\\\label" ispell-tex-arg-end)
+               ;; ("\\\\" ispell-tex-arg-end)
+               ))
+            (cadr ispell-tex-skip-alists)))
+           ))
 
 (setq-default TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "xdg-open") (output-html "xdg-open"))))
 
@@ -490,7 +490,7 @@ then inserts a comment at the end of the line."
 
 
 (add-to-list 'load-path
-	     "~/.emacs.d/plugins/yasnippet-0.6.1c")
+             "~/.emacs.d/plugins/yasnippet-0.6.1c")
 
 (when (> emacs-major-version 21)
   (require 'yasnippet)
@@ -528,28 +528,28 @@ then inserts a comment at the end of the line."
 ;;   (setq ac-auto-start nil)
 ;;   (setq ac-dwim t)
 ;;   (set-default 'ac-sources '(ac-source-yasnippet
-;; 			     ac-source-abbrev ac-source-words-in-buffer))
+;;                           ac-source-abbrev ac-source-words-in-buffer))
 
 ;;   (setq ac-modes
-;; 	(append ac-modes
-;; 		'(eshell-mode
-;; 		  ;;org-mode
-;; 		  )))
+;;      (append ac-modes
+;;              '(eshell-mode
+;;                ;;org-mode
+;;                )))
 ;;   ;; (add-to-list 'ac-trigger-commands 'org-self-insert-command)
 
 ;;   (add-hook 'emacs-lisp-mode-hook
-;; 	    (lambda ()
-;; 	      (setq ac-sources '(ac-source-yasnippet
-;; 				 ac-source-abbrev
-;; 				 ac-source-words-in-buffer
-;; 				 ac-source-symbols))))
+;;          (lambda ()
+;;            (setq ac-sources '(ac-source-yasnippet
+;;                               ac-source-abbrev
+;;                               ac-source-words-in-buffer
+;;                               ac-source-symbols))))
 
 ;;   (add-hook 'eshell-mode-hook
-;;   	    (lambda ()
-;;   	      (setq ac-sources '(ac-source-yasnippet
-;;   				 ac-source-abbrev
-;;   				 ac-source-files-in-current-dir
-;;   				 ac-source-words-in-buffer))))
+;;          (lambda ()
+;;            (setq ac-sources '(ac-source-yasnippet
+;;                               ac-source-abbrev
+;;                               ac-source-files-in-current-dir
+;;                               ac-source-words-in-buffer))))
 ;;   )
 
 ;;-----------------------------------------------------------------------------
@@ -581,7 +581,7 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (add-hook 'js-mode-hook (lambda ()
-			  (setq tab-width 4)))
+                          (setq tab-width 4)))
 ;;-----------------------------------------------------------------------------
 ;; Templates
 ;;-----------------------------------------------------------------------------
@@ -613,7 +613,7 @@ then inserts a comment at the end of the line."
 
 (defun command-line-diff (switch)
   (let ((file1 (pop command-line-args-left))
-	(file2 (pop command-line-args-left)))
+        (file2 (pop command-line-args-left)))
     (ediff file1 file2)))
 
 (add-to-list 'command-switch-alist '("-diff" . command-line-diff))
@@ -624,8 +624,8 @@ then inserts a comment at the end of the line."
 
 ;; (require 'tramp)
 ;; (add-to-list 'tramp-default-proxies-alist
-	     ;; '("localhost.localdomain" "\\`root\\'" "/sudo:%h:")
-	     ;; '(nil "\\`root\\'" "/ssh:%h:"))
+             ;; '("localhost.localdomain" "\\`root\\'" "/sudo:%h:")
+             ;; '(nil "\\`root\\'" "/ssh:%h:"))
 
 ;;-----------------------------------------------------------------------------
 ;; Thunderbird email mode
@@ -651,8 +651,8 @@ then inserts a comment at the end of the line."
 )
 
 ;; (message "My .emacs loaded in %ds"
-;; 	 (destructuring-bind (hi lo ms) (current-time)
-;; 	   (- (+ hi lo) (+ (first *emacs-load-start*)
-;; 			   (second *emacs-load-start*)))))
+;;       (destructuring-bind (hi lo ms) (current-time)
+;;         (- (+ hi lo) (+ (first *emacs-load-start*)
+;;                         (second *emacs-load-start*)))))
 
 
