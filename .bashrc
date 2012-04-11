@@ -162,37 +162,9 @@ alias cleanup='rm -f *~ *# .*~'
 
 
 dus () {
-    \du -sk "$@" |
-    sort -rn |
-    awk -F '\t' '{
-if ($1 < 1024) printf "%s\t%s\n", $1 "K", $2
-else if ($1 < 1024^2) printf "%3.1f%s\t%s\n", $1/1024, "M", $2
-else if ($1 < 1024^3) printf "%3.1f%s\t%s\n", $1/1024^2, "G", $2
-else if ($1 < 1024^4) printf "%3.1f%s\t%s\n", $1/1024^3, "T", $2
-else printf "%.1f%s\t%s\n", $1/1024^4, "P", $2
-}'
-
+    \du -sh | sort -rh
 }
 
-dus2 () {
-
-    \du -sh "$@" |
-    while read row; do
-	echo "$row" | awk '{
-len=length($1)
-size=substr($1,0,len-1)
-suf=substr($1,len,1)
-if(suf=="K") printf "%d\t%s\n", int(size), $0
-else if(suf=="M") printf "%d\t%s\n", int(size*1024), $0
-else if(suf=="G") printf "%d\t%s\n", int(size*1024^2), $0
-else if(suf=="T") printf "%d\t%s\n", int(size*1024^3), $0
-else if(suf=="P") printf "%d\t%s\n", int(size*1024^4), $0
-else print "error reading suffix"
-}'
-    done |
-    sort -rn |
-    cut -f2,3
-}
 
 
 fix-perms ()  {
