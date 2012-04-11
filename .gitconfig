@@ -17,3 +17,4 @@
     lg = log -p
     who = shortlog -s --
     ls = ls-files
+    rh = reset HEAD
