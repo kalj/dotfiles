@@ -24,8 +24,6 @@
 ;; framework doesn't get this and still uses it...
 (tool-bar-mode -1)
 
-;; remove the scrollbar - handled in .Xdefaults
-;; (scroll-bar-mode -1)
 
 ;; remove menu bar (can't be handled in Xresources, since should hold for -nw also)
 ;; (if (not window-system)
@@ -41,10 +39,6 @@
                                       buffer-file-name)
           (buffer-name))))
 
-;; default font and size - handled in .Xdefaults
-;; (set-default-font "Monospace-8")
-
-;;(setq initial-frame-alist '((width . 82) (height . 47)))
 
 ;; inverse colors theme
 (defun my-black-mode ()
@@ -157,9 +151,6 @@
 
 ;; replace ispell-word by interactive ispell
 (global-set-key (kbd "M-$") 'ispell)
-
-;; Activation of vi-mode
-;; (global-set-key (kbd "C-z") 'vi-mode)
 
 (when (> emacs-major-version 21)
   ;; Improve the comment-dwim command. Partially with help from here:
@@ -289,7 +280,7 @@ then inserts a comment at the end of the line."
 ;; (require 'viper)
 
 ;; Activation of vi-mode
-(global-set-key (kbd "<escape>") 'vi-mode)
+;; (global-set-key (kbd "<escape>") 'vi-mode)
 ;; (global-set-key (kbd "C-z") 'vi-mode)
 
 ;;-----------------------------------------------------------------------------
