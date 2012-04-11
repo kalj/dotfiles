@@ -228,6 +228,7 @@ function $function_name {
 # system information
 alias df='df -h'
 alias psgrep='ps aux | grep -i'
+alias rl='readlink -f'
 
 # programming etc
 alias rmake='make clean && make'
