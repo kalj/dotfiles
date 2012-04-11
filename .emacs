@@ -24,6 +24,9 @@
 ;; framework doesn't get this and still uses it...
 (tool-bar-mode -1)
 
+;; disable useless C-z behavior when not in a terminal
+(if window-system
+    (global-unset-key (kbd "C-z")))
 
 ;; remove menu bar (can't be handled in Xresources, since should hold for -nw also)
 ;; (if (not window-system)
