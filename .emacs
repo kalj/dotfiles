@@ -84,6 +84,12 @@
 
 (delete-selection-mode t)
 
+;; Make emacs play nice with the cut/paste buffers of X/Linux
+(global-set-key [mouse-2] 'mouse-yank-primary)
+(setq select-active-regions t)
+(setq x-select-enable-clipboard t)
+(setq x-select-enable-primary nil)
+(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;; remove annoying tooltips!
 (tooltip-mode -1)
