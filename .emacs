@@ -426,6 +426,12 @@ then inserts a comment at the end of the line."
 (add-to-list 'auto-mode-alist '("\\.abc\\'"  . abc-mode))
 (add-to-list 'auto-mode-alist '("\\.abp\\'"  . abc-mode))
 (autoload 'abc-mode "abc-mode" "abc music files" t)
+
+(setq abc-mode-hook
+      '(lambda ()
+         (local-set-key (kbd "C-c C-c") 'abc-run-abc2ps-all)
+         ))
+
 ;; (add-to-list 'auto-insert-alist '(abc-mode . abc-skeleton))
 
 ;;-----------------------------------------------------------------------------
