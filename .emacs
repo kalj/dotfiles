@@ -216,6 +216,12 @@ then inserts a comment at the end of the line."
 (global-set-key (kbd "<M-down>") 'menu-bar-mode)
 (global-set-key (kbd "<M-up>") 'menu-bar-mode)
 
+;; make C-tab / C-M-tab cycle buffers
+(global-set-key (kbd "<C-tab>") 'next-buffer)
+(global-set-key (kbd "<C-M-tab>") 'previous-buffer)
+(global-set-key (kbd "<C-S-iso-lefttab>") 'previous-buffer)
+
+
 ;;-----------------------------------------------------------------------------
 ;; Encoding systems
 ;;-----------------------------------------------------------------------------
