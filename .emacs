@@ -1,5 +1,7 @@
 ; .emacs --
 
+;; (defvar *emacs-load-start* (current-time))
+
 ;;-----------------------------------------------------------------------------
 ;; User variables
 ;;-----------------------------------------------------------------------------
@@ -9,8 +11,6 @@
 ;;-----------------------------------------------------------------------------
 ;; general behavior/appearance mods
 ;;-----------------------------------------------------------------------------
-
-;; (defvar *emacs-load-start* (current-time))
 
 ;; make org-mode default mode
 ;; (setq default-major-mode 'org-mode)
@@ -29,9 +29,7 @@
     (global-unset-key (kbd "C-z")))
 
 ;; remove menu bar (can't be handled in Xresources, since should hold for -nw also)
-;; (if (not window-system)
-    (menu-bar-mode -1)
-  ;; nil)
+(menu-bar-mode -1)
 
 ;; Change title bar to ~/file-path if the current buffer is a
 ;; real file or buffer name if it is just a buffer.
@@ -68,16 +66,11 @@
   (set-cursor-color "black")
   )
 
-;; enable - handled in .Xdefaults
-;; (if window-system
-    ;; (my-day-mode))
-
 ;; activate highlighting of selection
 (setq transient-mark-mode t)
 
 (setq-default truncate-partial-width-windows nil)
 
-;; (setq scroll-step 2)
 (setq scroll-conservatively 5)
 
 ;; Cursor in same relative row and column during PgUP/DN
@@ -91,7 +84,6 @@
 
 (delete-selection-mode t)
 
-;; (mouse-avoidance-mode 'exile)
 
 ;; remove annoying tooltips!
 (tooltip-mode -1)
@@ -111,9 +103,6 @@
 
 ;; trailing whitespaces are also evil
 (setq-default show-trailing-whitespace t)
-
-;; Don't hide pointer when typing
-;; (setq make-pointer-invisible nil)
 
 ;; Show column number in modeline
 (setq column-number-mode t)
@@ -647,19 +636,6 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 ;; Custom
 ;;-----------------------------------------------------------------------------
-
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-)
 
 ;; (message "My .emacs loaded in %ds"
 ;;       (destructuring-bind (hi lo ms) (current-time)
