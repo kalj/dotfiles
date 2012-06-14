@@ -22,7 +22,8 @@
 %% math
 \usepackage{amsmath,amsfonts,mathrsfs,amssymb}
 \usepackage[squaren]{SIunits}
-\usepackage{ulem}
+% \usepackage{ulem}
+% \renewcommand{\emph}{\textit}
 
 %% fonts
 % \usepackage{palatino}
@@ -48,38 +49,38 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 
 %% Matlab settings
-% \lstset{language=Matlab,
-%   keywords={break,case,catch,continue,else,elseif,end,for,function,
-%     global,if,otherwise,persistent,return,switch,try,while},
-%   basicstyle=\footnotesize\ttfamily,
-%   keywordstyle=\color{blue},
-%   commentstyle=\color{red},
-%   stringstyle=\color{dkgreen},
-%   % numbers=left,
-%   numberstyle=\tiny\color{gray},
-%   stepnumber=1,
-%   numbersep=10pt,
-%   backgroundcolor=\color{white},
-%   tabsize=2,
-%   showspaces=false,
-%   showstringspaces=false}
+\lstset{language=Matlab,
+  keywords={break,case,catch,continue,else,elseif,end,for,function,
+    global,if,otherwise,persistent,return,switch,try,while},
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{red},
+  stringstyle=\color{dkgreen},
+  % numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  backgroundcolor=\color{white},
+  tabsize=2,
+  showspaces=false,
+  showstringspaces=false}
 
-\lstset{language=C++
-  % ,morekeywords={for, to, in, if, else, and, while}
-  % ,otherkeywords={<, >, (,),;}
-  % ,deletekeywords={and}
-  % ,emph={<, >, (,),;}
-  % ,emphstyle=\bfseries\color{codegrey}
-  % ,basicstyle=\bfseries\footnotesize\ttfamily
-  % ,keywordstyle=\color{blue}
-  % ,commentstyle=\color{codegreen}
-  ,frame=tb
-  ,texcl
-  ,mathescape=true
-  % ,numbers=left
-  % ,numbersep=-5pt
-  ,captionpos=b
-}
+%% C++ settings
+% \lstset{language=C++
+%   ,morekeywords={for, if, else, and, while} %, __device__, __global__, __shared__}
+%   % ,otherkeywords={<, >, (,),;}
+%   ,emph={(,),;}
+%   ,emphstyle=\bfseries\color{dkgreen}
+%   ,basicstyle=\bfseries\footnotesize\ttfamily
+%   ,keywordstyle=\color{blue}
+%   ,commentstyle=\color{dkgreen}
+%   ,frame=tb
+%   ,mathescape=true
+%   ,captionpos=b
+%   % ,numbers=left
+%   ,numbersep=10pt
+% }
+
 
 %% Misc.
 \usepackage{url}
@@ -88,32 +89,35 @@
 \def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
 
 %% References
-\newcommand{\fgref}[1]{Figure \ref{#1}}
-\newcommand{\tbref}[1]{Table \ref{#1}}
+\newcommand{\fgref}[1]{\autoref{#1}}
+\newcommand{\tbref}[1]{\autoref{#1}}
 \newcommand{\alref}[1]{Algorithm \ref{#1}}
 \newcommand{\secref}[1]{Section \ref{#1}}
 \newcommand{\appref}[1]{Appendix \ref{#1}}
 \newcommand{\liref}[1]{Listing \ref{#1}}
 
 %% math macros
-\newcommand{\ve}[1]{\mathbf{#1}}
-\newcommand{\mat}[1]{\uuline{#1}}
-\newcommand{\ordo}[1]{\mathcal{O}(#1)}
-\newcommand{\degrees}{{}^\circ}
-\newcommand{\de}{\mathrm{d}}
-\newcommand{\pd}{\partial}
-\newcommand{\dd}[2]{\frac{\de#1}{\de#2}}
-\newcommand{\pdd}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\pddc}[3]{ \left( \frac{\partial #1}{\partial #2} \right)_#3 }
-\newcommand{\ddn}[3]{\frac{\de^{#1} #2}{\de #3^{#1}}}
-\newcommand{\pddn}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
-\newcommand{\ddop}[1]{\frac{\de}{\de #1}}
-\newcommand{\pddop}[1]{\frac{\partial}{\partial #1}}
-\newcommand{\ddopn}[2]{\frac{\de^{#1}}{\de #2^{#1}}}
-\newcommand{\pddopn}[2]{\frac{\partial^{#1}}{\partial #2^{#1}}}
-\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
+% \newcommand{\mat}[1]{\uuline{#1}}
+\newcommand{\ordo}[1]{\ensuremath{\mathcal{O}(#1)}}
+\newcommand{\degrees}{\ensuremath{{}^\circ}}
+\newcommand{\de}{\ensuremath{\mathrm{d}}}
+\newcommand{\pd}{\ensuremath{\partial}}
+\newcommand{\dd}[2]{\ensuremath{\frac{\de#1}{\de#2}}}
+\newcommand{\pdd}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\pddc}[3]{\ensuremath{ \left( \frac{\partial #1}{\partial #2} \right)_#3 }}
+\newcommand{\ddn}[3]{\ensuremath{\frac{\de^{#1} #2}{\de #3^{#1}}}}
+\newcommand{\pddn}[3]{\ensuremath{\frac{\partial^{#1} #2}{\partial #3^{#1}}}}
+\newcommand{\ddop}[1]{\ensuremath{\frac{\de}{\de #1}}}
+\newcommand{\pddop}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
+\newcommand{\ddopn}[2]{\ensuremath{\frac{\de^{#1}}{\de #2^{#1}}}}
+\newcommand{\pddopn}[2]{\ensuremath{\frac{\partial^{#1}}{\partial #2^{#1}}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\inprod}[2]{\ensuremath{\left(#1,#2\right)}}
 
-\renewcommand{\emph}{\textit}
+%% Defining the authors email address
+\newcommand{\insertemail}{karl.ljungkvist@it.uu.se}%
+
 
 % \thispagestyle{empty}
 
