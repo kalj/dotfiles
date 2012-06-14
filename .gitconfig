@@ -8,6 +8,10 @@
         diff = auto
         status = auto
 
+[color "diff"]
+       meta = yellow bold
+       frag = magenta bold
+
 [alias]
     st = status
     ci = commit
