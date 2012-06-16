@@ -35,7 +35,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import Data.Map
-import Maybe
+import Data.Maybe
 
 import XMonad.Config.Gnome
 
@@ -65,7 +65,7 @@ myKPEnterFilter ((bm,apa),x) = case apa of
   xK_Return -> Just ((bm,xK_KP_Enter),x)
   otherwise -> Nothing
 
-myAddKPEnter = Data.Map.fromList . (\x -> x ++ (Maybe.mapMaybe myKPEnterFilter x) ) . Data.Map.toList
+myAddKPEnter = Data.Map.fromList . (\x -> x ++ (Data.Maybe.mapMaybe myKPEnterFilter x) ) . Data.Map.toList
 
 -- XF86Sleep
 -- XF86ScreenSaver
