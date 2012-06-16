@@ -162,7 +162,7 @@ alias cleanup='rm -f *~ *# .*~'
 
 
 dus () {
-    \du -sh $* | sort -rh
+    \du -sh "$@" | sort -rh
 }
 
 
