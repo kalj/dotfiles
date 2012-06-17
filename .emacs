@@ -293,8 +293,7 @@ then inserts a comment at the end of the line."
 ;; (require 'viper)
 
 ;; Activation of vi-mode
-;; (global-set-key (kbd "<escape>") 'vi-mode)
-;; (global-set-key (kbd "C-z") 'vi-mode)
+(global-set-key (kbd "<f8>") 'vi-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; first add ~/.emacs.d to load-path
