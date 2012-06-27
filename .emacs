@@ -292,8 +292,14 @@ then inserts a comment at the end of the line."
 ;; (setq viper-mode t)
 ;; (require 'viper)
 
+;; Evil mode
+(add-to-list 'load-path "~/.emacs.d/plugins/evil")
+(require 'evil)
+(evil-mode 1)
+; Add another escape at f8
+(global-set-key (kbd "<f8>") 'evil-force-normal-state)
+
 ;; Activation of vi-mode
-(global-set-key (kbd "<f8>") 'vi-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; first add ~/.emacs.d to load-path

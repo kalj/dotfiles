@@ -55,15 +55,15 @@ NORMAL='\[\e[00m\]'
 # set user color
 case "$TERM" in
     xterm*|linux|screen*|rxvt*|cygwin|dumb|*-color)
-	if [ ${UID} -eq 0 ]; then
-	    USER_COLOR=$BRED
-	else
-	    USER_COLOR=$BBLUE
-	fi
-	;;
+        if [ ${UID} -eq 0 ]; then
+            USER_COLOR=$BRED
+        else
+            USER_COLOR=$BBLUE
+        fi
+        ;;
     *)
-	USER_COLOR=""
-	;;
+        USER_COLOR=""
+        ;;
 esac
 
 # if unicode, set a fancy prompt
@@ -87,10 +87,10 @@ esac
 case "$TERM" in
     xterm*|rxvt*|screen*)
 
-	PROMPT_COMMAND='echo -ne "\e]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} \a"; history -a'
-	;;
+        PROMPT_COMMAND='echo -ne "\e]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} \a"; history -a'
+        ;;
     *)
-	PROMPT_COMMAND='history -a'
+        PROMPT_COMMAND='history -a'
         ;;
 esac
 
@@ -105,11 +105,11 @@ esac
 #     local greeting="Good night"
 
 #     if [ $hour -ge 6 ] && [ $hour -lt 9 ]; then
-# 	greeting="Good morning"
+#       greeting="Good morning"
 #     elif [ $hour -ge 9 ] && [ $hour -lt 18 ]; then
-# 	greeting="Hello"
+#       greeting="Hello"
 #     elif [ $hour -ge 18 ]; then
-# 	greeting="Good evening"
+#       greeting="Good evening"
 #     fi
 
 #     local idag=$(date +"%A %F")
@@ -166,7 +166,6 @@ dus () {
 }
 
 
-
 fix-perms ()  {
     find "$1" -type d -exec chmod 755 {} \;
     find "$1" -type f -exec chmod 644 {} \;
@@ -185,10 +184,10 @@ make-completion-wrapper () {
     shift 2
     local function="
 function $function_name {
-	((COMP_CWORD+=$arg_count))
-	COMP_WORDS=( "$@" \${COMP_WORDS[@]:1} )
-	"$comp_function_name"
-	return 0
+        ((COMP_CWORD+=$arg_count))
+        COMP_WORDS=( "$@" \${COMP_WORDS[@]:1} )
+        "$comp_function_name"
+        return 0
 }"
     eval "$function"
     # echo $function_name
@@ -207,7 +206,8 @@ alias rmake='make clean && make'
 
 # emacs
 alias emx='emacs -nw'
-alias smx='sudo emacs -nw'
+alias smx='sudo vim'
+alias svi='sudo vim'
 alias emc="emacsclient -c -n -a ''"
 alias emt="emacsclient -t -a ''"
 alias emd='emacs --daemon'
