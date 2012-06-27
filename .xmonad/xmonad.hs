@@ -60,12 +60,21 @@ myKeys = [ ("M-`", spawn myTerminal)
          -- , ("M-a", myRun)
          ]
 
-myKPEnterFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
-myKPEnterFilter ((bm,apa),x) = case apa of
-  xK_Return -> Just ((bm,xK_KP_Enter),x)
-  otherwise -> Nothing
+myKPFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
+myKPFilter ((bm,apa),x) = case apa of
+  xK_Return     -> Just ((bm,xK_KP_Enter),x)
+  xK_1          -> Just ((bm,xK_KP_1),x)
+  xK_2          -> Just ((bm,xK_KP_2),x)
+  xK_3          -> Just ((bm,xK_KP_3),x)
+  xK_4          -> Just ((bm,xK_KP_4),x)
+  xK_5          -> Just ((bm,xK_KP_5),x)
+  xK_6          -> Just ((bm,xK_KP_6),x)
+  xK_7          -> Just ((bm,xK_KP_7),x)
+  xK_8          -> Just ((bm,xK_KP_8),x)
+  xK_9          -> Just ((bm,xK_KP_9),x)
+  otherwise     -> Nothing
 
-myAddKPEnter = Data.Map.fromList . (\x -> x ++ (Data.Maybe.mapMaybe myKPEnterFilter x) ) . Data.Map.toList
+myAddKPs = Data.Map.fromList . (\x -> x ++ (Data.Maybe.mapMaybe myKPFilter x) ) . Data.Map.toList
 
 -- XF86Sleep
 -- XF86ScreenSaver
@@ -115,7 +124,7 @@ main = do
        , layoutHook = myLayoutHook
        , logHook = logHook gnomeConfig >> takeTopFocus
        , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
-       , XMonad.keys = myAddKPEnter  . (XMonad.keys gnomeConfig)
+       , XMonad.keys = myAddKPs  . (XMonad.keys gnomeConfig)
     } `additionalKeysP` myKeys
 
 -- . (Data.Map.union (mkKeymap gnomeConfig myKeys))
