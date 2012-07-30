@@ -298,6 +298,8 @@ then inserts a comment at the end of the line."
 (evil-mode 1)
 ; Add another escape at f8
 (global-set-key (kbd "<f8>") 'evil-force-normal-state)
+; and at C-å
+(global-set-key (kbd "C-å") 'evil-force-normal-state)
 
 ;; Activation of vi-mode
 
