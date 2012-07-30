@@ -301,7 +301,7 @@ then inserts a comment at the end of the line."
 ; and at C-å
 (global-set-key (kbd "C-å") 'evil-force-normal-state)
 
-;; Activation of vi-mode
+(define-key evil-insert-state-map "\C-k" 'kill-line)
 
 ;;-----------------------------------------------------------------------------
 ;; first add ~/.emacs.d to load-path
