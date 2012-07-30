@@ -40,13 +40,14 @@ eigenvectors
 Krylov
 parallelized
 descheduled
-eigenvector
 inline
+eigenvector
 Chombo's
 bijective
 nonuniformly
 orthogonalized
 Arnoldi
+intrinsics
 Schur
 structs
 chipset
@@ -78,7 +79,6 @@ Rantakokko
 unflagged
 prolongate
 Matlab
-MATLAB
 naïve
 diagonalization
 Lehto
