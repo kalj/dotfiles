@@ -302,6 +302,8 @@ then inserts a comment at the end of the line."
 (global-set-key (kbd "C-å") 'evil-force-normal-state)
 
 (define-key evil-insert-state-map "\C-k" 'kill-line)
+(define-key evil-insert-state-map "\C-e" 'move-end-of-line)
+(define-key evil-insert-state-map "\C-r" 'isearch-backward)
 
 ;;-----------------------------------------------------------------------------
 ;; first add ~/.emacs.d to load-path
