@@ -436,10 +436,25 @@ then inserts a comment at the end of the line."
 (add-to-list 'auto-mode-alist '("\\.abp\\'"  . abc-mode))
 (autoload 'abc-mode "abc-mode" "abc music files" t)
 
+(defun abc-show-current-ps()
+  (interactive)
+  (save-buffer)
+  (shell-command
+   (read-from-minibuffer
+    "Options: "
+    (concat "evince" " "
+            (replace-regexp-in-string "\.abc$" ".ps" buffer-file-name)
+            " &"
+            ))))
+
+
+
 (setq abc-mode-hook
       '(lambda ()
          (local-set-key (kbd "C-c C-c") 'abc-run-abc2ps-all)
+         (local-set-key (kbd "C-c C-v") 'abc-show-current-ps)
          ))
+
 
 ;; (add-to-list 'auto-insert-alist '(abc-mode . abc-skeleton))
 
