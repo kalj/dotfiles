@@ -87,13 +87,11 @@ esac
 case "$TERM" in
     xterm*|rxvt*|screen*)
 
-        PROMPT_COMMAND='echo -ne "\e]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} \a"; history -a'
-        ;;
-    *)
-        PROMPT_COMMAND='history -a'
+        PROMPT_COMMAND='echo -ne "\e]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} \a"'
         ;;
 esac
 
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }"'history -a'
 
 #==============================================================================
 # Greeting
