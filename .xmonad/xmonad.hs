@@ -39,6 +39,10 @@ import Data.Maybe
 
 import XMonad.Config.Gnome
 import XMonad.Layout.NoBorders
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.IM
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.Reflect
 
 -- =============================================================================
 -- Misc. variables
@@ -88,7 +92,14 @@ myAddKPs = Data.Map.fromList . (\x -> x ++ (Data.Maybe.mapMaybe myKPFilter x) ) 
 -- =============================================================================
 -- Layout Hook
 -- =============================================================================
-myLayoutHook = smartBorders ( layoutHook gnomeConfig)
+
+myLayoutHook = smartBorders $ ow "8" imLayout $ ow "9" mailLayout $ ow "1" webLayout $ standardLayouts
+  where
+    standardLayouts = Tall 1 (3/100) (0.56) ||| ThreeCol 1 (3/100) (1/2) ||| Full
+    imLayout = reflectHoriz $ withIM (1/7) (Role "buddy_list") $ reflectHoriz $ webLayout
+    mailLayout = Tall 1 (3/100) (1/3)
+    webLayout = Tall 1 (3/100) (0.60)
+    ow a b c = onWorkspace a b c
 
 
 -- =============================================================================
