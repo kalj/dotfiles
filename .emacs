@@ -293,17 +293,21 @@ then inserts a comment at the end of the line."
 ;; (require 'viper)
 
 ;; Evil mode
-(add-to-list 'load-path "~/.emacs.d/plugins/evil")
-(require 'evil)
-(evil-mode 1)
-; Add another escape at f8
-(global-set-key (kbd "<f8>") 'evil-force-normal-state)
-; and at C-å
-(global-set-key (kbd "C-å") 'evil-force-normal-state)
+;; (add-to-list 'load-path "~/.emacs.d/plugins/evil")
+;; (require 'evil)
+;; (evil-mode 1)
 
-(define-key evil-insert-state-map "\C-k" 'kill-line)
-(define-key evil-insert-state-map "\C-e" 'move-end-of-line)
-(define-key evil-insert-state-map "\C-r" 'isearch-backward)
+;; ;; completely wipe all the evil insert-mode bindings
+;; (setcdr evil-insert-state-map nil)
+;; (define-key evil-insert-state-map
+;;   (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+
+;; ;; Add an escape to switch out of insert mode
+;; (define-key evil-insert-state-map "\C-[" 'evil-force-normal-state)
+;; ; Add another escape at f8
+;; (global-set-key (kbd "<f8>") 'evil-force-normal-state)
+;; ; and at C-å
+;; (global-set-key (kbd "C-å") 'evil-force-normal-state)
 
 ;;-----------------------------------------------------------------------------
 ;; first add ~/.emacs.d to load-path
