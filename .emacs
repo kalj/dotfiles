@@ -108,7 +108,8 @@
              '(("\t" 0 'trailing-whitespace prepend)))))
 
 ;; trailing whitespaces are also evil
-(setq-default show-trailing-whitespace t)
+;; therefore, delete them on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Show column number in modeline
 (setq column-number-mode t)
@@ -146,6 +147,23 @@
 (global-set-key (kbd "C-S-e") 'move-end-of-line)
 (global-set-key (kbd "M-S-f") 'forward-word)
 (global-set-key (kbd "M-S-b") 'backward-word)
+
+;; make C-u and C-w behave like in Unix / bash
+(global-set-key (kbd "C-u")
+                (lambda ()
+                  (interactive)
+                  (kill-line 0)))
+
+(defun unix-werase-or-kill (arg)
+  (interactive "*p")
+  (if (and transient-mark-mode
+           mark-active)
+      (kill-region (region-beginning) (region-end))
+    (backward-kill-word arg)))
+(global-set-key (kbd "C-w") 'unix-werase-or-kill)
+
+
+(global-unset-key (kbd "C-x C-n"))
 
 ;; replace ispell-word by interactive ispell
 (global-set-key (kbd "M-$") 'ispell)
@@ -308,6 +326,8 @@ then inserts a comment at the end of the line."
 ;; (global-set-key (kbd "<f8>") 'evil-force-normal-state)
 ;; ; and at C-å
 ;; (global-set-key (kbd "C-å") 'evil-force-normal-state)
+
+;; (define-key evil-insert-state-map "\C-k" 'kill-line)
 
 ;;-----------------------------------------------------------------------------
 ;; first add ~/.emacs.d to load-path
