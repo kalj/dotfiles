@@ -238,7 +238,6 @@ alias aremove='sudo apt-get remove'
 alias aclean='sudo apt-get autoremove && sudo apt-get autoclean'
 alias aupgrade='sudo apt-get dist-upgrade'
 alias aupdate='sudo apt-get update'
-
 alias asearch='apt-cache search'
 make-completion-wrapper _apt_cache _asearch apt-cache search
 complete -F _asearch asearch
@@ -246,6 +245,9 @@ complete -F _asearch asearch
 alias ashow='apt-cache show'
 make-completion-wrapper _apt_cache _ashow apt-cache show
 complete -F _ashow ashow
+alias ashowpkg='apt-cache showpkg'
+make-completion-wrapper _apt_cache _ashowpkg apt-cache showpkg
+complete -F _ashowpkg ashowpkg
 
 alias dpgrep='dpkg -l | grep'
 
