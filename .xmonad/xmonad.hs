@@ -38,6 +38,7 @@ import Data.Map
 import Data.Maybe
 
 import XMonad.Config.Gnome
+import XMonad.Layout.NoBorders
 
 -- =============================================================================
 -- Misc. variables
@@ -57,6 +58,9 @@ myKeys = [ ("M-`", spawn myTerminal)
          , ("M-<F3>", spawn "firefox")
          , ("M-<F2>", spawn "thunderbird")
          , ("M-<F1>", spawn "pidgin")
+         , ("C-M-<Insert>", spawn "ncmpcpp toggle")
+         , ("C-M-<Page_Down>", spawn "ncmpcpp next")
+         , ("C-M-<Page_Up>", spawn "ncmpcpp prev")
          -- , ("M-a", myRun)
          ]
 
@@ -84,7 +88,8 @@ myAddKPs = Data.Map.fromList . (\x -> x ++ (Data.Maybe.mapMaybe myKPFilter x) ) 
 -- =============================================================================
 -- Layout Hook
 -- =============================================================================
-myLayoutHook = avoidStruts ( layoutHook gnomeConfig)
+myLayoutHook = smartBorders ( layoutHook gnomeConfig)
+
 
 -- =============================================================================
 -- Manage Hook
@@ -98,6 +103,7 @@ myManageHook = composeAll
                , className =? "Pidgin" --> doShift "8"
                , className =? "Empathy" --> doShift "8"
                , className =? "Skype" --> doShift "8"
+               , className =? "Transmission-gtk" --> doShift "8"
                , appName   =? "Mail" --> doShift "9"
                , className =? "Do" --> doIgnore
                , className =? "Gimp-2.6" --> doFloat
