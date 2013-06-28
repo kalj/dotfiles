@@ -34,7 +34,7 @@ export HISTSIZE=1000
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-# KL: /etc/profile sources /etc/profile.bash which sources /etc/bash.bashrc which does this. 
+# KL: /etc/profile sources /etc/profile.bash which sources /etc/bash.bashrc which does this.
 # KL: No, that's not the case. Sopa.
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
@@ -145,6 +145,8 @@ alias lla='ls -lhA'
 alias lal='ls -lhA'
 alias llt='ls -lhtr'
 alias llat='ls -lhAtr'
+alias lls='ls -lhSr'
+alias llas='ls -lhASr'
 
 alias cd..='cd ..'
 alias ..='cd ..'
@@ -202,8 +204,10 @@ alias rl='readlink -f'
 # programming etc
 alias rmake='make clean && make'
 
-# emacs
+# editors
+alias v='vim'
 alias emx='emacs -nw'
+alias e='emacs -nw'
 alias smx='sudo vim'
 alias svi='sudo vim'
 alias emc="emacsclient -c -n -a ''"
@@ -213,7 +217,10 @@ alias emd='emacs --daemon'
 alias svim='sudo vim'
 
 # git
+alias g='git'
+complete -F _git g
 alias gitfind='git ls-tree -r HEAD | grep -i'
+alias gitk='gitk --all'
 
 # less/man in separate window
 alias xless="xterm -e less"
