@@ -71,9 +71,9 @@ CHR 40;33;01 	# character device driver
 ORPHAN 40;31;01 # symlink to nonexistent file, or non-stat'able file
 SETUID 37;41 	# file that is setuid (u+s)
 SETGID 30;43 	# file that is setgid (g+s)
-STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable 
+STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable
 		# (+t,o+w)
-OTHER_WRITABLE 37;42 # dir that is other-writable (o+w) and not 
+OTHER_WRITABLE 37;42 # dir that is other-writable (o+w) and not
 		# sticky
 STICKY 37;44 	# dir with the sticky bit set (+t) and not other-writable
 
@@ -99,6 +99,7 @@ EXEC 01;32
 # archives or compressed (bright red)
 .tar 01;31
 .tgz 01;31
+.txz 01;31
 .svgz 01;31
 .arj 01;31
 .taz 01;31
