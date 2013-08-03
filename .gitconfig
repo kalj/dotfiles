@@ -17,7 +17,8 @@
     ci = commit
     br = branch
     co = checkout
-    df = diff -w --find-copies-harder
+    df = diff --find-copies-harder
+    dfc = diff --find-copies-harder --cached
     lg = log -p
     glog = log --oneline --graph --decorate
     who = shortlog -s --
