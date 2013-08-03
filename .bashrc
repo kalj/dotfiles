@@ -226,6 +226,7 @@ alias svi='sudo vim'
 alias emc="emacsclient -c -n -a ''"
 alias emt="emacsclient -t -a ''"
 alias emd='emacs --daemon'
+alias ediff='emacs --diff'
 
 alias svim='sudo vim'
 
