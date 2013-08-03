@@ -177,24 +177,37 @@ fix-perms-restr ()  {
 }
 
 
+# Wraps a completion function
+# make-completion-wrapper <actual completion function> <name of new func.> <alias>
+#                         <command name> <list supplied arguments>
+# eg.
+# alias agi='apt-get install'
+# make-completion-wrapper _apt_get _apt_get_install apt-get install
+# defines a function called _apt_get_install (that's $2) that will complete
+# the 'agi' alias. (complete -F _apt_get_install agi)
+#
+#make-completion-wrapper _git_checkout _git_checkout_shortcut go git checkout
 make-completion-wrapper () {
-    local function_name="$2"
-    local arg_count=$(($#-3))
     local comp_function_name="$1"
-    shift 2
+    local function_name="$2"
+    local alias_name="$3"
+    local arg_count=$(($#-4))
+    shift 3
+    local args="$*"
     local function="
 function $function_name {
-        ((COMP_CWORD+=$arg_count))
-        COMP_WORDS=( "$@" \${COMP_WORDS[@]:1} )
-        "$comp_function_name"
-        return 0
+    COMP_LINE=\"$@\${COMP_LINE#$alias_name}\"
+    let COMP_POINT+=$((${#args}-${#alias_name}))
+    ((COMP_CWORD+=$arg_count))
+    COMP_WORDS=("$@" \"\${COMP_WORDS[@]:1}\")
+
+    local cur words cword prev
+    _get_comp_words_by_ref -n =: cur words cword prev
+    "$comp_function_name"
+    return 0
 }"
     eval "$function"
-    # echo $function_name
-    # echo "$function"
 }
-
-
 
 # system information
 alias df='df -h'
@@ -226,6 +239,7 @@ alias gitk='gitk --all'
 alias xless="xterm -e less"
 alias xman="xterm -e man"
 
+
 # various abrevations/shorcuts
 alias hemsida='lftp -u kalj0193 home.student.uu.se'
 alias ciplogin='ssh kalle@ciplogin.physik.uni-freiburg.de'
@@ -234,29 +248,30 @@ alias go='gnome-open'
 
 # apt commands
 alias ainstall='sudo apt-get install'
-make-completion-wrapper _apt_get _ainstall apt-get install
-complete -F _ainstall ainstall
-
 alias apurge='sudo apt-get purge'
-make-completion-wrapper _apt_get _apurge apt-get purge
-complete -F _apurge apurge
-
 alias aremove='sudo apt-get remove'
 alias aclean='sudo apt-get autoremove && sudo apt-get autoclean'
 alias aupgrade='sudo apt-get dist-upgrade'
 alias aupdate='sudo apt-get update'
 alias asearch='apt-cache search'
-make-completion-wrapper _apt_cache _asearch apt-cache search
-complete -F _asearch asearch
-
 alias ashow='apt-cache show'
-make-completion-wrapper _apt_cache _ashow apt-cache show
-complete -F _ashow ashow
 alias ashowpkg='apt-cache showpkg'
-make-completion-wrapper _apt_cache _ashowpkg apt-cache showpkg
-complete -F _ashowpkg ashowpkg
 
 alias dpgrep='dpkg -l | grep'
+
+# completion of apt aliases
+[ ! -f /usr/share/bash-completion/completions/apt-cache ] || source /usr/share/bash-completion/completions/apt-cache
+[ ! -f /usr/share/bash-completion/completions/apt-get ] || source /usr/share/bash-completion/completions/apt-get
+make-completion-wrapper _apt_get _ainstall ainstall apt-get install
+complete -F _ainstall ainstall
+make-completion-wrapper _apt_get _apurge apurge apt-get purge
+complete -F _apurge apurge
+make-completion-wrapper _apt_cache _asearch asearch apt-cache search
+complete -F _asearch asearch
+make-completion-wrapper _apt_cache _ashow ashow apt-cache show
+complete -F _ashow ashow
+make-completion-wrapper _apt_cache _ashowpkg ashowpkg apt-cache showpkg
+complete -F _ashowpkg ashowpkg
 
 # pacman
 alias supd='sudo pacman -Syu'
