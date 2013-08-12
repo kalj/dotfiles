@@ -93,7 +93,7 @@ myAddKPs = Data.Map.fromList . (\x -> x ++ (Data.Maybe.mapMaybe myKPFilter x) ) 
 -- Layout Hook
 -- =============================================================================
 
-myLayoutHook = avoidStruts $ smartBorders $ ow "8" imLayout $ ow "9" mailLayout $ ow "1" webLayout $ standardLayouts
+myLayoutHook = avoidStruts $ smartBorders $ ow "8" imLayout $ ow "9" mailLayout $ standardLayouts
   where
     standardLayouts = Tall 1 (3/100) (0.56) ||| ThreeCol 1 (3/100) (1/2) ||| Full
     imLayout = reflectHoriz $ withIM (1/7) (Role "buddy_list") $ reflectHoriz $ webLayout
