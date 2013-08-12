@@ -48,7 +48,7 @@ import XMonad.Layout.Reflect
 -- Misc. variables
 -- =============================================================================
 
-myTerminal = "gnome-terminal"
+myTerminal = "mate-terminal"
 myModMask = mod4Mask
 myRun     = gnomeRun
 
@@ -60,7 +60,7 @@ myRun     = gnomeRun
 myKeys = [ ("M-`", spawn myTerminal)
          , ("M-<Tab>", toggleWS)
          , ("M-<F3>", spawn "firefox")
-         , ("M-<F2>", spawn "thunderbird")
+         , ("M-<F2>", spawn "icedove")
          , ("M-<F1>", spawn "pidgin")
          , ("C-M-<Insert>", spawn "ncmpcpp toggle")
          , ("C-M-<Page_Down>", spawn "ncmpcpp next")
