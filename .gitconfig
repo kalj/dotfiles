@@ -9,7 +9,6 @@
         status = auto
 
 [color "diff"]
-       meta = yellow bold
        frag = magenta bold
 
 [alias]
