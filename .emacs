@@ -234,6 +234,29 @@ then inserts a comment at the end of the line."
 (global-set-key (kbd "<C-M-tab>") 'previous-buffer)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'previous-buffer)
 
+;;-----------------------------------------------------------------------------
+;; Change text size of everything
+;;-----------------------------------------------------------------------------
+
+(defun sacha/increase-font-size ()
+  (interactive)
+  (set-face-attribute 'default
+                      nil
+                      :height
+                      (ceiling (* 1.10
+                                  (face-attribute 'default :height)))))
+(defun sacha/decrease-font-size ()
+  (interactive)
+  (set-face-attribute 'default
+                      nil
+                      :height
+                      (floor (* 0.9
+                                  (face-attribute 'default :height)))))
+
+(global-set-key (kbd "C-x C-+") 'sacha/increase-font-size)
+(global-set-key (kbd "C-.")     'sacha/increase-font-size)
+(global-set-key (kbd "C-x C--") 'sacha/decrease-font-size)
+(global-set-key (kbd "C-,")     'sacha/decrease-font-size)
 
 ;;-----------------------------------------------------------------------------
 ;; Encoding systems
@@ -709,23 +732,3 @@ then inserts a comment at the end of the line."
 ;;         (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                         (second *emacs-load-start*)))))
 
-
-
-(defun sacha/increase-font-size ()
-  (interactive)
-  (set-face-attribute 'default
-                      nil
-                      :height
-                      (ceiling (* 1.10
-                                  (face-attribute 'default :height)))))
-(defun sacha/decrease-font-size ()
-  (interactive)
-  (set-face-attribute 'default
-                      nil
-                      :height
-                      (floor (* 0.9
-                                  (face-attribute 'default :height)))))
-(global-set-key (kbd "C-x C-+") 'sacha/increase-font-size)
-(global-set-key (kbd "C-.") 'sacha/increase-font-size)
-(global-set-key (kbd "C-x C--") 'sacha/decrease-font-size)
-(global-set-key (kbd "C-,") 'sacha/decrease-font-size)
