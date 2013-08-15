@@ -13,9 +13,9 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
 # set standard text editor: emacs!
-export EDITOR='emacs -nw'
+export EDITOR='vim'
 export VISUAL="$EDITOR"
-export ALTERNATE_EDITOR='\emacs -q'
+export ALTERNATE_EDITOR='vi'
 
 # mail address
 export EMAIL="k.ljungkvist@gmail.com"
@@ -221,7 +221,7 @@ alias rmake='make clean && make'
 alias v='vim'
 alias emx='emacs -nw'
 alias e='emacs -nw'
-alias smx='sudo vim'
+alias smx='sudo emacs -nw'
 alias svi='sudo vim'
 alias emc="emacsclient -c -n -a ''"
 alias emt="emacsclient -t -a ''"
