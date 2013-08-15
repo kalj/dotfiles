@@ -50,7 +50,6 @@ import XMonad.Layout.Reflect
 
 myTerminal = "mate-terminal"
 myModMask = mod4Mask
-myRun     = gnomeRun
 
 -- =============================================================================
 -- Commands and key bindings
@@ -65,7 +64,6 @@ myKeys = [ ("M-`", spawn myTerminal)
          , ("C-M-<Insert>", spawn "ncmpcpp toggle")
          , ("C-M-<Page_Down>", spawn "ncmpcpp next")
          , ("C-M-<Page_Up>", spawn "ncmpcpp prev")
-         -- , ("M-a", myRun)
          ]
 
 myKPFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
