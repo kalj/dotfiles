@@ -387,6 +387,19 @@ then inserts a comment at the end of the line."
 ;; \\usepackage[mathscr]{eucal}
 ;; \\pagestyle{empty}             % do not remove")
 
+
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-hide-leading-stars t)
+(setq org-startup-folded 'content)
+
+(setq org-agenda-custom-commands
+      '(
+        ("A" "Agenda + Todos"
+         ((agenda)
+          (todo "TODO")
+          ))))
+
 ;;-----------------------------------------------------------------------------
 ;; c-mode customizations
 ;;-----------------------------------------------------------------------------
