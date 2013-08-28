@@ -189,8 +189,22 @@ then inserts a comment at the end of the line."
         (toggle-comment-line)
       (comment-dwim arg)))
 
+  (defun my-comment-dwim-keep-mark (&optional arg)
+    (interactive "*P")
+    (my-comment-dwim arg)
+    (setq deactivate-mark nil))
+
   (global-set-key "\M-;" 'my-comment-dwim)
+  (global-set-key "\M-:" 'my-comment-dwim-keep-mark)
   )
+
+(defun kill-ring-save-keep-mark(beg end)
+  (interactive "r")
+  (kill-ring-save beg end)
+  (setq deactivate-mark nil))
+
+  (global-set-key "\M-W" 'kill-ring-save-keep-mark)
+
 
 ;; make the f* keys do something useful
 (defun my-initial-split()
