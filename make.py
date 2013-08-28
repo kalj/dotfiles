@@ -14,7 +14,7 @@ DOTDIR=HOME+"/.dotfiles"
 OLDDIR=HOME+"/dotfiles_old_"+time.strftime('%Y-%m-%d_%X')
 
 
-def setup(dir, nodes):    
+def setup(dir, nodes):
 
 
     if dir == None:
@@ -26,14 +26,14 @@ def setup(dir, nodes):
         if not os.path.isdir(link_dir):
             os.makedirs(link_dir)
 
-        
+
     for node in nodes:
 
         if dir == None:
             node_path=node
         else:
             node_path="%s/%s" % (dir,node)
-            
+
         full_bup_path="%s/%s" % (bup_dir,node)
         full_src_path="%s/%s" % (DOTDIR,node_path)
         full_link_path="%s/%s" % (HOME,node_path)
@@ -79,9 +79,9 @@ if __name__ == '__main__':
     setup(None,homefiles)
 
     # emacs.d
-    emacsfiles=[ 'template.el', 'matlab.el', 'plugins', 'abc-mode.el', 'tbemail.el', 'cuda-mode.el']
+    emacsfiles=[ 'template.el', 'plugins', 'abc-mode.el', 'tbemail.el', 'cuda-mode.el']
     setup(".emacs.d",emacsfiles)
-    
+
     # xmonad
     xmonadfiles=["xmonad.hs", "xmobar.hs"]
     setup(".xmonad",xmonadfiles)

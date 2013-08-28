@@ -497,7 +497,6 @@ then inserts a comment at the end of the line."
 ;; matlab
 ;;-----------------------------------------------------------------------------
 
-(autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
 (setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
 (setq matlab-mode-hook
       '(lambda ()
@@ -509,9 +508,6 @@ then inserts a comment at the end of the line."
          (setq matlab-indent-level 4)
          (local-set-key (kbd "C-j") 'matlab-return)
          ))
-
-
-(autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 
 
 ;;-----------------------------------------------------------------------------
