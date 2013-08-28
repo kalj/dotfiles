@@ -165,6 +165,13 @@ dus () {
     \du -sh "$@" | sort -h
 }
 
+dusc () {
+    local dusclist="$(\du -shc "$@")"
+    echo "${dusclist}" | head -n-1 | sort -h
+    echo "${dusclist}" | tail -n 1
+}
+
+
 
 fix-perms ()  {
     find "$1" -type d -exec chmod 755 {} \;
