@@ -376,6 +376,8 @@ then inserts a comment at the end of the line."
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 (define-key isearch-mode-map [escape] 'isearch-abort)
 
+(define-key evil-visual-state-map "q" 'my-comment-dwim)
+(define-key evil-normal-state-map "q" 'my-comment-dwim)
 ;; (define-key evil-insert-state-map "\C-k" 'kill-line)
 
 ;;-----------------------------------------------------------------------------
