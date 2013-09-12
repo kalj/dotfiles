@@ -66,8 +66,9 @@ if __name__ == '__main__':
                '.inputrc',
                '.screenrc',
                '.templates', # note, this is not a file, but we want all of this
-               # directory versioned
+                             # directory versioned
                '.vimperatorrc',
+               '.vimrc',
                '.viper',
                '.Xresources',
                '.gitconfig',
@@ -86,3 +87,6 @@ if __name__ == '__main__':
     xmonadfiles=["xmonad.hs", "xmobar.hs"]
     setup(".xmonad",xmonadfiles)
 
+    # vim
+    vimfiles=[ 'plugin' ]
+    setup(".vim",vimfiles)
