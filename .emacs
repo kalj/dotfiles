@@ -131,6 +131,41 @@
 (setq read-buffer-completion-ignore-case 1)
 
 ;;-----------------------------------------------------------------------------
+;; vi emulation
+;;-----------------------------------------------------------------------------
+
+;; Evil mode
+(add-to-list 'load-path "~/.emacs.d/plugins/evil")
+(require 'evil)
+(evil-mode 1)
+
+;; completely wipe all the evil insert-mode bindings
+(setcdr evil-insert-state-map nil)
+(define-key evil-insert-state-map
+  (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+
+;; Add an escape to switch out of insert mode
+(define-key evil-insert-state-map "\C-[" 'evil-force-normal-state)
+; Add another escape at f8
+(global-set-key (kbd "<f8>") 'evil-force-normal-state)
+; and at C-å
+(global-set-key (kbd "C-å") 'evil-force-normal-state)
+
+
+;; make esc quit stuff (i.e. replace C-g)
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(define-key isearch-mode-map [escape] 'isearch-abort)
+
+(define-key evil-visual-state-map "q" 'my-comment-dwim)
+(define-key evil-normal-state-map "q" 'my-comment-dwim)
+
+;;-----------------------------------------------------------------------------
 ;; Global key bindings
 ;;-----------------------------------------------------------------------------
 
@@ -339,46 +374,6 @@ then inserts a comment at the end of the line."
 ;; bind to keys
 (global-set-key "\C-c\C-r" 'reload-init-file)
 (global-set-key "\C-c\C-e" 'edit-init-file)
-
-;;-----------------------------------------------------------------------------
-;; vi emulation
-;;-----------------------------------------------------------------------------
-
-;; Try out viper-mode!
-;; (setq viper-mode t)
-;; (require 'viper)
-
-;; Evil mode
-(add-to-list 'load-path "~/.emacs.d/plugins/evil")
-(require 'evil)
-(evil-mode 1)
-
-;; completely wipe all the evil insert-mode bindings
-(setcdr evil-insert-state-map nil)
-(define-key evil-insert-state-map
-  (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
-
-;; Add an escape to switch out of insert mode
-(define-key evil-insert-state-map "\C-[" 'evil-force-normal-state)
-; Add another escape at f8
-(global-set-key (kbd "<f8>") 'evil-force-normal-state)
-; and at C-å
-(global-set-key (kbd "C-å") 'evil-force-normal-state)
-
-
-;; make esc quit stuff (i.e. replace C-g)
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-(define-key isearch-mode-map [escape] 'isearch-abort)
-
-(define-key evil-visual-state-map "q" 'my-comment-dwim)
-(define-key evil-normal-state-map "q" 'my-comment-dwim)
-;; (define-key evil-insert-state-map "\C-k" 'kill-line)
 
 ;;-----------------------------------------------------------------------------
 ;; first add ~/.emacs.d to load-path
