@@ -267,9 +267,9 @@ then inserts a comment at the end of the line."
                       (floor (* 0.9
                                   (face-attribute 'default :height)))))
 
-(global-set-key (kbd "C-x C-+") 'sacha/increase-font-size)
+(global-set-key (kbd "C-x C-.") 'sacha/increase-font-size)
 (global-set-key (kbd "C-.")     'sacha/increase-font-size)
-(global-set-key (kbd "C-x C--") 'sacha/decrease-font-size)
+(global-set-key (kbd "C-x C-,") 'sacha/decrease-font-size)
 (global-set-key (kbd "C-,")     'sacha/decrease-font-size)
 
 ;;-----------------------------------------------------------------------------
