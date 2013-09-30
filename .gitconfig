@@ -17,6 +17,7 @@
     br = branch
     co = checkout
     df = diff --find-copies-harder --minimal
+    wdf = diff --word-diff -w --find-copies-harder --minimal
     dfc = diff --find-copies-harder --minimal --cached
     lg = log -p
     glog = log --oneline --graph --decorate
