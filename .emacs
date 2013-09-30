@@ -397,8 +397,10 @@ then inserts a comment at the end of the line."
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;;-----------------------------------------------------------------------------
-;; org-mode customizations
+;; org-mode
 ;;-----------------------------------------------------------------------------
+
+(require 'org)
 
 ;; (setq org-format-latex-header
 ;;       "\\documentclass[a4paper]{article}
@@ -414,6 +416,24 @@ then inserts a comment at the end of the line."
 ;; \\usepackage[mathscr]{eucal}
 ;; \\pagestyle{empty}             % do not remove")
 
+;; Remap org-mode meta keys for convenience
+(evil-declare-key 'normal org-mode-map
+                  (kbd "M-l") 'org-metaright
+                  (kbd "M-h") 'org-metaleft
+                  (kbd "M-k") 'org-metaup
+                  (kbd "M-j") 'org-metadown
+                  (kbd "M-L") 'org-shiftmetaright
+                  (kbd "M-H") 'org-shiftmetaleft
+                  (kbd "M-K") 'org-shiftmetaup
+                  (kbd "M-J") 'org-shiftmetadown)
+
+
+;; org agenda -- leave in emacs mode but add j & k
+(defun my-org-mode-hook ()
+  (define-key org-agenda-mode-map "j" 'evil-next-line)
+  (define-key org-agenda-mode-map "k" 'evil-previous-line))
+(add-hook 'org-mode-hook 'my-org-mode-hook)
+
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -426,6 +446,8 @@ then inserts a comment at the end of the line."
          ((agenda)
           (todo "TODO")
           ))))
+
+(setq org-agenda-files '("~/docs/work/todo.org" "~/docs/work/todo.org_archive"))
 
 ;;-----------------------------------------------------------------------------
 ;; c-mode customizations
