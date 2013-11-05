@@ -22,14 +22,7 @@ export EMAIL="k.ljungkvist@gmail.com"
 
 export PAGER=less
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... and ignore same sucessive entries.
-export HISTCONTROL=ignoredups
 
-# append rather than overwrite command history
-shopt -s histappend
-
-export HISTSIZE=1000
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -91,6 +84,29 @@ case "$TERM" in
         ;;
 esac
 
+#==============================================================================
+# History
+#==============================================================================
+
+export HISTSIZE=1000000
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... and ignore same sucessive entries.
+export HISTCONTROL=ignoredups
+
+# append rather than overwrite command history
+shopt -s histappend
+
+# make multi-line commands into single-line ones
+shopt -s cmdhist
+
+# show time stamp when displaying history
+HISTTIMEFORMAT='%F %T '
+
+# ignore super common commands
+HISTIGNORE='ls:bg:fg:history'
+
+# append rather than overwriting history
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }"'history -a'
 
 #==============================================================================
