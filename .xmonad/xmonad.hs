@@ -37,7 +37,7 @@ import XMonad.Hooks.ManageHelpers
 import Data.Map
 import Data.Maybe
 
-import XMonad.Config.Gnome
+import XMonad.Config.Mate
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.IM
@@ -48,22 +48,31 @@ import XMonad.Layout.Reflect
 -- Misc. variables
 -- =============================================================================
 
-myTerminal = "mate-terminal"
 myModMask = mod4Mask
 
 -- =============================================================================
 -- Commands and key bindings
 -- =============================================================================
 
+runInTerm :: String -> X ()
+runInTerm command = asks (terminal . config) >>= \t -> spawn $ t  ++ " -x " ++ command
 
-myKeys = [ ("M-`", spawn myTerminal)
-         , ("M-<Tab>", toggleWS)
-         , ("M-<F3>", spawn "firefox")
-         , ("M-<F2>", spawn "icedove")
-         , ("M-<F1>", spawn "pidgin")
-         , ("C-M-<Insert>", spawn "ncmpcpp toggle")
-         , ("C-M-<Page_Down>", spawn "ncmpcpp next")
-         , ("C-M-<Page_Up>", spawn "ncmpcpp prev")
+
+myKeys = [ ("M-`",              spawn (terminal mateConfig ))
+         , ("M-<Tab>",          toggleWS)
+         , ("M-<F3>",           spawn "firefox")
+         , ("M-<F2>",           spawn "icedove")
+         , ("M-<F1>",           spawn "pidgin")
+         , ("C-M-<Insert>",     spawn "ncmpcpp toggle")
+         , ("C-M-<Page_Down>",  spawn "ncmpcpp next")
+         , ("C-M-<Page_Up>",    spawn "ncmpcpp prev")
+         , ("<XF86AudioPlay>",    spawn "ncmpcpp toggle")
+         , ("<XF86AudioNext>",    spawn "ncmpcpp next")
+         , ("<XF86AudioPrev>",    spawn "ncmpcpp prev")
+         , ("<XF86AudioStop>",    spawn "ncmpcpp stop")
+         , ("<XF86Tools>",        spawn "sonata -p")
+         , ("M-x",              runInTerm "top -d 1")
+         , ("<XF86Calculator>", runInTerm "octave -q")
          ]
 
 myKPFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
@@ -118,7 +127,6 @@ myManageHook = composeAll
                , className =? "Gimp-2.6" --> doFloat
                , className =? "Timer-applet" --> doFloat
                , composeOne [ isFullscreen -?> doFullFloat ]
-               , manageDocks
                ]
 
 
@@ -132,14 +140,13 @@ myManageHook = composeAll
 -- =============================================================================
 
 main = do
-  xmonad $ gnomeConfig {
+  xmonad $ mateConfig {
          modMask            = myModMask
-       , terminal           = myTerminal
-       , manageHook = myManageHook <+> manageHook gnomeConfig
+       , manageHook = myManageHook <+> manageHook mateConfig
        , layoutHook = myLayoutHook
-       , logHook = logHook gnomeConfig >> takeTopFocus
+       , logHook = logHook mateConfig >> takeTopFocus
        , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
-       , XMonad.keys = myAddKPs  . (XMonad.keys gnomeConfig)
+       , XMonad.keys = myAddKPs  . (XMonad.keys mateConfig)
     } `additionalKeysP` myKeys
 
 -- . (Data.Map.union (mkKeymap gnomeConfig myKeys))
