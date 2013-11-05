@@ -92,6 +92,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" make movement across newlines possible
+set whichwrap=<,>,[,],h,l
+
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
