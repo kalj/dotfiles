@@ -67,6 +67,7 @@ if __name__ == '__main__':
                '.screenrc',
                '.templates', # note, this is not a file, but we want all of this
                              # directory versioned
+               '.xmonad', # also this is a directory
                '.vimperatorrc',
                '.vimrc',
                '.viper',
@@ -82,10 +83,6 @@ if __name__ == '__main__':
     # emacs.d
     emacsfiles=[ 'template.el', 'plugins', 'abc-mode.el', 'tbemail.el', 'cuda-mode.el']
     setup(".emacs.d",emacsfiles)
-
-    # xmonad
-    xmonadfiles=["xmonad.hs", "xmobar.hs"]
-    setup(".xmonad",xmonadfiles)
 
     # vim
     vimfiles=[ 'plugin' ]
