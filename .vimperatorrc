@@ -16,11 +16,10 @@ set newtab=all
 
 " Reset many shortcuts to the firefox default
 map <C-f> <Insert><C-f><Insert>
-imap <Esc> <Insert><Esc><Insert>
 map <C-g> <Insert><C-g><Insert>
 map <C-b> <Insert><C-b><Insert>
 imap <C-h> <Insert><C-h><Insert>
-imap <C-l> <Esc><A-d>
+imap <C-l> <Esc><C-l>
 imap <C-k> <Esc><C-k>
 
 
