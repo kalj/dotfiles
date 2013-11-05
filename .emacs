@@ -100,12 +100,6 @@
 ;; Only use spaces for indentation
 (setq-default indent-tabs-mode nil)
 
-;; if evil tabs show up anyway, mark them out for execution
-(add-hook 'font-lock-mode-hook
-          (lambda ()
-            (font-lock-add-keywords
-             nil
-             '(("\t" 0 'trailing-whitespace prepend)))))
 
 ;; trailing whitespaces are also evil
 ;; therefore, delete them on save
