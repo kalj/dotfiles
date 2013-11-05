@@ -1,21 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @(#)make.py
+# @(#)setup.py
 # @author Karl Ljungkvist
 
 
 import os
+import argparse
 import errno
 import shutil
 import time
 
-HOME=os.path.expanduser('~')
-DOTDIR=HOME+"/.dotfiles"
-OLDDIR=HOME+"/dotfiles_old_"+time.strftime('%Y-%m-%d_%X')
-
-
-def setup(dir, nodes):
-
+def setup(dir, nodes, HOME, DOTDIR, OLDIR):
 
     if dir == None:
         bup_dir=OLDDIR
@@ -25,7 +20,6 @@ def setup(dir, nodes):
 
         if not os.path.isdir(link_dir):
             os.makedirs(link_dir)
-
 
     for node in nodes:
 
@@ -57,33 +51,24 @@ def setup(dir, nodes):
 
 if __name__ == '__main__':
 
-    os.chdir(DOTDIR)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('nodes',type=str,nargs='+')
+    parser.add_argument('-dir',type=str,action='store')
+    parser.add_argument('-timestamp',type=str,action='store')
+    args=parser.parse_args()
 
-    # regular files
-    homefiles=['.bashrc',
-               '.dircolors',
-               '.emacs',
-               '.inputrc',
-               '.screenrc',
-               '.templates', # note, this is not a file, but we want all of this
-                             # directory versioned
-               '.xmonad', # also this is a directory
-               '.vimperatorrc',
-               '.vimrc',
-               '.viper',
-               '.Xresources',
-               '.gitconfig',
-               '.aspell.en.pws',
-               '.aspell.en.prepl',
-               '.aspell.sv.pws'
-               ]
+    if args.timestamp == None:
+        raise Exception('Must supply timestamp')
 
-    setup(None,homefiles)
+    HOME=os.path.expanduser('~')
+    DOTDIR=HOME+"/.dotfiles"
+    OLDDIR=HOME+"/dotfiles_old_"+args.timestamp
 
-    # emacs.d
-    emacsfiles=[ 'template.el', 'plugins', 'abc-mode.el', 'tbemail.el', 'cuda-mode.el']
-    setup(".emacs.d",emacsfiles)
+    # print 'timestamp: '+args.timestamp
+    # print 'files: '+', '.join(args.nodes)
+    # if args.dir != None:
+    #     print 'in dir: '+args.dir
 
-    # vim
-    vimfiles=[ 'plugin' ]
-    setup(".vim",vimfiles)
+    setup(args.dir,args.nodes,HOME,DOTDIR,OLDDIR)
+
+
