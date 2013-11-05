@@ -239,6 +239,7 @@ alias rl='readlink -f'
 
 # programming etc
 alias rmake='make clean && make'
+alias bmake='make -B'
 
 # editors
 alias v='vim'
