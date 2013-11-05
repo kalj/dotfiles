@@ -340,16 +340,6 @@ then inserts a comment at the end of the line."
 (setq backup-directory-alist (list (cons "." backup-dir)))
 
 ;;-----------------------------------------------------------------------------
-;; Use ido to fascilitate buffer switching / file opening
-;;-----------------------------------------------------------------------------
-
-(require 'ido)
-(setq ido-case-fold t)
-(setq ido-enable-flex-matching t)
-(ido-mode)
-(setq ido-auto-merge-work-directories-length -1)
-
-;;-----------------------------------------------------------------------------
 ;; Command for reloading this file
 ;;-----------------------------------------------------------------------------
 
