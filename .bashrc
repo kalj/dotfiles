@@ -78,7 +78,7 @@ esac
 
 ##### Sets the prompt command. Updates title
 case "$TERM" in
-    xterm*|rxvt*|screen*)
+    xterm*|rxvt*)
 
         PROMPT_COMMAND='echo -ne "\e]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} \a"'
         ;;
