@@ -68,5 +68,6 @@ $endif
 
 "\C-p": history-search-backward
 "\C-n": history-search-forward
-"\ep": history-search-backward
-"\en": history-search-forward
+"\ep": menu-complete-backward
+"\en": menu-complete
+"\ei": menu-complete
