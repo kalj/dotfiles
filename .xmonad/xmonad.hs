@@ -75,6 +75,7 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , ("<XF86Tools>",        spawn "sonata -p")
          , ("M-x",              runInTerm "top -d 1")
          , ("<XF86Calculator>", runInTerm "octave -q")
+         , ("M-c",              spawn "caja ~")
          ]
 
 myKPFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
