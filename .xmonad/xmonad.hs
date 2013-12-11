@@ -61,7 +61,7 @@ runInTerm command = asks (terminal . config) >>= \t -> spawn $ t  ++ " -x " ++ c
 myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , ("M-<Tab>",          toggleWS)
          , ("M-<F3>",           spawn "firefox")
-         , ("M-<F2>",           spawn "icedove")
+         , ("M-<F2>",           spawn "thunderbird")
          , ("M-<F1>",           spawn "pidgin")
          , ("C-M-<Insert>",     spawn "ncmpcpp toggle")
          , ("C-M-<Page_Down>",  spawn "ncmpcpp next")
