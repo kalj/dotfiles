@@ -1,4 +1,4 @@
-personal_ws-1.1 en 84 
+personal_ws-1.1 en 88 
 partitionings
 preallocated
 regrid
@@ -10,6 +10,7 @@ dequeue
 regridding
 enqueue
 multigrid
+Incompressible
 pipelining
 advection
 bioinformatics
@@ -40,8 +41,8 @@ eigenvectors
 Krylov
 parallelized
 descheduled
-inline
 eigenvector
+inline
 Chombo's
 bijective
 nonuniformly
@@ -68,12 +69,15 @@ automatization
 versa
 Hugoniot
 smoothers
+immiscible
 thresholding
 multithreaded
+GPUs
 Courant
 codomain
 parallelize
 repoint
+CUDA
 mispredicted
 Rantakokko
 unflagged
@@ -83,3 +87,4 @@ naïve
 diagonalization
 Lehto
 multi
+Navier
