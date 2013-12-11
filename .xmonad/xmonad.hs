@@ -145,7 +145,7 @@ main = do
        , manageHook = myManageHook <+> manageHook mateConfig
        , layoutHook = myLayoutHook
        , logHook = logHook mateConfig >> takeTopFocus
-       , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
+       , startupHook = startupHook mateConfig >> setWMName "LG3D"
        , XMonad.keys = myAddKPs  . (XMonad.keys mateConfig)
     } `additionalKeysP` myKeys
 
