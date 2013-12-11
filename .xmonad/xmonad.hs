@@ -44,6 +44,8 @@ import XMonad.Layout.IM
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.Reflect
 
+import MaxWidth
+
 -- =============================================================================
 -- Misc. variables
 -- =============================================================================
@@ -102,10 +104,10 @@ myAddKPs = Data.Map.fromList . (\x -> x ++ (Data.Maybe.mapMaybe myKPFilter x) ) 
 
 myLayoutHook = avoidStruts $ smartBorders $ ow "8" imLayout $ ow "9" mailLayout $ standardLayouts
   where
-    standardLayouts = Tall 1 (3/100) (0.56) ||| ThreeCol 1 (3/100) (1/2) ||| Full
-    imLayout = reflectHoriz $ withIM (1/7) (Role "buddy_list") $ reflectHoriz $ webLayout
+    standardLayouts = myTall ||| ThreeCol 1 (3/100) (1/2) ||| Full
+    imLayout = reflectHoriz $ withIM (1/7) (Role "buddy_list") $ reflectHoriz $ standardLayouts
     mailLayout = Tall 1 (3/100) (1/3)
-    webLayout = Tall 1 (3/100) (0.60)
+    myTall = maxWidth [(ClassName "Firefox", 1100)] (Tall 1 (3/100) (0.573))
     ow a b c = onWorkspace a b c
 
 
