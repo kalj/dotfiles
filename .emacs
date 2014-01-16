@@ -596,11 +596,23 @@ then inserts a comment at the end of the line."
                ))
             (cadr ispell-tex-skip-alists)))
      (add-to-list 'LaTeX-verbatim-environments "comment")
+     (add-to-list 'TeX-expand-list
+                  '("%(RubberPDF)"
+                    (lambda ()
+                      (if
+                          (not TeX-PDF-mode)
+                          ""
+                        "--pdf"))))
+     (add-to-list 'TeX-command-list
+                  '("Rubber" "rubber %(RubberPDF) %t" TeX-run-shell nil t) t)
      ))
 
-(setq-default TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "xdg-open") (output-html "xdg-open"))))
+(setq-default TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv")
+                                                 (output-dvi "xdvi") (output-pdf "xdg-open")
+                                                 (output-html "xdg-open"))))
 
 (setq-default TeX-PDF-mode t)
+(setq-default TeX-command-default "Rubber")
 
 (defun my-latex-mode-hook()
   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
