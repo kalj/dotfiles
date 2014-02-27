@@ -506,6 +506,8 @@ then inserts a comment at the end of the line."
 (setq auto-mode-alist (append '(("\\.cu$" . cuda-mode)) auto-mode-alist))
 (setq auto-mode-alist (append '(("\\.cuh$" . cuda-mode)) auto-mode-alist))
 
+;; upc
+(setq auto-mode-alist (append '(("\\.upc$" . c-mode)) auto-mode-alist))
 
 ;;-----------------------------------------------------------------------------
 ;; Fortran
