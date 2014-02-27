@@ -1,11 +1,13 @@
-personal_ws-1.1 en 99
+personal_ws-1.1 en 107
 Arnoldi
 CPUs
 CUDA
 Chombo's
 Courant
 GHz
+GPU
 GPUs
+Galerkin
 Gflops
 Hermitian
 Hugoniot
@@ -17,15 +19,19 @@ Lehto
 Matlab
 Navier
 Nicolson
+OpenMP
 PDEs
 RGB
 Rantakokko
 Schur
 Steensland
+UPMARC
 Uppsala
 advection
+al
 atomics
 automatization
+benchmarked
 bijective
 bioinformatics
 chipset
@@ -40,6 +46,7 @@ discretizing
 eigenvector
 eigenvectors
 enqueue
+et
 executables
 exponentiating
 hexahedral
@@ -50,6 +57,7 @@ inlined
 intra
 intrinsics
 isoefficiency
+kB
 linearized
 mispredicted
 multi
