@@ -736,6 +736,15 @@ then inserts a comment at the end of the line."
 
 (add-hook 'js-mode-hook (lambda ()
                           (setq tab-width 4)))
+
+;;-----------------------------------------------------------------------------
+;; Arduino mode
+;;-----------------------------------------------------------------------------
+
+(add-to-list 'load-path "~/.emacs.d/plugins/arduino-mode")
+(setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
+(autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
+
 ;;-----------------------------------------------------------------------------
 ;; Templates
 ;;-----------------------------------------------------------------------------
