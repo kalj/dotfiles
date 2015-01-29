@@ -379,10 +379,10 @@ then inserts a comment at the end of the line."
 (global-set-key "\C-c\C-e" 'edit-init-file)
 
 ;;-----------------------------------------------------------------------------
-;; first add ~/.emacs.d to load-path
+;; first add ~/.emacs.d/plugins to load-path
 ;;-----------------------------------------------------------------------------
 
-(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/plugins")
 
 ;;-----------------------------------------------------------------------------
 ;; haskell-mode

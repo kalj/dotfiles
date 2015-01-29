@@ -8,7 +8,7 @@ HOMEFILES=.bashrc .dircolors .emacs .inputrc .screenrc .templates \
 		.xmonad .vimperatorrc .vimrc .viper .Xresources \
 		.gitconfig .aspell.en.pws .aspell.en.prepl .aspell.sv.pws
 
-EMACSFILES=template.el plugins abc-mode.el tbemail.el cuda-mode.el
+EMACSFILES=plugins
 VIMFILES=plugin
 
 install:
