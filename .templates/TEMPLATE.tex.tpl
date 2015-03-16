@@ -1,6 +1,10 @@
 % @(#)TEMPLATE.tex.tpl
 % @author (>>>USER_NAME<<<) <(>>>AUTHOR<<<)>
 
+% -----------------------------------------------------------------------------
+% Preamble
+% -----------------------------------------------------------------------------
+
 \documentclass[a4paper,10pt]{article}
 % \documentclass[]{beamer}
 % \usetheme{UUIT}
@@ -12,8 +16,6 @@
 
 %% Layout
 % \usepackage{fullpage}
-% \usepackage{geometry}
-% \pagestyle{headings}
 
 %% Have new paragraph begin with blank line rather than indent.
 % \setlength{\parindent}{0pt}
@@ -22,12 +24,6 @@
 %% math
 \usepackage{amsmath,amsfonts,mathrsfs,amssymb}
 \usepackage[squaren]{SIunits}
-% \usepackage{ulem}
-% \renewcommand{\emph}{\textit}
-
-%% fonts
-% \usepackage{palatino}
-% \usepackage{soul} % to widen text
 
 %% figure-related stuff
 \usepackage{graphicx}
@@ -36,50 +32,56 @@
 \usepackage{hyperref}
 % \usepackage{floatflt}
 
-%% Code inclusion evironments
-\usepackage{comment} % for orgmode tables
-\usepackage{moreverb}
-\newcommand{\verbinpt}[1]{{\scriptsize\verbatimtabinput[4]{#1}}}
+%% Algorithms
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+
+%% Code inclusion evironments
 \usepackage{color}
 \usepackage{listings}
+\usepackage{xcolor}
+\xdefinecolor{codegreen}{RGB}{0,128,0}
+\xdefinecolor{codedgreen}{RGB}{0,64,0}
+\xdefinecolor{codegrey}{RGB}{128,128,128}
+\xdefinecolor{codeblue}{RGB}{0,0,128}
+\xdefinecolor{codered}{RGB}{100,0,0}
 
-\definecolor{dkgreen}{rgb}{0,0.6,0}
-\definecolor{gray}{rgb}{0.5,0.5,0.5}
+% Matlab settings
+\lstdefinestyle{mymatlab}{
+  language=Matlab
+  ,keywords={break,case,catch,continue,else,elseif,end,for,function,
+    global,if,otherwise,persistent,return,switch,try,while}
+  ,basicstyle=\bfseries\scriptsize\ttfamily
+  ,keywordstyle=\color{codeblue}
+  ,commentstyle=\color{codered}
+  ,stringstyle=\color{codegreen}
+  ,numbers=left
+  ,stepnumber=1
+  ,numbersep=10pt
+  ,tabsize=2
+  ,showspaces=false
+  ,showstringspaces=false
+  ,frame=tb
+  ,xleftmargin=\parindent
+}
 
-%% Matlab settings
-\lstset{language=Matlab,
-  keywords={break,case,catch,continue,else,elseif,end,for,function,
-    global,if,otherwise,persistent,return,switch,try,while},
-  basicstyle=\footnotesize\ttfamily,
-  keywordstyle=\color{blue},
-  commentstyle=\color{red},
-  stringstyle=\color{dkgreen},
-  % numbers=left,
-  numberstyle=\tiny\color{gray},
-  stepnumber=1,
-  numbersep=10pt,
-  backgroundcolor=\color{white},
-  tabsize=2,
-  showspaces=false,
-  showstringspaces=false}
-
-%% C++ settings
-% \lstset{language=C++
-%   ,morekeywords={for, if, else, and, while} %, __device__, __global__, __shared__}
-%   % ,otherkeywords={<, >, (,),;}
-%   ,emph={(,),;}
-%   ,emphstyle=\bfseries\color{dkgreen}
-%   ,basicstyle=\bfseries\footnotesize\ttfamily
-%   ,keywordstyle=\color{blue}
-%   ,commentstyle=\color{dkgreen}
-%   ,frame=tb
+% C++ settings
+\lstdefinestyle{mycpp}{
+  language=C++
+  ,basicstyle=\bfseries\scriptsize\ttfamily
+  ,stringstyle=\color{codered}
+  ,morekeywords={for, if, else, while,std} %, __device__, __global__, __shared__}
+  ,keywordstyle=\color{codeblue}
+  ,commentstyle=\color{codegreen}
+  ,showstringspaces=false
+  ,frame=tb
+  ,xleftmargin=\parindent
 %   ,mathescape=true
 %   ,captionpos=b
 %   % ,numbers=left
 %   ,numbersep=10pt
-% }
+}
+
 
 
 %% Misc.
@@ -99,6 +101,7 @@
 %% math macros
 \newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
 % \newcommand{\mat}[1]{\uuline{#1}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\ordo}[1]{\ensuremath{\mathcal{O}(#1)}}
 \newcommand{\degrees}{\ensuremath{{}^\circ}}
 \newcommand{\de}{\ensuremath{\mathrm{d}}}
@@ -112,11 +115,14 @@
 \newcommand{\pddop}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
 \newcommand{\ddopn}[2]{\ensuremath{\frac{\de^{#1}}{\de #2^{#1}}}}
 \newcommand{\pddopn}[2]{\ensuremath{\frac{\partial^{#1}}{\partial #2^{#1}}}}
-\newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\inprod}[2]{\ensuremath{\left(#1,#2\right)}}
 
 %% Defining the authors email address
 \newcommand{\insertemail}{karl.ljungkvist@it.uu.se}%
+
+% -----------------------------------------------------------------------------
+% End of preamble
+% -----------------------------------------------------------------------------
 
 
 % \thispagestyle{empty}
