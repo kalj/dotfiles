@@ -31,5 +31,3 @@
 
 [merge]
     tool = ediff
-[push]
-	default = simple
