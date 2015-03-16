@@ -2,7 +2,7 @@
 ##
 ## Author: Karl Ljungkvist
 
-TIMESTAMP=$(shell date +"%Y-%m-%d_%X")
+TIMESTAMP=$(shell date +"%Y-%m-%d_%T")
 
 HOMEFILES=.bashrc .dircolors .emacs .inputrc .screenrc .templates \
 		.xmonad .vimperatorrc .vimrc .viper .Xresources \
