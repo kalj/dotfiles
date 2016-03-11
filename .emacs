@@ -451,7 +451,7 @@ then inserts a comment at the end of the line."
 ;; customizations for all c-related modes
 (defun my-c-mode-common-hook ()
   ;; make standard indentation offset :=4
-  (setq c-basic-offset 4)
+  (setq c-basic-offset 2)
   ;; find-other-file key binding in c-mode
   (local-set-key (kbd "C-c o") 'ff-find-other-file)
   ;; Changes the indentation of substatement parantheses
