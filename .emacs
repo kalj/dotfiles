@@ -133,7 +133,7 @@
   (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
 
 ;; Add an escape to switch out of insert mode
-(define-key evil-insert-state-map "\C-[" 'evil-force-normal-state)
+(define-key evil-insert-state-map [escape] 'evil-force-normal-state)
 ; Add another escape at f8
 (global-set-key (kbd "<f8>") 'evil-force-normal-state)
 ; and at C-å
