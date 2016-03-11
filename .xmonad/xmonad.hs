@@ -105,7 +105,7 @@ myAddKPs = Data.Map.fromList . (\x -> x ++ (Data.Maybe.mapMaybe myKPFilter x) ) 
 
 myLayoutHook = avoidStruts $ smartBorders $ ow "8" imLayout $ ow "9" mailLayout $ standardLayouts
   where
-    standardLayouts = myTall ||| ThreeCol 1 (3/100) (1/2) ||| Full
+    standardLayouts = myTall ||| ThreeCol 1 (3/100) (1/2) ||| noBorders Full
     imLayout = reflectHoriz $ withIM (1/7) (Role "buddy_list") $ reflectHoriz $ standardLayouts
     mailLayout = Tall 1 (3/100) (1/3)
     myTall = maxWidth [(ClassName "Firefox", 1100)] (Tall 1 (3/100) (0.573))
