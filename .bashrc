@@ -281,6 +281,7 @@ alias aupdate='sudo apt-get update'
 alias asearch='apt-cache search'
 alias ashow='apt-cache show'
 alias ashowpkg='apt-cache showpkg'
+alias apolicy='apt-cache policy'
 
 alias dpgrep='dpkg -l | grep'
 
