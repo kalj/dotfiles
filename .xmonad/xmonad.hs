@@ -35,7 +35,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import Data.Map (fromList, toList)
-import Data.Maybe
+import Data.Maybe (mapMaybe)
 
 import XMonad.Config.Mate
 import XMonad.Layout.NoBorders
