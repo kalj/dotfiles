@@ -4,3 +4,6 @@
 [submodule ".emacs.d/plugins/arduino-mode"]
 	path = .emacs.d/plugins/arduino-mode
 	url = git://github.com/bookest/arduino-mode.git
+[submodule ".emacs.d/plugins/yasnippet"]
+	path = .emacs.d/plugins/yasnippet
+	url = https://github.com/capitaomorte/yasnippet

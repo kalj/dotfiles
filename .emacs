@@ -644,13 +644,13 @@ then inserts a comment at the end of the line."
 
 
 (add-to-list 'load-path
-             "~/.emacs.d/plugins/yasnippet-0.6.1c")
+             "~/.emacs.d/plugins/yasnippet")
 
 (when (> emacs-major-version 21)
   (require 'yasnippet)
   (yas/initialize)
-  (yas/load-directory "~/.emacs.d/plugins/yasnippet-0.6.1c/snippets")
-)
+  (yas-global-mode 1)
+  )
 
 ;; ;; [sic] Almost people hate rope to use `C-x p'.
 ;; (unless (boundp 'ropemacs-global-prefix)
