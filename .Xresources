@@ -46,17 +46,17 @@ URxvt.urgentOnBell:                     true
 !! Emacs
 !! -----------------------------------------------------------------------------
 
-Emacs*toolBar:                          off
-Emacs*verticalScrollBars:               off
-Emacs*font:                             Monospace-8
+Emacs24*toolBar:                          off
+Emacs24*verticalScrollBars:               off
+Emacs24*font:                             Monospace-7.5
 
 !Emacs23client*toolBar:                 off
 
 !! 'day mode'
-Emacs*background:                       #ffffe0
-Emacs*foreground:                       black
-Emacs*modeline*attributeForeground:     black
-Emacs*cursorColor:                      black
+Emacs24*background:                       #ffffe0
+Emacs24*foreground:                       black
+Emacs24*modeline*attributeForeground:     black
+Emacs24*cursorColor:                      black
 
 !! 'night mode'
 !Emacs*background:                      black
