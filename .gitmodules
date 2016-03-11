@@ -1,6 +1,6 @@
 [submodule ".emacs.d/plugins/evil"]
 	path = .emacs.d/plugins/evil
-	url = git://gitorious.org/evil/evil.git
+	url = https://github.com/emacsmirror/evil.git
 [submodule ".emacs.d/plugins/arduino-mode"]
 	path = .emacs.d/plugins/arduino-mode
 	url = git://github.com/bookest/arduino-mode.git
