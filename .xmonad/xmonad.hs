@@ -34,7 +34,7 @@ import XMonad.Hooks.ICCCMFocus
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import Data.Map
+import Data.Map (fromList, toList)
 import Data.Maybe
 
 import XMonad.Config.Mate
@@ -92,25 +92,18 @@ myKPFilter ((bm,apa),x) = case apa of
   xK_9          -> Just ((bm,xK_KP_9),x)
   otherwise     -> Nothing
 
-myAddKPs = Data.Map.fromList . (\x -> x ++ (Data.Maybe.mapMaybe myKPFilter x) ) . Data.Map.toList
-
--- XF86Sleep
--- XF86ScreenSaver
--- XF86HomePage
--- Help
+myAddKPs = fromList . (\x -> x ++ (mapMaybe myKPFilter x) ) . toList
 
 -- =============================================================================
 -- Layout Hook
 -- =============================================================================
 
-myLayoutHook = avoidStruts $ smartBorders $ ow "8" imLayout $ ow "9" mailLayout $ standardLayouts
+myLayoutHook = avoidStruts $ smartBorders $ ow "9" mailLayout $ standardLayouts
   where
-    standardLayouts = myTall ||| ThreeCol 1 (3/100) (1/2) ||| noBorders Full
-    imLayout = reflectHoriz $ withIM (1/7) (Role "buddy_list") $ reflectHoriz $ standardLayouts
+    standardLayouts = webLayout ||| ThreeCol 1 (3/100) (1/2) ||| noBorders Full
     mailLayout = Tall 1 (3/100) (1/3)
-    myTall = maxWidth [(ClassName "Firefox", 1100)] (Tall 1 (3/100) (0.573))
+    webLayout = maxWidth [(ClassName "Firefox", 1100)] (Tall 1 (3/100) (0.573))
     ow a b c = onWorkspace a b c
-
 
 -- =============================================================================
 -- Manage Hook
@@ -118,17 +111,14 @@ myLayoutHook = avoidStruts $ smartBorders $ ow "8" imLayout $ ow "9" mailLayout 
 
 myManageHook = composeAll
                [ appName   =? "Navigator" --> doShift "1"
-               , className =? "Chromium" --> doShift "7"
-               , className =? "Rhythmbox" --> doShift "8"
-               , appName   =? "spotify.exe" --> doShift "8"
+               , className =? "chromium-browser" --> doShift "7"
                , className =? "Spotify" --> doShift "8"
---               , className =? "Pidgin" --> doShift "8"
---               , className =? "Empathy" --> doShift "8"
---               , className =? "Skype" --> doShift "8"
+               , className =? "Skype" --> doShift "8"
                , className =? "Transmission-gtk" --> doShift "8"
                , appName   =? "Mail" --> doShift "9"
+               , className =? "Wrapper" --> doIgnore
                , className =? "Do" --> doIgnore
---               , className =? "Gimp" --> doFloat
+               , className =? "Timer-applet" --> doFloat
                , className =? "Timer-applet" --> doFloat
                , composeOne [ isFullscreen -?> doFullFloat ]
                ]
