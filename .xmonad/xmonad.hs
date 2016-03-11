@@ -64,7 +64,7 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , ("M-<Tab>",          toggleWS)
          , ("M-<F3>",           spawn "firefox")
          , ("M-<F2>",           spawn "thunderbird")
-         , ("M-<F1>",           spawn "pidgin")
+         , ("M-<F1>",           spawn "chromium")
          , ("C-M-<Insert>",     spawn "ncmpcpp toggle")
          , ("C-M-<Page_Down>",  spawn "ncmpcpp next")
          , ("C-M-<Page_Up>",    spawn "ncmpcpp prev")
@@ -118,16 +118,17 @@ myLayoutHook = avoidStruts $ smartBorders $ ow "8" imLayout $ ow "9" mailLayout 
 
 myManageHook = composeAll
                [ appName   =? "Navigator" --> doShift "1"
-               , className =? "Rhythmbox" --> doShift "7"
-               , appName   =? "spotify.exe" --> doShift "7"
-               , className =? "Spotify" --> doShift "7"
-               , className =? "Pidgin" --> doShift "8"
-               , className =? "Empathy" --> doShift "8"
-               , className =? "Skype" --> doShift "8"
+               , className =? "Chromium" --> doShift "7"
+               , className =? "Rhythmbox" --> doShift "8"
+               , appName   =? "spotify.exe" --> doShift "8"
+               , className =? "Spotify" --> doShift "8"
+--               , className =? "Pidgin" --> doShift "8"
+--               , className =? "Empathy" --> doShift "8"
+--               , className =? "Skype" --> doShift "8"
                , className =? "Transmission-gtk" --> doShift "8"
                , appName   =? "Mail" --> doShift "9"
                , className =? "Do" --> doIgnore
-               , className =? "Gimp-2.6" --> doFloat
+--               , className =? "Gimp" --> doFloat
                , className =? "Timer-applet" --> doFloat
                , composeOne [ isFullscreen -?> doFullFloat ]
                ]
