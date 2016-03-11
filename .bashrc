@@ -319,3 +319,5 @@ alias locate='locate -i'
 alias matlab='matlab -nosplash'
 alias mlab='matlab -nodesktop'
 alias octave='octave -q'
+
+export GCC_COLORS=1
