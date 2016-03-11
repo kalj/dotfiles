@@ -540,12 +540,12 @@ then inserts a comment at the end of the line."
   (interactive)
   (save-buffer)
   (shell-command
-   (read-from-minibuffer
-    "Options: "
-    (concat "evince" " "
-            (replace-regexp-in-string "\.abc$" ".ps" buffer-file-name)
-            " &"
-            ))))
+    (read-from-minibuffer
+      "Options: "
+      (concat "atril" " "
+              (replace-regexp-in-string "\.abc$" ".ps" buffer-file-name)
+              " &"
+              ))))
 
 
 
