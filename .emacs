@@ -84,6 +84,8 @@
 
 (delete-selection-mode t)
 
+;; enable standard mouse copy/paste behavior
+(setq x-select-enable-primary t)
 
 ;; remove annoying tooltips!
 (tooltip-mode -1)
