@@ -321,3 +321,5 @@ alias mlab='matlab -nodesktop'
 alias octave='octave -q'
 
 export GCC_COLORS=1
+
+xhost local:kalle > /dev/null
