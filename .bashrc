@@ -88,7 +88,9 @@ esac
 # History
 #==============================================================================
 
+unset HISTFILESIZE
 export HISTSIZE=1000000
+export HISTFILESIZE=1000000
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... and ignore same sucessive entries.
