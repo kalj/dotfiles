@@ -1,0 +1,15 @@
+define hook-step
+set scheduler-locking on
+end
+define hookpost-step
+set scheduler-locking off
+end
+define hook-run
+set scheduler-locking off
+end
+define hook-continue
+set scheduler-locking off
+end
+
+printf "sourced scheduler_lock"
+
