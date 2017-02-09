@@ -68,11 +68,9 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , ("C-M-<Insert>",     spawn "ncmpcpp toggle")
          , ("C-M-<Page_Down>",  spawn "ncmpcpp next")
          , ("C-M-<Page_Up>",    spawn "ncmpcpp prev")
-         , ("<XF86AudioPlay>",    spawn "ncmpcpp toggle")
-         , ("<XF86AudioNext>",    spawn "ncmpcpp next")
-         , ("<XF86AudioPrev>",    spawn "ncmpcpp prev")
-         , ("<XF86AudioStop>",    spawn "ncmpcpp stop")
-         , ("<XF86Tools>",        spawn "sonata -p")
+         , ("M-<F11>",            spawn "pactl set-sink-volume 0 -1.5%")
+         , ("M-<F12>",            spawn "pactl set-sink-volume 0 +1.5%")
+         , ("M-<Print>",            spawn "mate-screenshot -i")
          , ("M-x",              runInTerm "top -d 1")
          , ("<XF86Calculator>", runInTerm "octave -q")
          , ("M-c",              spawn "caja ~")
@@ -112,7 +110,6 @@ myLayoutHook = avoidStruts $ smartBorders $ ow "9" mailLayout $ standardLayouts
 myManageHook = composeAll
                [ appName   =? "Navigator" --> doShift "1"
                , className =? "chromium-browser" --> doShift "7"
-               , className =? "Spotify" --> doShift "8"
                , className =? "Skype" --> doShift "8"
                , className =? "Transmission-gtk" --> doShift "8"
                , appName   =? "Mail" --> doShift "9"
