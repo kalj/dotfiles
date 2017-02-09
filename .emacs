@@ -491,9 +491,6 @@ then inserts a comment at the end of the line."
 (autoload 'cuda-mode "cuda-mode.el" "Cuda mode." t)
 (setq auto-mode-alist (append '(("\\.cuh?$" . cuda-mode)) auto-mode-alist))
 
-;; upc
-(setq auto-mode-alist (append '(("\\.upc$" . c-mode)) auto-mode-alist))
-
 ;;-----------------------------------------------------------------------------
 ;; Fortran
 ;;-----------------------------------------------------------------------------
