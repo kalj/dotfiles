@@ -381,16 +381,6 @@ then inserts a comment at the end of the line."
 (add-to-list 'load-path "~/.emacs.d/plugins")
 
 ;;-----------------------------------------------------------------------------
-;; haskell-mode
-;;-----------------------------------------------------------------------------
-
-(load "haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-
-;;-----------------------------------------------------------------------------
 ;; org-mode
 ;;-----------------------------------------------------------------------------
 
