@@ -1,4 +1,4 @@
-personal_ws-1.1 en 198 
+personal_ws-1.1 en 212 
 structs
 microbenchmarks
 isoefficiency
@@ -13,6 +13,7 @@ manycore
 quartile
 vectorization
 Hugoniot
+optimizations
 transactional
 parallelized
 bijective
@@ -36,13 +37,16 @@ CSR
 precomputed
 premultiplying
 recurse
+discretizations
 operability
 parallelize
+factorizations
 FFT
 Gunilla
 Holmgren
 runtimes
 Jacobian
+multicores
 precomputation
 Matlab
 adaptively
@@ -52,15 +56,17 @@ Jacobians
 mispredicted
 eigenvector
 advisors
+Chebyshev
 incompressibility
 GHz
 partitioner
 linearities
 variational
-Galerkin
 CUSPARSE
+Galerkin
 Krylov
 preconditioners
+resizing
 simplices
 elementwise
 benchmarked
@@ -80,6 +86,7 @@ multicore
 tuples
 orthogonalization
 parametrizations
+nonlinearity
 Chombo's
 Uppmax
 backends
@@ -93,6 +100,7 @@ Lehto
 significands
 Nvidias
 Laplacian
+intergrid
 profiler
 dequeue
 pipelining
@@ -108,6 +116,7 @@ al
 prolongating
 Sverker
 chunking
+iteratively
 Maxwell's
 incrementation
 adaptivity
@@ -129,9 +138,11 @@ Komatitsch
 descheduled
 bioinformatics
 immiscible
+analytical
 arithmetics
 dimensionality
 tetrahedra
+Neumann
 chipset
 Kormann
 SPARC
@@ -189,11 +200,14 @@ parallelization
 Gflop
 pre
 shaders
+algorithmically
 Johansson
 Rantakokko
 enqueue
 discretization
 multithreaded
+strided
 hexahedrons
 Karlsson
 symplectic
+octant
