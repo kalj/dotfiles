@@ -1,4 +1,4 @@
-/* -*- c-basic-offset:4; tab-width:4; indent-tabs-mode:nil -*-
+/* -*- c-basic-offset:2; tab-width:2; indent-tabs-mode:nil -*-
  *
  * @(#)TEMPLATE.h.tpl
  * @author (>>>USER_NAME<<<) <(>>>AUTHOR<<<)>

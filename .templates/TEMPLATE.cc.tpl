@@ -1,5 +1,5 @@
 /* -*- c-basic-offset:2; tab-width:2; indent-tabs-mode:nil -*-
- * @(#)TEMPLATE.cpp.tpl
+ * @(#)TEMPLATE.cc.tpl
  * @author (>>>USER_NAME<<<) <(>>>AUTHOR<<<)>
  *
  *
