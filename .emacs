@@ -283,9 +283,10 @@ then inserts a comment at the end of the line."
 (global-set-key (kbd "<C-S-iso-lefttab>") 'previous-buffer)
 
 ;;-----------------------------------------------------------------------------
-;; Change text size of everything
+;; Font size
 ;;-----------------------------------------------------------------------------
 
+; Change text size of everything
 (defun sacha/increase-font-size ()
   (interactive)
   (set-face-attribute 'default
