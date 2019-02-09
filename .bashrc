@@ -278,12 +278,12 @@ alias bashrc="$EDITOR ~/.bashrc"
 alias xdgo='xo'
 
 # apt commands
-alias ainstall='sudo apt-get install'
-alias apurge='sudo apt-get purge'
-alias aremove='sudo apt-get remove'
-alias aclean='sudo apt-get autoremove --purge && sudo apt-get autoclean'
-alias aupgrade='sudo apt-get dist-upgrade'
-alias aupdate='sudo apt-get update'
+alias ainstall='sudo apt install'
+alias apurge='sudo apt purge'
+alias aremove='sudo apt remove'
+alias aclean='sudo apt autoremove --purge && sudo apt-get autoclean'
+alias aupgrade='sudo apt full-upgrade'
+alias aupdate='sudo apt update'
 alias asearch='apt-cache search'
 alias ashow='apt-cache show'
 alias ashowpkg='apt-cache showpkg'
