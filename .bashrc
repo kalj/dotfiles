@@ -201,6 +201,10 @@ fix-perms-restr ()  {
     find "$1" -type f -exec chmod 600 {} \;
 }
 
+bup () {
+    dstr=`date +"%Y%m%d%H%S%M"`
+    cp "$1" "${1}.${dstr}"
+}
 
 # Wraps a completion function
 # make-completion-wrapper <actual completion function> <name of new func.> <alias>
