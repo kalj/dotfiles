@@ -33,3 +33,5 @@
     tool = ediff
 [push]
 	default = current
+[core]
+	autocrlf = input
