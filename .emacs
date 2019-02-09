@@ -479,7 +479,10 @@ then inserts a comment at the end of the line."
                                       ("\\.hxx\\'"
                                        (".cxx"))
                                       ("\\.cu\\'"
-                                       (".h")))))
+                                       (".h"))))
+  (setq ff-search-directories
+        '("." "../src" "../source" "../../source" "../include" "../include/*"))
+  )
 
 ;; realize
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
