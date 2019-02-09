@@ -24,7 +24,7 @@
     who = shortlog -s --
     ls = ls-files
     rh = reset HEAD
-    tree = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    gla = log --graph --decorate --pretty=oneline --abbrev-commit --all
 
 [mergetool "ediff"]
     cmd = emacs --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
