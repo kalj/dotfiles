@@ -48,7 +48,15 @@ URxvt.urgentOnBell:                     true
 
 Emacs24*toolBar:                          off
 Emacs24*verticalScrollBars:               off
-Emacs24*font:                             Monospace-7.5
+Emacs24*font:                             Monospace-8
+
+Emacs25*toolBar:                          off
+Emacs25*verticalScrollBars:               off
+Emacs25*font:                             Monospace-8
+
+Emacs*toolBar:                          off
+Emacs*verticalScrollBars:               off
+Emacs*font:                             Monospace-8
 
 !Emacs23client*toolBar:                 off
 
