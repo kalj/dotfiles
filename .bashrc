@@ -324,7 +324,7 @@ alias locate='locate -i'
 # matlab: remove splash screen at startup
 alias matlab='matlab -nosplash'
 alias mlab='matlab -nodesktop'
-alias octave='octave -q'
+alias octave='octave --no-gui'
 
 export GCC_COLORS=1
 
