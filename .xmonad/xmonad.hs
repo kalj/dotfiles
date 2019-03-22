@@ -111,9 +111,10 @@ myAddKPs = fromList . (\x -> x ++ (mapMaybe myKPFilter x) ) . toList
 
 myLayoutHook = avoidStruts $ smartBorders $ ow "9" mailLayout $ standardLayouts
   where
-    standardLayouts = webLayout ||| ThreeCol 1 (3/100) (1/2) ||| noBorders Full
+    standardLayouts = Tall 1 (3/100) (0.573) ||| ThreeCol 1 (3/100) (1/2) ||| noBorders Full
+--    standardLayouts = webLayout ||| ThreeCol 1 (3/100) (1/2) ||| noBorders Full
     mailLayout = Tall 1 (3/100) (1/3)
-    webLayout = maxWidth [(ClassName "Firefox", 1100)] (Tall 1 (3/100) (0.573))
+--    webLayout = maxWidth [(ClassName "Firefox", 1100)] (Tall 1 (3/100) (0.573))
     ow a b c = onWorkspace a b c
 
 -- =============================================================================
