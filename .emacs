@@ -495,6 +495,18 @@ then inserts a comment at the end of the line."
 (autoload 'cuda-mode "cuda-mode.el" "Cuda mode." t)
 (setq auto-mode-alist (append '(("\\.cuh?$" . cuda-mode)) auto-mode-alist))
 
+
+;;-----------------------------------------------------------------------------
+;; clang format
+;;-----------------------------------------------------------------------------
+
+(require 'clang-format)
+
+(add-hook 'c-mode-common-hook
+          (function (lambda ()
+                      (add-hook 'before-save-hook
+                                'clang-format-buffer))))
+
 ;;-----------------------------------------------------------------------------
 ;; Fortran
 ;;-----------------------------------------------------------------------------
