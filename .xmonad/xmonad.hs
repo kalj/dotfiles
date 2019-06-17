@@ -84,7 +84,7 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , ("M-<F12>",          spawn "pactl set-sink-volume 0 +1.5%")
          , ("M-<Print>",        spawn "mate-screenshot -i")
          , ("M-S-s",            spawn "sleep 0.2 ; mate-screenshot -a")
-         , ("M-x",              runInTerm "top -d 1")
+         , ("M-x",              runInTerm "htop")
          , ("<XF86Calculator>", runInTerm "octave -q")
          , ("M-c",              spawn "caja ~")
          ]
