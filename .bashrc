@@ -329,4 +329,3 @@ alias octave='octave --no-gui'
 # Enable coloring of gcc output
 export GCC_COLORS=1
 
-xhost local:kalle > /dev/null
