@@ -7,3 +7,6 @@
 [submodule ".emacs.d/plugins/yasnippet"]
 	path = .emacs.d/plugins/yasnippet
 	url = https://github.com/capitaomorte/yasnippet
+[submodule "dockerfile-mode"]
+	path = .emacs.d/plugins/dockerfile-mode
+	url = https://github.com/spotify/dockerfile-mode

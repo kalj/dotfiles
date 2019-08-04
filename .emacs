@@ -632,6 +632,13 @@ then inserts a comment at the end of the line."
 ;; (defalias 'perl-mode 'cperl-mode)
 
 ;;-----------------------------------------------------------------------------
+;; Dockerfile mode
+;;-----------------------------------------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/plugins/dockerfile-mode/")
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
+;;-----------------------------------------------------------------------------
 ;; Auto completion, yasnippet,
 ;; rope/ropemacs/pymacs, etc
 ;;-----------------------------------------------------------------------------
