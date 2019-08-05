@@ -209,6 +209,14 @@ bup () {
     cp "$1" "${1}.${dstr}"
 }
 
+success() {
+    if [ $? -eq 0 ]; then
+        echo "Success"
+    else
+        echo "Failure"
+    fi
+}
+
 # Wraps a completion function
 # make-completion-wrapper <actual completion function> <name of new func.> <alias>
 #                         <command name> <list supplied arguments>
