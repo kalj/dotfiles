@@ -178,6 +178,9 @@ alias cp='cp -iv'
 alias du='du -sh'
 alias cleanup='rm -f *~ *# .*~'
 
+# make with multiple threads
+alias mk='make -j $((2+$(nproc)))'
+alias nj='ninja'
 
 dus () {
     \du -sh "$@" | sort -h
