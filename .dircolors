@@ -60,12 +60,12 @@ TERM dumb
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
 NORMAL 00	# global default, although everything should be something.
 FILE 00		# normal file
-DIR 01;34	# directory
-LINK 01;36 	# symbolic link. (If you set this to 'target' instead of a
+DIR 00;94	# directory
+LINK 00;96 	# symbolic link. (If you set this to 'target' instead of a
 		# numerical value, the color is as for the file pointed to.)
 FIFO 40;33 	# pipe
-SOCK 01;35 	# socket
-DOOR 01;35 	# door
+SOCK 00;95 	# socket
+DOOR 00;95 	# door
 BLK 40;33;01 	# block device driver
 CHR 40;33;01 	# character device driver
 ORPHAN 40;31;01 # symlink to nonexistent file, or non-stat'able file
@@ -78,7 +78,7 @@ OTHER_WRITABLE 37;42 # dir that is other-writable (o+w) and not
 STICKY 37;44 	# dir with the sticky bit set (+t) and not other-writable
 
 # This is for files with execute permission:
-EXEC 01;92
+EXEC 00;92
 
 # List any file extensions like '.gz' or '.tar' that you would like ls
 # to colorize below. Put the extension, a space, and the color init string.
@@ -97,76 +97,76 @@ EXEC 01;92
 #.csh 01;32
 
 # archives or compressed (bright red)
-.tar 01;31
-.tgz 01;31
-.txz 01;31
-.svgz 01;31
-.arj 01;31
-.taz 01;31
-.lzh 01;31
-.lzma 01;31
-.zip 01;31
-.z 01;31
-.Z 01;31
-.dz 01;31
-.gz 01;31
-.bz2 01;31
-.bz 01;31
-.tbz2 01;31
-.tz 01;31
-.deb 01;31
-.rpm 01;31
-.jar 01;31
-.rar 01;31
-.ace 01;31
-.zoo 01;31
-.cpio 01;31
-.7z 01;31
-.rz 01;31
-.xz 01;31
+.tar 00;91
+.tgz 00;91
+.txz 00;91
+.svgz 00;91
+.arj 00;91
+.taz 00;91
+.lzh 00;91
+.lzma 00;91
+.zip 00;91
+.z 00;91
+.Z 00;91
+.dz 00;91
+.gz 00;91
+.bz2 00;91
+.bz 00;91
+.tbz2 00;91
+.tz 00;91
+.deb 00;91
+.rpm 00;91
+.jar 00;91
+.rar 00;91
+.ace 00;91
+.zoo 00;91
+.cpio 00;91
+.7z 00;91
+.rz 00;91
+.xz 00;91
 
 # image formats
-.jpg 01;35
-.JPG 01;35
-.jpeg 01;35
-.gif 01;35
-.bmp 01;35
-.pbm 01;35
-.pgm 01;35
-.ppm 01;35
-.tga 01;35
-.xbm 01;35
-.xpm 01;35
-.tif 01;35
-.tiff 01;35
-.png 01;35
-.svg 01;35
-.mng 01;35
-.pcx 01;35
-.mov 01;35
-.mpg 01;35
-.mpeg 01;35
-.m2v 01;35
-.mkv 01;35
-.ogm 01;35
-.mp4 01;35
-.m4v 01;35
-.mp4v 01;35
-.vob 01;35
-.qt 01;35
-.nuv 01;35
-.wmv 01;35
-.asf 01;35
-.rm 01;35
-.rmvb 01;35
-.flc 01;35
-.avi 01;35
-.fli 01;35
-.gl 01;35
-.dl 01;35
-.xcf 01;35
-.xwd 01;35
-.yuv 01;35
+.jpg 00;95
+.JPG 00;95
+.jpeg 00;95
+.gif 00;95
+.bmp 00;95
+.pbm 00;95
+.pgm 00;95
+.ppm 00;95
+.tga 00;95
+.xbm 00;95
+.xpm 00;95
+.tif 00;95
+.tiff 00;95
+.png 00;95
+.svg 00;95
+.mng 00;95
+.pcx 00;95
+.mov 00;95
+.mpg 00;95
+.mpeg 00;95
+.m2v 00;95
+.mkv 00;95
+.ogm 00;95
+.mp4 00;95
+.m4v 00;95
+.mp4v 00;95
+.vob 00;95
+.qt 00;95
+.nuv 00;95
+.wmv 00;95
+.asf 00;95
+.rm 00;95
+.rmvb 00;95
+.flc 00;95
+.avi 00;95
+.fli 00;95
+.gl 00;95
+.dl 00;95
+.xcf 00;95
+.xwd 00;95
+.yuv 00;95
 
 # audio formats
 .aac 00;36
