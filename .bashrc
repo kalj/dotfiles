@@ -140,14 +140,14 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }"'history -a'
 # Aliases
 #==============================================================================
 
-alias ls='ls --group-directories-first'
+alias ls='ls -H --group-directories-first'
 
 # enable color support of ls et al
 if [ -x /bin/dircolors ] || [ -x /usr/bin/dircolors ] || [ -x /it/sw/gnutools/bin/dircolors ]; then
     eval $(dircolors -b)
     [ -e "$HOME/.dircolors" ] && eval $(dircolors -b $HOME/.dircolors)
 
-    alias ls='ls --color=auto --group-directories-first'
+    alias ls='ls --color=auto -H --group-directories-first'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias rgrep='rgrep --color=auto'
