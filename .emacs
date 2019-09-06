@@ -502,10 +502,10 @@ then inserts a comment at the end of the line."
 
 (require 'clang-format)
 
-(add-hook 'c-mode-common-hook
-          (function (lambda ()
-                      (add-hook 'before-save-hook
-                                'clang-format-buffer))))
+;; (add-hook 'c-mode-common-hook
+;;           (function (lambda ()
+;;                       (add-hook 'before-save-hook
+;;                                 'clang-format-buffer))))
 
 ;;-----------------------------------------------------------------------------
 ;; Fortran
