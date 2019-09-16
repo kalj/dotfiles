@@ -337,6 +337,9 @@ alias matlab='matlab -nosplash'
 alias mlab='matlab -nodesktop'
 alias octave='octave --no-gui'
 
+# networking
+alias ipca='ip -c a'
+
 # Enable coloring of gcc output
 export GCC_COLORS=1
 
