@@ -300,9 +300,9 @@
 #def_key "s"
 #  stop
 #
-#def_key "P"
-#  pause
-#
+def_key "P"
+  pause
+
 #def_key ">"
 #  next
 #
@@ -504,9 +504,9 @@
 #def_key "U"
 #  toggle_playing_song_centering
 #
-#def_key "p"
-#  toggle_display_mode
-#
+def_key "p"
+  toggle_display_mode
+
 #def_key "\\"
 #  toggle_interface
 #
