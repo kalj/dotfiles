@@ -192,8 +192,6 @@ dusc () {
     echo "${dusclist}" | tail -n 1
 }
 
-
-
 fix-perms ()  {
     find "$1" -type d -exec chmod 755 {} \;
     find "$1" -type f -exec chmod 644 {} \;
@@ -216,6 +214,53 @@ success() {
         echo "Failure"
     fi
 }
+
+# archive extraction and listing
+extract() {
+    if [ $# -ne 1 ]; then
+        echo "error: no input argument"
+        return 1
+    elif [ -f "$1" ]; then
+        case $1 in
+            *.tar) tar xvf  "$1" ;;
+            *.tar.gz|*.tgz) tar xvzf "$1";;
+            *.tar.xz|*.txz) tar xvJf  "$1";;
+            *.tar.bz2) tar xvjf  "$1";;
+            *.tar.bz) tar xvjf  "$1";;
+            *.zip) unzip  "$1" ;;
+            *.rar) unrar x "$1" ;;
+            *.gz) gunzip "$1" ;;
+            *) echo "error: file '$1' cannot be extracted" ;;
+        esac
+    else
+        echo "error: file '$1' doesn't exist"
+        return 1
+    fi
+    return 0
+}
+
+exls() {
+    if [ $# -ne 1 ]; then
+        echo "error: no input argument"
+        return 1
+    elif [ -f "$1" ]; then
+        case $1 in
+            *.tar) tar tvf "$1" ;;
+            *.tar.gz|*.tgz) tar tvzf "$1";;
+            *.tar.xz|*.txz) tar tvJf "$1";;
+            *.tar.bz2) tar tvjf "$1";;
+            *.zip) unzip -l "$1" ;;
+            *.rar) unrar l "$1" ;;
+            *) echo "error: file '$1' cannot be listed" ;;
+        esac
+    else
+        echo "error: file '$1' doesn't exist"
+        return 1
+    fi
+    return 0
+}
+
+
 
 # Wraps a completion function
 # make-completion-wrapper <actual completion function> <name of new func.> <alias>
@@ -342,4 +387,3 @@ alias ipca='ip -c a'
 
 # Enable coloring of gcc output
 export GCC_COLORS=1
-
