@@ -33,6 +33,7 @@ import XMonad.Hooks.EwmhDesktops (ewmhDesktopsStartup)
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Hooks.ICCCMFocus (takeTopFocus)
 import XMonad.Actions.CycleWS
+import XMonad.Actions.PhysicalScreens
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 
@@ -88,6 +89,10 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , ("<XF86Calculator>", runInTerm "octave -q")
          , ("M-c",              spawn "caja ~")
          ]
+         ++
+         [("M-" ++ mask ++ key, f sc)
+         | (key, sc) <- zip ["w", "e", "r"] [0..]
+         , (f, mask) <- [(viewScreen, ""), (sendToScreen, "S-")]]
 
 myKPFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
 myKPFilter ((bm,apa),x) = case apa of
