@@ -11,3 +11,5 @@ vbell off
 startup_message off
 
 bind o focus
+
+defscrollback 50000
