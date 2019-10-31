@@ -172,11 +172,14 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # file commands
-alias rm='rm -v'
 alias mv='mv -iv'
 alias cp='cp -iv'
 alias du='du -sh'
-alias cleanup='rm -f *~ *# .*~'
+
+# discourage usage of rm, instead use trash AKA tm
+alias rm='rm -iv'
+alias tm='trash'
+alias cleanup='\rm -f *~ *# .*~'
 
 # make with multiple threads
 alias mk='make -j $((2+$(nproc)))'
