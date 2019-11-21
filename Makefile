@@ -9,7 +9,7 @@ HOMEFILES=.bashrc .dircolors .emacs .inputrc .screenrc .templates \
 		.gitconfig .aspell.en.pws .aspell.en.prepl .aspell.sv.pws \
 		.aspell.sv.prepl .ncmpcpp .gdbinit .gdbscripts
 
-EMACSFILES=plugins
+EMACSFILES=plugins snippets
 VIMFILES=plugin
 
 install:

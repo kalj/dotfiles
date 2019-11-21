@@ -643,73 +643,20 @@ then inserts a comment at the end of the line."
 ;; rope/ropemacs/pymacs, etc
 ;;-----------------------------------------------------------------------------
 
-;; TODO: move this to an external file, and shut off loading of pymacs except
-;; when running python code. And also disable automatic popups (as this really
-;; slows things down...)
+;(add-to-list 'load-path
+;             "~/.emacs.d/plugins/yasnippet")
 
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"                 ;; personal snippets
+        "/usr/share/yasnippet-snippets/"
+        ))
 
-(add-to-list 'load-path
-             "~/.emacs.d/plugins/yasnippet")
-
-(when (> emacs-major-version 21)
+(when (> emacs-major-version 20)
   (require 'yasnippet)
   (yas/initialize)
   (yas-global-mode 1)
   )
 
-;; ;; [sic] Almost people hate rope to use `C-x p'.
-;; (unless (boundp 'ropemacs-global-prefix)
-;;     (setq ropemacs-global-prefix nil))
-
-;; (eval-after-load "python-mode"
-;;   '(progn
-;;      (pymacs-load "ropemacs" "rope-")
-;;   ))
-
-;; (setq ropemacs-enable-autoimport t)
-
-
-;; (when (require 'auto-complete nil t)
-;;  (require 'auto-complete-yasnippet)
-;;   (require 'auto-complete-python)
-;;   (ac-ropemacs-init)
-;;   (require 'auto-complete-emacs-lisp)
-;;   (require 'auto-complete-cpp)
-
-;;   (global-auto-complete-mode t)
-;; ;  (set-face-background 'ac-menu-face "lightgray")
-;; ;  (set-face-underline 'ac-menu-face "darkgray")
-;;   (set-face-background 'ac-selection-face "steelblue")
-;;   (define-key ac-complete-mode-map "\t" 'ac-expand)
-;;   (define-key ac-complete-mode-map "\r" 'ac-complete)
-;;   (define-key ac-complete-mode-map "\M-n" 'ac-next)
-;;   (define-key ac-complete-mode-map "\M-p" 'ac-previous)
-;;   (setq ac-auto-start nil)
-;;   (setq ac-dwim t)
-;;   (set-default 'ac-sources '(ac-source-yasnippet
-;;                           ac-source-abbrev ac-source-words-in-buffer))
-
-;;   (setq ac-modes
-;;      (append ac-modes
-;;              '(eshell-mode
-;;                ;;org-mode
-;;                )))
-;;   ;; (add-to-list 'ac-trigger-commands 'org-self-insert-command)
-
-;;   (add-hook 'emacs-lisp-mode-hook
-;;          (lambda ()
-;;            (setq ac-sources '(ac-source-yasnippet
-;;                               ac-source-abbrev
-;;                               ac-source-words-in-buffer
-;;                               ac-source-symbols))))
-
-;;   (add-hook 'eshell-mode-hook
-;;          (lambda ()
-;;            (setq ac-sources '(ac-source-yasnippet
-;;                               ac-source-abbrev
-;;                               ac-source-files-in-current-dir
-;;                               ac-source-words-in-buffer))))
-;;   )
 
 ;;-----------------------------------------------------------------------------
 ;; shell mode customizations
