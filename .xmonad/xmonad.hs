@@ -40,6 +40,7 @@ import XMonad.Hooks.ManageHelpers
 import Data.Map (fromList, toList)
 import Data.Maybe (isJust, catMaybes, mapMaybe, fromMaybe, listToMaybe)
 import Data.List (intersperse)
+import Data.Default
 
 import XMonad.Config.Mate
 import XMonad.Layout.NoBorders
@@ -92,7 +93,7 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          ++
          [("M-" ++ mask ++ key, f sc)
          | (key, sc) <- zip ["w", "e", "r"] [0..]
-         , (f, mask) <- [(viewScreen, ""), (sendToScreen, "S-")]]
+         , (f, mask) <- [(viewScreen def, ""), (sendToScreen def, "S-")]]
 
 myKPFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
 myKPFilter ((bm,apa),x) = case apa of
