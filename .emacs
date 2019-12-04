@@ -134,10 +134,12 @@
 (define-key evil-insert-state-map
   (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
 
+;; Also revert binding for M-.
+(define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
+(define-key evil-visual-state-map (kbd "M-.") 'xref-find-definitions)
+
 ;; Add an escape to switch out of insert mode
 (define-key evil-insert-state-map [escape] 'evil-force-normal-state)
-; Add another escape at f8
-(global-set-key (kbd "<f8>") 'evil-force-normal-state)
 ; and at C-å
 (global-set-key (kbd "C-å") 'evil-force-normal-state)
 
@@ -753,6 +755,23 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (require 'iso-transl)
+
+;;-----------------------------------------------------------------------------
+;; ctags
+;;-----------------------------------------------------------------------------
+
+(setq path-to-ctags "ctags") ;; <- your ctags path here
+
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (let ((d (directory-file-name dir-name)))
+    (shell-command
+     (format "%s -f %s/TAGS -e -R %s" path-to-ctags d d))
+    )
+  )
+
+(global-set-key [f8] 'create-tags)
 
 ;;-----------------------------------------------------------------------------
 ;; Custom
