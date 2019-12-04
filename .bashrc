@@ -177,9 +177,32 @@ alias cp='cp -iv'
 alias du='du -sh'
 
 # discourage usage of rm, instead use trash AKA tm
-alias rm='rm -iv'
+function rm {
+    echo "Stop using rm, stupid!"
+    return 1
+}
 alias tm='trash'
-alias cleanup='\rm -f *~ *# .*~'
+
+function cleandir {
+    if [[ $# -ne 1 ]] ; then
+        echo 'usage: ${0} <dir>'
+        return 1
+    fi
+
+    (
+    cd "${1}"
+
+    dot_files=(.[^.]*)
+    files=(*)
+    if [ "${dot_files[0]}" != ".[^.]*" ]; then
+        trash "${dot_files[@]}"
+    fi
+    if [ "${files[0]}" != "*" ]; then
+        trash "${files[@]}"
+    fi
+    )
+    return 0
+}
 
 # make with multiple threads
 alias mk='make -j $((2+$(nproc)))'
