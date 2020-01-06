@@ -182,7 +182,8 @@ iconsAppletLogString = do
     -- window title
     wt <- maybe (return "") (fmap show . getName) . S.peek $ winset
 
-    let cropped_title = if (length wt) > 100 then ((take 97 wt)++"...") else wt
+    let maxlen = 137
+    let cropped_title = if (length wt) > maxlen then ((take (maxlen-1) wt)++"...") else wt
 
     -- run extra loggers, ignoring any that generate errors.
     extras <- mapM (flip catchX (return Nothing)) $ ppExtras iconsAppletPP
