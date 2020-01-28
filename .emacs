@@ -107,9 +107,8 @@
 ;; required on old emacs (at least on uppmax):
 (global-font-lock-mode t)
 
-;; Always flash for parens and define a more distinctive color
-;; (show-paren-mode 1)
-;; (set-face-foreground 'show-paren-match-face "#3f0000")
+;; Always flash for parens
+(show-paren-mode 1)
 
 ;; provide an error trace if loading .emacs fails
 (setq debug-on-error t)
