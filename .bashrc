@@ -256,6 +256,7 @@ extract() {
             *.zip) unzip  "$1" ;;
             *.rar) unrar x "$1" ;;
             *.gz) gunzip "$1" ;;
+            *.7z) 7z x "$1" ;;
             *) echo "error: file '$1' cannot be extracted" ;;
         esac
     else
@@ -277,6 +278,7 @@ exls() {
             *.tar.bz2) tar tvjf "$1";;
             *.zip) unzip -l "$1" ;;
             *.rar) unrar l "$1" ;;
+            *.7z) 7z l "$1" ;;
             *) echo "error: file '$1' cannot be listed" ;;
         esac
     else
