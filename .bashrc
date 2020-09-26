@@ -415,3 +415,5 @@ alias ipca='ip -c a'
 
 # Enable coloring of gcc output
 export GCC_COLORS=1
+# Enable coloring of gtest output
+export GTEST_COLOR=1
