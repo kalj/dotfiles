@@ -657,7 +657,6 @@ then inserts a comment at the end of the line."
 
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets"                 ;; personal snippets
-        "/usr/share/yasnippet-snippets/"
         ))
 
 (when (> emacs-major-version 20)
