@@ -447,6 +447,13 @@ then inserts a comment at the end of the line."
 (defun my-c-mode-common-hook ()
   ;; make standard indentation offset :=4
   (setq c-basic-offset 4)
+
+  ;; make enums etc indent correctly
+  (c-set-offset 'brace-list-intro '+)
+
+  ;; also make argument lists starting on a new line indent correctly
+  (c-set-offset 'arglist-intro '+)
+
   ;; find-other-file key binding in c-mode
   (local-set-key (kbd "C-c o") 'ff-find-other-file)
   ;; Changes the indentation of substatement parantheses
