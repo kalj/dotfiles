@@ -10,6 +10,9 @@ from libstdcxx.v6.printers import register_libstdcxx_printers
 
 sys.path.append(os.path.expanduser('~/.gdbscripts/'))
 import deal
+
+from eigen_printers import register_eigen_printers
+register_eigen_printers (None)
 end
 
 define hookpost-run
