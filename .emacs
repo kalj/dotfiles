@@ -523,22 +523,38 @@ then inserts a comment at the end of the line."
 (add-hook 'f90-mode-hook '(lambda ()
                             (local-unset-key (kbd "C-j"))))
 
+;;-----------------------------------------------------------------------------
+;; octave
+;;-----------------------------------------------------------------------------
+
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+(defun octave-my-setting ()
+  (setq octave-comment-char ?%)
+  (abbrev-mode 1)
+  (auto-fill-mode 1)
+  (if (eq window-system 'x)
+	  (font-lock-mode 1))
+  (setq octave-block-offset 4)
+  (setq indent-tabs-mode nil))
+(add-hook 'octave-mode-hook 'octave-my-setting)
 
 ;;-----------------------------------------------------------------------------
 ;; matlab
 ;;-----------------------------------------------------------------------------
 
-(setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
-(setq matlab-mode-hook
-      '(lambda ()
-;;       (setq matlab-indent-function t)       ; if you want function bodies
-;;                                      ; indented
-;;       (setq fill-column 76)         ; where auto-fill should wrap
-;;       (turn-on-auto-fill)
-         (local-unset-key (kbd "M-;"))
-         (setq matlab-indent-level 4)
-         (local-set-key (kbd "C-j") 'matlab-return)
-         ))
+;; (setq auto-mode-alist (cons '("\\.m$" . matlab-mode) auto-mode-alist))
+;; (setq matlab-mode-hook
+;;       '(lambda ()
+;; ;;       (setq matlab-indent-function t)       ; if you want function bodies
+;; ;;                                      ; indented
+;; ;;       (setq fill-column 76)         ; where auto-fill should wrap
+;; ;;       (turn-on-auto-fill)
+;;          (local-unset-key (kbd "M-;"))
+;;          (setq matlab-indent-level 4)
+;;          (local-set-key (kbd "C-j") 'matlab-return)
+;;          ))
 
 
 ;;-----------------------------------------------------------------------------
@@ -792,4 +808,3 @@ then inserts a comment at the end of the line."
 ;;       (destructuring-bind (hi lo ms) (current-time)
 ;;         (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                         (second *emacs-load-start*)))))
-
