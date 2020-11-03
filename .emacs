@@ -436,6 +436,19 @@ then inserts a comment at the end of the line."
 
 (setq org-agenda-files '("~/docs/work/todo.org" "~/docs/work/todo.org_archive"))
 
+;;-------------------------------------------------------------------
+;; function for converting from camelcase to snake case
+;;-------------------------------------------------------------------
+
+(defun to-snake-case (start end)
+  "Change selected text to snake case format"
+  (interactive "r")
+  (if (use-region-p)
+      (let ((camel-case-str (buffer-substring start end)))
+        (delete-region start end)
+        (insert (s-snake-case camel-case-str)))
+    (message "No region selected")))
+
 ;;-----------------------------------------------------------------------------
 ;; c-mode customizations
 ;;-----------------------------------------------------------------------------
