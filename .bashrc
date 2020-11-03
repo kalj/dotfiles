@@ -330,6 +330,7 @@ alias rl='readlink -f'
 # programming etc
 alias rmake='make clean && make'
 alias bmake='make -B'
+alias rinja='ninja clean && ninja'
 
 # editors
 alias v='vim'
