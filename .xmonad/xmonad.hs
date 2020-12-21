@@ -93,7 +93,7 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          ++
          [("M-" ++ mask ++ key, f sc)
          | (key, sc) <- zip ["w", "e", "r"] [0..]
-         , (f, mask) <- [(viewScreen def, ""), (sendToScreen def, "S-")]]
+         , (f, mask) <- [(viewScreen horizontalScreenOrderer, ""), (sendToScreen horizontalScreenOrderer, "S-")]]
 
 myKPFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
 myKPFilter ((bm,apa),x) = case apa of
