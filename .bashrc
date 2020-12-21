@@ -394,7 +394,7 @@ complete -F _ashowpkg ashowpkg
 alias supd='sudo pacman -Syu'
 
 # ssh
-alias sshx='ssh -c arcfour,blowfish-cbc -X -C'
+alias sshx='ssh -X -C'
 complete -F _ssh sshx
 
 # Transmission BitTorrent client
