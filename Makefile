@@ -13,9 +13,9 @@ EMACSFILES=plugins snippets
 VIMFILES=plugin
 
 install:
-	@python setup.py -timestamp ${TIMESTAMP} $(HOMEFILES)
-	@python setup.py -timestamp ${TIMESTAMP} -dir ".emacs.d" $(EMACSFILES)
-	@python setup.py -timestamp ${TIMESTAMP} -dir ".vim" $(VIMFILES)
+	@python3 setup.py -timestamp ${TIMESTAMP} $(HOMEFILES)
+	@python3 setup.py -timestamp ${TIMESTAMP} -dir ".emacs.d" $(EMACSFILES)
+	@python3 setup.py -timestamp ${TIMESTAMP} -dir ".vim" $(VIMFILES)
 
 LOCALBRANCH=$(shell hostname)-local
 

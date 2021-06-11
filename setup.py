@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # @(#)setup.py
 # @author Karl Ljungkvist
@@ -38,14 +38,14 @@ def setup(dir, nodes, HOME, DOTDIR, OLDIR):
 
             # Back up old config file
 
-            print "Backing up %s" % node_path
+            print(f"Backing up {node_path}")
 
             if not os.path.isdir(bup_dir):
                 os.makedirs(bup_dir)
 
             shutil.move(full_link_path, full_bup_path)
 
-        print "Creating symlink for %s" % node_path
+        print(f"Creating symlink for {node_path}")
         os.symlink(full_src_path, full_link_path)
 
 
@@ -64,10 +64,10 @@ if __name__ == '__main__':
     DOTDIR=HOME+"/.dotfiles"
     OLDDIR=HOME+"/dotfiles_old_"+args.timestamp
 
-    # print 'timestamp: '+args.timestamp
-    # print 'files: '+', '.join(args.nodes)
+    # print(f"timestamp: {args.timestamp}")
+    # print("files:',', '.join(args.nodes))
     # if args.dir != None:
-    #     print 'in dir: '+args.dir
+    #     print('in dir:', args.dir)
 
     setup(args.dir,args.nodes,HOME,DOTDIR,OLDDIR)
 
