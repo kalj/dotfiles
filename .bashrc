@@ -177,20 +177,26 @@ alias cp='cp -iv'
 alias du='du -sh'
 
 # discourage usage of rm, instead use trash AKA tm
-function rm {
+function rm_replacement {
     echo "Stop using rm, stupid!"
     return 1
 }
 alias tm='trash'
+alias rm='rm_replacement'
 
 function cleandir {
     if [[ $# -ne 1 ]] ; then
         echo 'usage: ${0} <dir>'
         return 1
     fi
+    local dir="${1}"
 
+    if [ ! -d "${dir}" ] ; then
+        #echo "No existing directory ${dir}"
+        return 0
+    fi
     (
-    cd "${1}"
+    cd "${dir}"
 
     dot_files=(.[^.]*)
     files=(*)
@@ -201,6 +207,7 @@ function cleandir {
         trash "${files[@]}"
     fi
     )
+
     return 0
 }
 
