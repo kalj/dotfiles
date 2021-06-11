@@ -425,3 +425,6 @@ alias ipca='ip -c a'
 export GCC_COLORS=1
 # Enable coloring of gtest output
 export GTEST_COLOR=1
+
+# Enable Ninja as default cmake generator
+export CMAKE_GENERATOR=Ninja

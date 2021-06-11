@@ -3,21 +3,32 @@
         email = k.ljungkvist@gmail.com
 
 [color]
-  ui = auto
+  ui = true
 [color "branch"]
   current = yellow reverse
   local = yellow
   remote = green
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
-;[color "status"]
-;  added = yellow
-;  changed = green
-;    untracked = cyan
+
+
+  meta       = "11"
+  frag       = "magenta bold"
+  commit     = "yellow bold"
+  old        = "red bold"
+  new        = "green bold"
+  whitespace = "red reverse"
+
+  ; meta = yellow bold
+  ; frag = magenta bold
+  ; old = red bold
+  ; new = green bold
+  ; whitespace = red reverse
+
+[color "diff-highlight"]
+  oldNormal    = "red bold"
+  oldHighlight = "red bold 52"
+  newNormal    = "green bold"
+  newHighlight = "green bold 22"
 
 [alias]
     st = status
@@ -33,6 +44,7 @@
     ls = ls-files
     rh = reset HEAD
     gla = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    su = submodule update --init --recursive
 
 [mergetool "ediff"]
     cmd = emacs --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
@@ -43,3 +55,4 @@
 	default = current
 [core]
 	autocrlf = input
+	pager = diff-so-fancy | less --tabs=4 -RFX
