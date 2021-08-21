@@ -814,6 +814,15 @@ then inserts a comment at the end of the line."
 (load "intel-hex-mode.el")
 
 ;;-----------------------------------------------------------------------------
+;; verilog
+;;-----------------------------------------------------------------------------
+
+(setq save-abbrevs nil)
+(defun my-verilog-setup ()
+    (clear-abbrev-table verilog-mode-abbrev-table))
+(add-hook 'verilog-mode-hook #'my-verilog-setup)
+
+;;-----------------------------------------------------------------------------
 ;; Custom
 ;;-----------------------------------------------------------------------------
 
