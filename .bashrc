@@ -554,3 +554,7 @@ export GTEST_COLOR=1
 
 # Enable Ninja as default cmake generator
 export CMAKE_GENERATOR=Ninja
+
+# for golang
+export GOPATH=$HOME/.local/go
+export PATH=$PATH:$(go env GOPATH)/bin
