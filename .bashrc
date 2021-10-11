@@ -137,7 +137,7 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }"'history -a'
 # }
 
 #==============================================================================
-# Aliases
+# Aliases and convenience functions
 #==============================================================================
 
 alias ls='ls -H --group-directories-first'
@@ -295,6 +295,132 @@ exls() {
     return 0
 }
 
+# build stuff with cmake
+function cbuild {
+
+    local options=$(getopt -o hg:t:c:b: -l help,target:,toolchain:,config:,buildtype: -n "$0" -- "$@")
+    eval set -- "$options"
+
+    #now all short and long options are first
+    while [[ $1 != -- ]]; do
+        case $1 in
+            -g|--target)
+            local target=$2
+            shift 2
+            ;;
+            -t|--toolchain)
+            local toolchain=$2
+            shift 2
+            ;;
+            -c|--config)
+            local config=$2
+            shift 2
+            ;;
+            -b|--buildtype)
+            local buildtype=$2
+            shift 2
+            ;;
+            -h|--help)
+            echo "Usage: $FUNCNAME [options] srcdir builddir cmds [-- cmake-extra-args]"
+            echo
+            echo "Builds a cmake project with source root at <srcdir>, build dir at <builddir>,"
+            echo "according to the commands <cmds> and the options <options>."
+            echo
+            echo "Commands is a string containing any of the following command letters:"
+            echo " * c - removes the build dir if exists"
+            echo " * g - invokes cmake generate"
+            echo " * b - invokes cmake build"
+            echo
+            echo "Available options:"
+            echo "  -t|--toolchain      Path to toolchain file"
+            echo "  -c|--config         Path to initial cache config file"
+            echo "  -b|--buildtype      Cmake build type (existing shorthands: rel=Release,"
+            echo "                      dbg|deb=Debug, rwd=RelWithDebInfo)"
+            echo "  -g|--target         The cmake target to build"
+            echo
+            echo "The optional <cmake-extra-args> are passed as-is to the cmake generate step"
+            echo
+            echo "Example usage:"
+            echo "  cbuild . build-21569 cgb -t toolchain/sharc-plus-21569-emulator.cmake -b rwd \\"
+            echo "                           -g simple_process -- -DDDSP_ENABLE_PROFILING_CPU=ON"
+            return 0
+            ;;
+            *)
+            >&2 echo "bad option: $1"
+            return 1
+            ;;
+        esac
+    done
+    # remove trailing --
+    shift
+
+    # now all the remaining options are positional and extra arguments
+
+    if [ $# -lt 3 ]; then
+        >&2 echo 'too few arguments!'
+        return 1
+    fi
+
+    local sourcedir="$(realpath "$1")"
+    local builddir="$(realpath "$2")"
+    local cmds="$3"
+    shift 3
+
+    if [ $# -gt 0 ]; then
+        local extra_args_for_cmake=$@
+    fi
+
+    echo "Settings:"
+    echo "  sourcedir: $sourcedir"
+    echo "  builddir:  $builddir"
+    echo "  cmds:      $cmds"
+    echo "  target:    $target"
+    echo "  toolchain: $toolchain"
+    echo "  config:    $config"
+    echo "  buildtype: $buildtype"
+    echo "  cmakeargs: $extra_args_for_cmake"
+
+    if [[ $cmds =~ "c" ]] && [[ -e "${builddir}" ]]; then
+        echo "Removing existing build dir ${builddir}"
+        rm -rf "${builddir}"
+    fi
+
+    if [[ $cmds =~ "g" ]]; then
+        if [ -n "$toolchain" ]; then
+            local toolchain_arg="-DCMAKE_TOOLCHAIN_FILE=$toolchain"
+        fi
+
+        if [ -n "$config" ]; then
+            local config_arg="-C $config"
+        fi
+        
+        if [ -n "$buildtype" ]; then
+            case $buildtype in
+                rel)
+                local buildtype=Release
+                ;;
+                dbg|deb)
+                local buildtype=Debug
+                ;;
+                rwd)
+                local buildtype=RelWithDebInfo
+                ;;
+            esac
+            local buildtype_arg="-DCMAKE_BUILD_TYPE=$buildtype"
+        fi
+
+        cmake -GNinja -S "${sourcedir}" -B "${builddir}" ${buildtype_arg} ${toolchain_arg} ${config_arg} ${extra_args_for_cmake}
+    fi
+
+    if [[ $cmds =~ "b" ]]; then
+        if [ -n "$target" ]; then
+            local target_arg="--target $target"
+        fi
+        cmake --build "${builddir}" $target_arg
+    fi
+
+    return 0
+}
 
 
 # Wraps a completion function
