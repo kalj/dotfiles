@@ -9,8 +9,6 @@
   local = yellow
   remote = green
 [color "diff"]
-
-
   meta       = "11"
   frag       = "magenta bold"
   commit     = "yellow bold"
@@ -34,7 +32,8 @@
     st = status
     ci = commit
     br = branch
-    co = checkout
+    sw = switch
+    rr = restore
     df = diff --find-copies-harder --minimal
     wdf = diff --word-diff -w --find-copies-harder --minimal
     dfc = diff --find-copies-harder --minimal --cached
