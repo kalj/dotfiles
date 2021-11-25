@@ -98,9 +98,20 @@
 
 (setq-default tab-width 4)
 
-;; trailing whitespaces are also evil
+;; trailing whitespaces are evil
 ;; therefore, delete them on save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; BUT, only if .dir-local.el doesn't protest
+
+(setq dont-delete-trailing-whitespace nil)
+(make-variable-buffer-local 'dont-delete-trailing-whitespace)
+
+(defun maybe-delete-trailing-whitespace () ""
+  (or dont-delete-trailing-whitespace
+       (progn
+     (delete-trailing-whitespace)
+     )))
+
+(add-hook 'before-save-hook 'maybe-delete-trailing-whitespace)
 
 ;; Show column number in modeline
 (setq column-number-mode t)
@@ -830,3 +841,17 @@ then inserts a comment at the end of the line."
 ;;       (destructuring-bind (hi lo ms) (current-time)
 ;;         (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                         (second *emacs-load-start*)))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values
+   (quote
+    ((dont-delete-trailing-whitespace . t)))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
