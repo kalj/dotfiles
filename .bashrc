@@ -382,7 +382,7 @@ function cbuild {
 
     if [[ $cmds =~ "c" ]] && [[ -e "${builddir}" ]]; then
         echo "Removing existing build dir ${builddir}"
-        rm -rf "${builddir}"
+        trash "${builddir}"
     fi
 
     if [[ $cmds =~ "g" ]]; then
