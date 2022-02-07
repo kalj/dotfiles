@@ -301,7 +301,10 @@ exls() {
     return 0
 }
 
+#==============================================================================
 # build stuff with cmake
+#==============================================================================
+
 function cbuild {
 
     local options=$(getopt -o ha:g:t:c:b: -l help,generator:,target:,toolchain:,config:,buildtype: -n "$0" -- "$@")
