@@ -32,6 +32,7 @@
     st = status
     ci = commit
     br = branch
+    co = checkout
     sw = switch
     rr = restore
     df = diff --find-copies-harder --minimal
@@ -56,5 +57,7 @@
 [core]
 	autocrlf = input
 	pager = diff-so-fancy | less --tabs=4 -RFX
+[init]
+	defaultBranch = master
 [pull]
 	ff = only
