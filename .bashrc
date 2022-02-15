@@ -18,7 +18,7 @@ export VISUAL="$EDITOR"
 export ALTERNATE_EDITOR='vi'
 
 # mail address
-export EMAIL="k.ljungkvist@gmail.com"
+export EMAIL="$(cat ~/.email_address)"
 
 export PAGER=less
 
