@@ -314,23 +314,23 @@ function cbuild {
     while [[ $1 != -- ]]; do
         case $1 in
             -a|--target)
-                local target=$2
+                local target="$2"
                 shift 2
                 ;;
             -g|--generator)
-                local generator=$2
+                local generator="$2"
                 shift 2
                 ;;
             -t|--toolchain)
-                local toolchain=$2
+                local toolchain="$2"
                 shift 2
                 ;;
             -c|--config)
-                local config=$2
+                local config="$2"
                 shift 2
                 ;;
             -b|--buildtype)
-                local buildtype=$2
+                local buildtype="$2"
                 shift 2
                 ;;
             -h|--help)
@@ -410,7 +410,7 @@ function cbuild {
         fi
 
         if [ -n "$generator" ]; then
-            local generator_arg="-G '$generator'"
+            local generator_arg="-G $generator"
         fi
 
         if [ -n "$buildtype" ]; then
