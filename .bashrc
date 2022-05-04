@@ -313,12 +313,18 @@ function hexcalc {
 
 function cbuild {
 
-    local options=$(getopt -o ha:g:t:c:b: -l help,generator:,target:,toolchain:,config:,buildtype: -n "$0" -- "$@")
+    local options=$(getopt -o vha:g:t:c:b: -l verbose,help,generator:,target:,toolchain:,config:,buildtype: -n "$0" -- "$@")
     eval set -- "$options"
+
+    local verbose=0
 
     #now all short and long options are first
     while [[ $1 != -- ]]; do
         case $1 in
+            -v|--verbose)
+                local verbose=1
+                shift 1
+                ;;
             -a|--target)
                 local target="$2"
                 shift 2
@@ -351,6 +357,7 @@ function cbuild {
                 echo " * b - invokes cmake build"
                 echo
                 echo "Available options:"
+                echo "  -v|--verbose        Output verbosely"
                 echo "  -g|--generator      The cmake generator to use"
                 echo "  -t|--toolchain      Path to toolchain file"
                 echo "  -c|--config         Path to initial cache config file"
@@ -390,19 +397,23 @@ function cbuild {
         local extra_args_for_cmake=$@
     fi
 
-    echo "Settings:"
-    echo "  sourcedir: $sourcedir"
-    echo "  builddir:  $builddir"
-    echo "  cmds:      $cmds"
-    echo "  generator: $generator"
-    echo "  target:    $target"
-    echo "  toolchain: $toolchain"
-    echo "  config:    $config"
-    echo "  buildtype: $buildtype"
-    echo "  cmakeargs: $extra_args_for_cmake"
+    if [ ${verbose} == 1 ] ; then
+        echo "Settings:"
+        echo "  sourcedir: $sourcedir"
+        echo "  builddir:  $builddir"
+        echo "  cmds:      $cmds"
+        echo "  generator: $generator"
+        echo "  target:    $target"
+        echo "  toolchain: $toolchain"
+        echo "  config:    $config"
+        echo "  buildtype: $buildtype"
+        echo "  cmakeargs: $extra_args_for_cmake"
+    fi
 
     if [[ $cmds =~ "c" ]] && [[ -e "${builddir}" ]]; then
-        echo "Removing existing build dir ${builddir}"
+        if [ ${verbose} == 1 ] ; then
+            echo "Removing existing build dir ${builddir}"
+        fi
         trash "${builddir}"
     fi
 
@@ -434,6 +445,11 @@ function cbuild {
             local buildtype_arg="-DCMAKE_BUILD_TYPE=$buildtype"
         fi
 
+        if [ ${verbose} == 1 ] ; then
+            echo "Running CMake configure command:"
+            echo "    cmake "${generator_arg}" -S "${sourcedir}" -B "${builddir}" ${buildtype_arg} ${toolchain_arg} ${config_arg} ${extra_args_for_cmake}"
+        fi
+
         cmake "${generator_arg}" -S "${sourcedir}" -B "${builddir}" ${buildtype_arg} ${toolchain_arg} ${config_arg} ${extra_args_for_cmake}
     fi
 
@@ -441,6 +457,12 @@ function cbuild {
         if [ -n "$target" ]; then
             local target_arg="--target $target"
         fi
+
+        if [ ${verbose} == 1 ] ; then
+            echo "Running CMake build command:"
+            echo "    cmake --build "${builddir}" $target_arg"
+        fi
+
         cmake --build "${builddir}" $target_arg
     fi
 
