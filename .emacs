@@ -533,7 +533,7 @@ then inserts a comment at the end of the line."
 ;; clang format
 ;;-----------------------------------------------------------------------------
 
-(require 'clang-format)
+;(require 'clang-format)
 
 ;; (add-hook 'c-mode-common-hook
 ;;           (function (lambda ()
@@ -617,9 +617,9 @@ then inserts a comment at the end of the line."
 
 ;; these explicit loads are not so bad since they don't really load anything,
 ;; but rather set some autoloads
-(load "auctex.el" nil t t)
+;; (load "auctex.el" nil t t)
 
-(load "preview-latex.el" nil t t)
+; (load "preview-latex.el" nil t t)
 
 ;; (setq tex-dvi-view-command "xdvi")
 
@@ -683,9 +683,9 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 ;; Dockerfile mode
 ;;-----------------------------------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/plugins/dockerfile-mode/")
-(require 'dockerfile-mode)
-(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+;; (add-to-list 'load-path "~/.emacs.d/plugins/dockerfile-mode/")
+;; (require 'dockerfile-mode)
+;; (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 
 ;;-----------------------------------------------------------------------------
 ;; Auto completion, yasnippet,
@@ -834,6 +834,13 @@ then inserts a comment at the end of the line."
 (add-hook 'verilog-mode-hook #'my-verilog-setup)
 
 ;;-----------------------------------------------------------------------------
+;; package management
+;;-----------------------------------------------------------------------------
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+;;-----------------------------------------------------------------------------
 ;; Custom
 ;;-----------------------------------------------------------------------------
 
@@ -846,9 +853,8 @@ then inserts a comment at the end of the line."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(safe-local-variable-values
-   (quote
-    ((dont-delete-trailing-whitespace . t)))))
+ '(package-selected-packages '(auctex clang-format yasnippet s dockerfile-mode))
+ '(safe-local-variable-values '((dont-delete-trailing-whitespace . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

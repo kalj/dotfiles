@@ -574,7 +574,9 @@ make-completion-wrapper _apt_cache _ashowpkg ashowpkg apt-cache showpkg
 complete -F _ashowpkg ashowpkg
 
 # pacman
-alias supd='sudo pacman -Syu'
+alias pupg='sudo pacman -Syu'
+alias pinst='sudo pacman -S'
+alias psrch='pacman -Ss'
 
 # ssh
 alias sshx='ssh -X -C'
@@ -606,5 +608,10 @@ export GTEST_COLOR=1
 export CMAKE_GENERATOR=Ninja
 
 # for golang
-export GOPATH=$HOME/.local/go
-export PATH=$PATH:$(go env GOPATH)/bin
+if which go &>/dev/null ; then
+    export GOPATH=$HOME/.local/go
+    export PATH=$PATH:$(go env GOPATH)/bin
+fi
+
+#. "$HOME/.cargo/env"
+source /usr/share/doc/pkgfile/command-not-found.bash
