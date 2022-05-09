@@ -766,8 +766,10 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 ;; make emacs auto-load templates
-(require 'template)
-(template-initialize)
+(use-package template
+  :config
+  (template-initialize)
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; PKGBUILD mode
@@ -838,7 +840,7 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 ;; intel hex mode
 ;;-----------------------------------------------------------------------------
-(load "intel-hex-mode.el")
+(use-package intel-hex-mode) ; TODO: defer?
 
 ;;-----------------------------------------------------------------------------
 ;; verilog
