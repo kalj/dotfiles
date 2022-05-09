@@ -6,7 +6,8 @@
 ;; User variables
 ;;-----------------------------------------------------------------------------
 
-(setq user-mail-address "k.ljungkvist@gmail.com")
+(setq user-mail-address (car (split-string (with-temp-buffer (insert-file-contents "~/.email_address")
+                                                             (buffer-string)))))
 
 ;;-----------------------------------------------------------------------------
 ;; general behavior/appearance mods
