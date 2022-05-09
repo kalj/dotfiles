@@ -854,9 +854,10 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 ;; (message "My .emacs loaded in %ds"
-;;       (destructuring-bind (hi lo ms) (current-time)
+;;       (destructuring-bind (hi lo us ps) (current-time)
 ;;         (- (+ hi lo) (+ (first *emacs-load-start*)
 ;;                         (second *emacs-load-start*)))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
