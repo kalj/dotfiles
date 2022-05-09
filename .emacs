@@ -136,17 +136,28 @@
 ;; packages
 ;;-----------------------------------------------------------------------------
 
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 (eval-when-compile
   (require 'use-package))
 
-(require 'diminish) ; TODO: can be use-package with defer ?
+(use-package diminish
+  :ensure t
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; vi emulation
 ;;-----------------------------------------------------------------------------
 
 (use-package evil
-  :load-path "~/.emacs.d/plugins/evil"
+  :ensure t
   :init
   :config
   (evil-mode 1)
@@ -185,9 +196,6 @@
                                         ; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
   )
-
-
-
 
 ;;-----------------------------------------------------------------------------
 ;; Global key bindings
@@ -410,12 +418,6 @@ then inserts a comment at the end of the line."
 (global-set-key "\C-c\C-e" 'edit-init-file)
 
 ;;-----------------------------------------------------------------------------
-;; first add ~/.emacs.d/plugins to load-path
-;;-----------------------------------------------------------------------------
-
-(add-to-list 'load-path "~/.emacs.d/plugins")
-
-;;-----------------------------------------------------------------------------
 ;; org-mode
 ;;-----------------------------------------------------------------------------
 
@@ -546,9 +548,10 @@ then inserts a comment at the end of the line."
   (c-set-offset 'substatement-open 0))
 (add-hook 'java-mode-hook 'my-java-mode-hook)
 
-(autoload 'cuda-mode "cuda-mode.el" "Cuda mode." t)
-(setq auto-mode-alist (append '(("\\.cuh?$" . cuda-mode)) auto-mode-alist))
-
+(use-package cuda-mode
+  :ensure t
+  :mode "\\.cuh?$"
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; clang format
@@ -606,28 +609,24 @@ then inserts a comment at the end of the line."
 ;; abc-mode
 ;;-----------------------------------------------------------------------------
 
-(add-to-list 'auto-mode-alist '("\\.abc\\'"  . abc-mode))
-(add-to-list 'auto-mode-alist '("\\.abp\\'"  . abc-mode))
-(autoload 'abc-mode "abc-mode" "abc music files" t)
-
 (defun abc-show-current-ps()
   (interactive)
   (save-buffer)
   (shell-command
-    (read-from-minibuffer
-      "Options: "
-      (concat "atril" " "
-              (replace-regexp-in-string "\.abc$" ".ps" buffer-file-name)
-              " &"
-              ))))
+   (read-from-minibuffer
+    "Options: "
+    (concat "atril" " "
+            (replace-regexp-in-string "\.abc$" ".ps" buffer-file-name)
+            " &"
+            ))))
 
+(use-package abc-mode
+  :ensure t
+  :mode ("\\.abc\\'" "\\.abp\\'")
+  :bind (("C-c C-c" . abc-run-abc2ps-all)
+         ("C-c C-v" . abc-show-current-ps))
+  )
 
-
-(setq abc-mode-hook
-      '(lambda ()
-         (local-set-key (kbd "C-c C-c") 'abc-run-abc2ps-all)
-         (local-set-key (kbd "C-c C-v") 'abc-show-current-ps)
-         ))
 
 
 ;; (add-to-list 'auto-insert-alist '(abc-mode . abc-skeleton))
@@ -706,7 +705,7 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package dockerfile-mode
-  :load-path "~/.emacs.d/plugins/dockerfile-mode/"
+  :ensure t
   :mode "Dockerfile\\'")
 
 ;;-----------------------------------------------------------------------------
@@ -715,6 +714,7 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package yasnippet
+  :ensure t
   :config
 
   (yas-global-mode 1)
@@ -758,7 +758,7 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package arduino-mode
-  :load-path "~/.emacs.d/plugins/arduino-mode/"
+  :ensure t
   :mode "\\.\\(pde\\|ino\\)$")
 
 ;;-----------------------------------------------------------------------------
@@ -766,7 +766,9 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 ;; make emacs auto-load templates
+; TODO: fails to install from melpa
 (use-package template
+  :load-path "~/.emacs.d/plugins"
   :config
   (template-initialize)
   )
@@ -775,8 +777,9 @@ then inserts a comment at the end of the line."
 ;; PKGBUILD mode
 ;;-----------------------------------------------------------------------------
 
-(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
-(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
+(use-package pkgbuild-mode
+  :ensure t
+  :mode "/PKGBUILD$")
 
 ;;-----------------------------------------------------------------------------
 ;; Ediff
@@ -812,7 +815,10 @@ then inserts a comment at the end of the line."
 ;; Thunderbird email mode
 ;;-----------------------------------------------------------------------------
 
-(require 'tbemail)
+;; (require 'tbemail)
+(use-package tbemail
+  :load-path "~/.emacs.d/plugins"
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; dead keys
@@ -840,7 +846,9 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 ;; intel hex mode
 ;;-----------------------------------------------------------------------------
-(use-package intel-hex-mode) ; TODO: defer?
+(use-package intel-hex-mode
+  :ensure t
+  ) ; TODO: defer?
 
 ;;-----------------------------------------------------------------------------
 ;; verilog
@@ -850,6 +858,12 @@ then inserts a comment at the end of the line."
 (defun my-verilog-setup ()
     (clear-abbrev-table verilog-mode-abbrev-table))
 (add-hook 'verilog-mode-hook #'my-verilog-setup)
+
+;;-----------------------------------------------------------------------------
+;; cmake-mode
+;;-----------------------------------------------------------------------------
+
+(use-package cmake-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; Custom
@@ -865,9 +879,9 @@ then inserts a comment at the end of the line."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(safe-local-variable-values
-   (quote
-    ((dont-delete-trailing-whitespace . t)))))
+ '(package-selected-packages
+   '(yasnippet-snippets use-package rust-mode markdown-mode flycheck diminish csv-mode pkgbuild-mode evil dockerfile-mode arduino-mode))
+ '(safe-local-variable-values '((dont-delete-trailing-whitespace . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
