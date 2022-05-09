@@ -635,64 +635,69 @@ then inserts a comment at the end of the line."
 ;; LaTeX
 ;;-----------------------------------------------------------------------------
 
-;; these explicit loads are not so bad since they don't really load anything,
-;; but rather set some autoloads
-(load "auctex.el" nil t t)
+(use-package tex
+  :ensure auctex)
 
-(load "preview-latex.el" nil t t)
+;; (use-package auctex)
 
-;; (setq tex-dvi-view-command "xdvi")
+;; ;; these explicit loads are not so bad since they don't really load anything,
+;; ;; but rather set some autoloads
+;; (load "auctex.el" nil t t)
 
-(eval-after-load "latex"
-  '(progn
-     (define-key LaTeX-math-keymap "/" 'LaTeX-math-frac)
-     (define-key LaTeX-math-keymap "2" 'LaTeX-math-sqrt)
-     (setq ispell-tex-skip-alists
-           (list
-            (append
-             (car ispell-tex-skip-alists) ;tell ispell to ignore content of this:
-             '(
-               ("\\[" . "\\]")
-               ;; ("\\\\verb\\\\|" . "\\\\|")
-               ("\\\\eqref" ispell-tex-arg-end)
-               ("\\\\secref" ispell-tex-arg-end)
-               ("\\\\liref" ispell-tex-arg-end)
-               ("\\\\fgref" ispell-tex-arg-end)
-               ("\\\\tbref" ispell-tex-arg-end)
-               ("\\\\alref" ispell-tex-arg-end)
-               ;; ("\\\\label" ispell-tex-arg-end)
-               ;; ("\\\\" ispell-tex-arg-end)
-               ))
-            (cadr ispell-tex-skip-alists)))
-     (add-to-list 'LaTeX-verbatim-environments "comment")
-     (add-to-list 'TeX-expand-list
-                  '("%(RubberPDF)"
-                    (lambda ()
-                      (if
-                          (not TeX-PDF-mode)
-                          ""
-                        "--pdf"))))
-     (add-to-list 'TeX-command-list
-                  '("Rubber" "rubber %(RubberPDF) %t" TeX-run-shell nil t) t)
-     ))
+;; (load "preview-latex.el" nil t t)
 
-(setq-default TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv")
-                                                 (output-dvi "xdvi") (output-pdf "xdg-open")
-                                                 (output-html "xdg-open"))))
+;; ;; (setq tex-dvi-view-command "xdvi")
 
-(setq-default TeX-PDF-mode t)
-(setq-default TeX-command-default "Rubber")
+;; (eval-after-load "latex"
+;;   '(progn
+;;      (define-key LaTeX-math-keymap "/" 'LaTeX-math-frac)
+;;      (define-key LaTeX-math-keymap "2" 'LaTeX-math-sqrt)
+;;      (setq ispell-tex-skip-alists
+;;            (list
+;;             (append
+;;              (car ispell-tex-skip-alists) ;tell ispell to ignore content of this:
+;;              '(
+;;                ("\\[" . "\\]")
+;;                ;; ("\\\\verb\\\\|" . "\\\\|")
+;;                ("\\\\eqref" ispell-tex-arg-end)
+;;                ("\\\\secref" ispell-tex-arg-end)
+;;                ("\\\\liref" ispell-tex-arg-end)
+;;                ("\\\\fgref" ispell-tex-arg-end)
+;;                ("\\\\tbref" ispell-tex-arg-end)
+;;                ("\\\\alref" ispell-tex-arg-end)
+;;                ;; ("\\\\label" ispell-tex-arg-end)
+;;                ;; ("\\\\" ispell-tex-arg-end)
+;;                ))
+;;             (cadr ispell-tex-skip-alists)))
+;;      (add-to-list 'LaTeX-verbatim-environments "comment")
+;;      (add-to-list 'TeX-expand-list
+;;                   '("%(RubberPDF)"
+;;                     (lambda ()
+;;                       (if
+;;                           (not TeX-PDF-mode)
+;;                           ""
+;;                         "--pdf"))))
+;;      (add-to-list 'TeX-command-list
+;;                   '("Rubber" "rubber %(RubberPDF) %t" TeX-run-shell nil t) t)
+;;      ))
 
-(defun my-latex-mode-hook()
-  (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
-  ;; (setq TeX-command-default "XeLaTeX")
-  (setq TeX-save-query nil)
-  ;; (setq TeX-show-compilation t)
-  (orgtbl-mode)
-  )
+;; (setq-default TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv")
+;;                                                  (output-dvi "xdvi") (output-pdf "xdg-open")
+;;                                                  (output-html "xdg-open"))))
+
+;; (setq-default TeX-PDF-mode t)
+;; (setq-default TeX-command-default "Rubber")
+
+;; (defun my-latex-mode-hook()
+;;   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+;;   ;; (setq TeX-command-default "XeLaTeX")
+;;   (setq TeX-save-query nil)
+;;   ;; (setq TeX-show-compilation t)
+;;   (orgtbl-mode)
+;;   )
 
 
-(add-hook 'LaTeX-mode-hook 'my-latex-mode-hook)
+;; (add-hook 'LaTeX-mode-hook 'my-latex-mode-hook)
 
 ;;-----------------------------------------------------------------------------
 ;; use cperl-mode instead of perl-mode, or maybe not...
@@ -864,6 +869,27 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package cmake-mode)
+
+;;-----------------------------------------------------------------------------
+;; rust-mode
+;;-----------------------------------------------------------------------------
+
+(use-package rust-mode
+  :ensure t)
+
+;;-----------------------------------------------------------------------------
+;; markdown-mode
+;;-----------------------------------------------------------------------------
+
+(use-package markdown-mode
+  :ensure t)
+
+;;-----------------------------------------------------------------------------
+;; csv-mode
+;;-----------------------------------------------------------------------------
+
+(use-package csv-mode
+  :ensure t)
 
 ;;-----------------------------------------------------------------------------
 ;; Custom
