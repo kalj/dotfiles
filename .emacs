@@ -133,6 +133,15 @@
 (setq read-buffer-completion-ignore-case 1)
 
 ;;-----------------------------------------------------------------------------
+;; packages
+;;-----------------------------------------------------------------------------
+
+(eval-when-compile
+  (require 'use-package))
+
+(require 'diminish) ; TODO: can be use-package with defer ?
+
+;;-----------------------------------------------------------------------------
 ;; vi emulation
 ;;-----------------------------------------------------------------------------
 
@@ -363,11 +372,20 @@ then inserts a comment at the end of the line."
 ;; Use ido to fascilitate buffer switching / file opening
 ;;-----------------------------------------------------------------------------
 
-(require 'ido)
-(setq ido-case-fold t)
-(setq ido-enable-flex-matching t)
-(ido-mode)
-(setq ido-auto-merge-work-directories-length -1)
+(use-package ido
+  :diminish ido-mode
+  :config
+  (setq ido-case-fold t
+        ido-use-faces t
+        ido-enable-flex-matching t
+        ido-auto-merge-work-directories-length -1)
+
+  ;; (setq ido-use-filename-at-point nil)
+  ;; (setq ido-use-virtual-buffers t))
+  ;; (ido-ubiquitous-mode 1)
+  (ido-mode)
+  (ido-everywhere)
+)
 
 ;;-----------------------------------------------------------------------------
 ;; Command for reloading this file
@@ -534,7 +552,7 @@ then inserts a comment at the end of the line."
 ;; clang format
 ;;-----------------------------------------------------------------------------
 
-(require 'clang-format)
+(use-package clang-format)
 
 ;; (add-hook 'c-mode-common-hook
 ;;           (function (lambda ()
@@ -684,28 +702,23 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 ;; Dockerfile mode
 ;;-----------------------------------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/plugins/dockerfile-mode/")
-(require 'dockerfile-mode)
-(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
+(use-package dockerfile-mode
+  :load-path "~/.emacs.d/plugins/dockerfile-mode/"
+  :mode "Dockerfile\\'")
 
 ;;-----------------------------------------------------------------------------
 ;; Auto completion, yasnippet,
 ;; rope/ropemacs/pymacs, etc
 ;;-----------------------------------------------------------------------------
 
-;(add-to-list 'load-path
-;             "~/.emacs.d/plugins/yasnippet")
+(use-package yasnippet
+  :config
 
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"                 ;; personal snippets
-        ))
-
-(when (> emacs-major-version 20)
-  (require 'yasnippet)
-  (yas/initialize)
   (yas-global-mode 1)
+  ; personal snippets
+  (add-to-list #'yas-snippet-dirs "~/.emacs.d/snippets")
   )
-
 
 ;;-----------------------------------------------------------------------------
 ;; shell mode customizations
@@ -742,9 +755,9 @@ then inserts a comment at the end of the line."
 ;; Arduino mode
 ;;-----------------------------------------------------------------------------
 
-(add-to-list 'load-path "~/.emacs.d/plugins/arduino-mode")
-(setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
-(autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
+(use-package arduino-mode
+  :load-path "~/.emacs.d/plugins/arduino-mode/"
+  :mode "\\.\\(pde\\|ino\\)$")
 
 ;;-----------------------------------------------------------------------------
 ;; Templates
