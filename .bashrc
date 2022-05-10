@@ -606,5 +606,7 @@ export GTEST_COLOR=1
 export CMAKE_GENERATOR=Ninja
 
 # for golang
-export GOPATH=$HOME/.local/go
-export PATH=$PATH:$(go env GOPATH)/bin
+if which go &>/dev/null ; then
+    export GOPATH=$HOME/.local/go
+    export PATH=$PATH:$(go env GOPATH)/bin
+fi
