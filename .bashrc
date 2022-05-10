@@ -612,3 +612,8 @@ if which go &>/dev/null ; then
     export GOPATH=$HOME/.local/go
     export PATH=$PATH:$(go env GOPATH)/bin
 fi
+
+# arch linux specific things
+if [ -f /etc/arch-release ] ; then
+    source /usr/share/doc/pkgfile/command-not-found.bash
+fi
