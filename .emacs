@@ -193,7 +193,8 @@
   (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-                                        ; Make horizontal movement cross lines
+
+  ; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
   )
 
@@ -421,54 +422,7 @@ then inserts a comment at the end of the line."
 ;; org-mode
 ;;-----------------------------------------------------------------------------
 
-(require 'org)
-
-;; (setq org-format-latex-header
-;;       "\\documentclass[a4paper]{article}
-;; \\usepackage[utf8]{inputenc}
-;; \\usepackage[T1]{fontenc}
-;; \\usepackage[english]{babel}
-;; \\usepackage[margin=3cm]{geometry}
-;; \\usepackage{palatino}
-;; \\usepackage{fullpage}         % do not remove
-;; \\usepackage[usenames]{color}
-;; \\usepackage{amsmath,amsfonts,mathrsfs,amssymb}
-;; \\usepackage{latexsym}
-;; \\usepackage[mathscr]{eucal}
-;; \\pagestyle{empty}             % do not remove")
-
-;; Remap org-mode meta keys for convenience
-(evil-declare-key 'normal org-mode-map
-                  (kbd "M-l") 'org-metaright
-                  (kbd "M-h") 'org-metaleft
-                  (kbd "M-k") 'org-metaup
-                  (kbd "M-j") 'org-metadown
-                  (kbd "M-L") 'org-shiftmetaright
-                  (kbd "M-H") 'org-shiftmetaleft
-                  (kbd "M-K") 'org-shiftmetaup
-                  (kbd "M-J") 'org-shiftmetadown)
-
-
-;; org agenda -- leave in emacs mode but add j & k
-(defun my-org-mode-hook ()
-  (define-key org-agenda-mode-map "j" 'evil-next-line)
-  (define-key org-agenda-mode-map "k" 'evil-previous-line))
-(add-hook 'org-mode-hook 'my-org-mode-hook)
-
-
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-hide-leading-stars t)
-(setq org-startup-folded 'content)
-
-(setq org-agenda-custom-commands
-      '(
-        ("A" "Agenda + Todos"
-         ((agenda)
-          (todo "TODO")
-          ))))
-
-(setq org-agenda-files '("~/docs/work/todo.org" "~/docs/work/todo.org_archive"))
+;; disabled for now, see git history for setup
 
 ;;-------------------------------------------------------------------
 ;; function for converting from camelcase to snake case
