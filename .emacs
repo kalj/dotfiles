@@ -21,6 +21,9 @@
 ;; no splash screen
 (setq inhibit-splash-screen t)
 
+;; no dialog boxes
+(setq use-dialog-box nil)
+
 ;; remove toolbar - handled in .Xdefaults, BUT the stupid emacsclient/server
 ;; framework doesn't get this and still uses it...
 (tool-bar-mode -1)
