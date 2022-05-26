@@ -514,7 +514,9 @@ then inserts a comment at the end of the line."
 ;; clang format
 ;;-----------------------------------------------------------------------------
 
-(use-package clang-format)
+(use-package clang-format
+  :ensure t
+  )
 
 ;; (add-hook 'c-mode-common-hook
 ;;           (function (lambda ()
