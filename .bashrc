@@ -576,9 +576,13 @@ make-completion-wrapper _apt_cache _ashowpkg ashowpkg apt-cache showpkg
 complete -F _ashowpkg ashowpkg
 
 # pacman
-alias pupg='sudo pacman -Syu'
-alias pinst='sudo pacman -S'
-alias psrch='pacman -Ss'
+alias pacyu='sudo pacman -Syu'
+alias pacu='sudo pacman -U'
+alias paci='sudo pacman -S'
+alias pacr='sudo pacman -Rsc'
+alias pacs='pacman -Ss'
+alias pacg='pacman -Q | grep'
+alias pacn='pacman -Si'
 
 # ssh
 alias sshx='ssh -X -C'
