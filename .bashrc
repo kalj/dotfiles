@@ -264,8 +264,9 @@ extract() {
             *.tar) tar xvf  "$1" ;;
             *.tar.gz|*.tgz) tar xvzf "$1";;
             *.tar.xz|*.txz) tar xvJf  "$1";;
-            *.tar.bz2) tar xvjf  "$1";;
+            *.tar.bz2|*.tbz2) tar xvjf  "$1";;
             *.tar.bz) tar xvjf  "$1";;
+            *.tar.zst) tar xv --zstd -f "$1";;
             *.zip) unzip  "$1" ;;
             *.rar) unrar x "$1" ;;
             *.gz) gunzip "$1" ;;
@@ -288,7 +289,8 @@ exls() {
             *.tar) tar tvf "$1" ;;
             *.tar.gz|*.tgz) tar tvzf "$1";;
             *.tar.xz|*.txz) tar tvJf "$1";;
-            *.tar.bz2) tar tvjf "$1";;
+            *.tar.bz2|*.tbz2) tar tvjf "$1";;
+            *.tar.zst) tar tv --zstd -f "$1";;
             *.zip) unzip -l "$1" ;;
             *.rar) unrar l "$1" ;;
             *.7z) 7z l "$1" ;;
