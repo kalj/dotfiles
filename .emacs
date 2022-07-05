@@ -29,8 +29,8 @@
 (tool-bar-mode -1)
 
 ;; disable useless C-z behavior when not in a terminal
-(if window-system
-    (global-unset-key (kbd "C-z")))
+(if (display-graphic-p)
+    (global-unset-key (kbd "C-x C-z")))
 
 ;; remove menu bar (can't be handled in Xresources, since should hold for -nw also)
 (menu-bar-mode -1)
@@ -541,7 +541,7 @@ then inserts a comment at the end of the line."
   (setq octave-comment-char ?%)
   (abbrev-mode 1)
   (auto-fill-mode 1)
-  (if (eq window-system 'x)
+  (if (display-graphic-p)
 	  (font-lock-mode 1))
   (setq octave-block-offset 4)
   (setq indent-tabs-mode nil))
