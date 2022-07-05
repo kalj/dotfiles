@@ -234,14 +234,6 @@ then inserts a comment at the end of the line."
   (global-set-key "\M-W" 'kill-ring-save-keep-mark)
 
 
-;; make the f* keys do something useful
-(defun my-initial-split()
-  "Replaces current window layout with one horizontal split."
-  (interactive)
-  (delete-other-windows nil)
-  (split-window-horizontally nil)
-  (switch-to-buffer-other-window nil)
-  )
 
 ;; fix font colors
 (global-set-key [f5] 'font-lock-fontify-buffer)
@@ -297,9 +289,7 @@ then inserts a comment at the end of the line."
                                   (face-attribute 'default :height)))))
 
 (global-set-key (kbd "C-x C-.") 'sacha/increase-font-size)
-(global-set-key (kbd "C-.")     'sacha/increase-font-size)
 (global-set-key (kbd "C-x C-,") 'sacha/decrease-font-size)
-(global-set-key (kbd "C-,")     'sacha/decrease-font-size)
 
 ;;-----------------------------------------------------------------------------
 ;; Encoding systems
@@ -375,8 +365,8 @@ then inserts a comment at the end of the line."
   )
 
 ;; bind to keys
-(global-set-key "\C-c\C-r" 'reload-init-file)
-(global-set-key "\C-c\C-e" 'edit-init-file)
+(global-set-key "\C-x\M-r" 'reload-init-file)
+(global-set-key "\C-x\M-e" 'edit-init-file)
 
 ;;-----------------------------------------------------------------------------
 ;; org-mode
