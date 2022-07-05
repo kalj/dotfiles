@@ -135,6 +135,9 @@
 ;; ignore case when completing buffer names
 (setq read-buffer-completion-ignore-case 1)
 
+;; always follow vc symlinks
+(setq vc-follow-symlinks t)
+
 ;;-----------------------------------------------------------------------------
 ;; packages
 ;;-----------------------------------------------------------------------------
