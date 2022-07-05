@@ -292,6 +292,16 @@ then inserts a comment at the end of the line."
 (global-set-key (kbd "C-x C-,") 'sacha/decrease-font-size)
 
 ;;-----------------------------------------------------------------------------
+;; which-key
+;;-----------------------------------------------------------------------------
+
+(use-package which-key
+  :demand
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'which-key-mode))
+
+;;-----------------------------------------------------------------------------
 ;; Encoding systems
 ;;-----------------------------------------------------------------------------
 
