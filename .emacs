@@ -159,52 +159,6 @@
   )
 
 ;;-----------------------------------------------------------------------------
-;; vi emulation
-;;-----------------------------------------------------------------------------
-
-(use-package evil
-  :ensure t
-  :init
-  :config
-  (evil-mode 1)
-
-  ;; completely wipe all the evil insert-mode bindings
-  (setcdr evil-insert-state-map nil)
-  (define-key evil-insert-state-map (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
-
-  ;; Also revert binding for M-.
-  (define-key evil-normal-state-map (kbd "M-.") 'xref-find-definitions)
-  (define-key evil-visual-state-map (kbd "M-.") 'xref-find-definitions)
-
-  ;; Add an escape to switch out of insert mode
-  (define-key evil-insert-state-map [escape] 'evil-force-normal-state)
-                                        ; and at C-å
-  (global-set-key (kbd "C-å") 'evil-force-normal-state)
-
-  ;; make esc quit stuff (i.e. replace C-g)
-  (define-key evil-normal-state-map [escape] 'keyboard-quit)
-  (define-key evil-visual-state-map [escape] 'keyboard-quit)
-  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-  (define-key isearch-mode-map [escape] 'isearch-abort)
-
-  (define-key evil-visual-state-map "q" 'my-comment-dwim)
-  (define-key evil-normal-state-map "q" 'my-comment-dwim)
-
-  ;; Make movement keys work like they should
-  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-
-  ; Make horizontal movement cross lines
-  (setq-default evil-cross-lines t)
-  )
-
-;;-----------------------------------------------------------------------------
 ;; Global key bindings
 ;;-----------------------------------------------------------------------------
 
@@ -850,6 +804,59 @@ then inserts a comment at the end of the line."
 
 (use-package csv-mode
   :ensure t)
+
+;;-----------------------------------------------------------------------------
+;; vi emulation
+;;-----------------------------------------------------------------------------
+
+;;   ;; completely wipe all the evil insert-mode bindings
+;;   (define-key evil-insert-state-map (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+
+;;   ;; Add an escape to switch out of insert mode
+;;   (define-key evil-insert-state-map [escape] 'evil-force-normal-state)
+;;                                         ; and at C-å
+
+;;   ;; make esc quit stuff (i.e. replace C-g)
+;;   (define-key evil-normal-state-map [escape] 'keyboard-quit)
+;;   (define-key evil-visual-state-map [escape] 'keyboard-quit)
+;;   (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+  ;; (define-key isearch-mode-map [escape] 'isearch-abort)
+
+;;   ;; Make movement keys work like they should
+;;   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+;;   (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+;;   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+;;   (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :custom
+  (evil-disable-insert-state-bindings t)
+  :config
+  (evil-mode 1)
+
+  (setq evil-want-fine-undo t)
+  ;; Make horizontal movement cross lines
+  (setq-default evil-cross-lines t)
+
+  (evil-define-key '(insert visual) 'global (kbd "C-å") 'evil-force-normal-state)
+  (evil-define-key '(normal visual) 'global "q" 'my-comment-dwim)
+
+  )
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init)
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; Custom
