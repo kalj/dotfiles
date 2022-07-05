@@ -742,7 +742,7 @@ then inserts a comment at the end of the line."
 ;; ctags
 ;;-----------------------------------------------------------------------------
 
-(setq path-to-ctags "ctags") ;; <- your ctags path here
+(setq path-to-ctags "ctags-exuberant") ;; <- your ctags path here
 
 (defun create-tags (dir-name)
   "Create tags file."
