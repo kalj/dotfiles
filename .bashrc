@@ -19,10 +19,9 @@ export ALTERNATE_EDITOR='vi'
 
 # mail address
 export EMAIL="$(cat ~/.email_address)"
+export MAILDIR=~/.mail
 
 export PAGER=less
-
-
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
