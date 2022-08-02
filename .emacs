@@ -154,9 +154,9 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package diminish
-  :ensure t
-  )
+(setq use-package-always-ensure t)
+
+(use-package diminish)
 
 ;;-----------------------------------------------------------------------------
 ;; Global key bindings
@@ -297,7 +297,6 @@ then inserts a comment at the end of the line."
 
 (use-package which-key
   :demand
-  :ensure t
   :config
   (add-hook 'after-init-hook 'which-key-mode))
 
@@ -463,7 +462,6 @@ then inserts a comment at the end of the line."
 (add-hook 'java-mode-hook 'my-java-mode-hook)
 
 (use-package cuda-mode
-  :ensure t
   :mode "\\.cuh?$"
   )
 
@@ -471,9 +469,7 @@ then inserts a comment at the end of the line."
 ;; clang format
 ;;-----------------------------------------------------------------------------
 
-(use-package clang-format
-  :ensure t
-  )
+(use-package clang-format)
 
 ;; (add-hook 'c-mode-common-hook
 ;;           (function (lambda ()
@@ -537,10 +533,10 @@ then inserts a comment at the end of the line."
             ))))
 
 (use-package abc-mode
-  :ensure t
   :mode ("\\.abc\\'" "\\.abp\\'")
-  :bind (("C-c C-c" . abc-run-abc2ps-all)
-         ("C-c C-v" . abc-show-current-ps))
+  :bind (:map abc-mode-map
+              ("C-c C-c" . abc-run-abc2ps-all)
+              ("C-c C-v" . abc-show-current-ps))
   )
 
 
@@ -626,7 +622,6 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package dockerfile-mode
-  :ensure t
   :mode "Dockerfile\\'")
 
 ;;-----------------------------------------------------------------------------
@@ -635,7 +630,6 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package yasnippet
-  :ensure t
   :config
 
   (yas-global-mode 1)
@@ -679,7 +673,6 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package arduino-mode
-  :ensure t
   :mode "\\.\\(pde\\|ino\\)$")
 
 ;;-----------------------------------------------------------------------------
@@ -699,7 +692,6 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package pkgbuild-mode
-  :ensure t
   :mode "/PKGBUILD$")
 
 ;;-----------------------------------------------------------------------------
@@ -758,9 +750,7 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 ;; intel hex mode
 ;;-----------------------------------------------------------------------------
-(use-package intel-hex-mode
-  :ensure t
-  ) ; TODO: defer?
+(use-package intel-hex-mode) ; TODO: defer?
 
 ;;-----------------------------------------------------------------------------
 ;; verilog
@@ -781,29 +771,25 @@ then inserts a comment at the end of the line."
 ;; rust-mode
 ;;-----------------------------------------------------------------------------
 
-(use-package rust-mode
-  :ensure t)
+(use-package rust-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; haskell
 ;;-----------------------------------------------------------------------------
 
-(use-package haskell-mode
-  :ensure t)
+(use-package haskell-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; markdown-mode
 ;;-----------------------------------------------------------------------------
 
-(use-package markdown-mode
-  :ensure t)
+(use-package markdown-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; csv-mode
 ;;-----------------------------------------------------------------------------
 
-(use-package csv-mode
-  :ensure t)
+(use-package csv-mode)
 
 ;;-----------------------------------------------------------------------------
 ;; vi emulation
@@ -833,7 +819,6 @@ then inserts a comment at the end of the line."
 ;;   (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
@@ -853,7 +838,6 @@ then inserts a comment at the end of the line."
 
 (use-package evil-collection
   :after evil
-  :ensure t
   :config
   (evil-collection-init)
   )
