@@ -791,29 +791,6 @@ then inserts a comment at the end of the line."
 ;; vi emulation
 ;;-----------------------------------------------------------------------------
 
-;;   ;; completely wipe all the evil insert-mode bindings
-;;   (define-key evil-insert-state-map (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
-
-;;   ;; Add an escape to switch out of insert mode
-;;   (define-key evil-insert-state-map [escape] 'evil-force-normal-state)
-;;                                         ; and at C-å
-
-;;   ;; make esc quit stuff (i.e. replace C-g)
-;;   (define-key evil-normal-state-map [escape] 'keyboard-quit)
-;;   (define-key evil-visual-state-map [escape] 'keyboard-quit)
-;;   (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-;;   (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-;;   (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-;;   (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-;;   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-  ;; (define-key isearch-mode-map [escape] 'isearch-abort)
-
-;;   ;; Make movement keys work like they should
-;;   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-;;   (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-;;   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-;;   (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-
 (use-package evil
   :init
   (setq evil-want-integration t ;; This is optional since it's already set to t by default.
