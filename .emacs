@@ -191,7 +191,7 @@
 (global-set-key (kbd "C-w") 'unix-werase-or-kill)
 
 
-(global-unset-key (kbd "C-x C-n"))
+;; (global-unset-key (kbd "C-x C-n"))
 
 ;; replace ispell-word by interactive ispell
 (global-set-key (kbd "M-$") 'ispell)
@@ -231,14 +231,22 @@ then inserts a comment at the end of the line."
   (kill-ring-save beg end)
   (setq deactivate-mark nil))
 
-  (global-set-key "\M-W" 'kill-ring-save-keep-mark)
-
-
+(global-set-key "\M-W" 'kill-ring-save-keep-mark)
 
 ;; fix font colors
 (global-set-key [f5] 'font-lock-fontify-buffer)
 
+
+;; Quicker access to go-to line
+;; (global-set-key (kbd "M-g") 'goto-line)
+
+;; From anrxc: Menu bar toggle, as in his vimperator setup
+(global-set-key (kbd "<M-down>") 'menu-bar-mode)
+(global-set-key (kbd "<M-up>") 'menu-bar-mode)
+
+;;-------------------------------------------------------------------
 ;; compile code using f12 and f11
+;;-------------------------------------------------------------------
 (global-set-key [f12] 'compile)
 (global-set-key [f11] 'recompile)
 
@@ -255,18 +263,6 @@ then inserts a comment at the end of the line."
         ;; (replace-buffer-in-windows "*compilation*"))
         ;; Always return the anticipated result of compilation-exit-message-function
         (cons msg code)))
-
-;; Quicker access to go-to line
-;; (global-set-key (kbd "M-g") 'goto-line)
-
-;; From anrxc: Menu bar toggle, as in his vimperator setup
-(global-set-key (kbd "<M-down>") 'menu-bar-mode)
-(global-set-key (kbd "<M-up>") 'menu-bar-mode)
-
-;; make C-tab / C-M-tab cycle buffers
-(global-set-key (kbd "<C-tab>") 'next-buffer)
-(global-set-key (kbd "<C-M-tab>") 'previous-buffer)
-(global-set-key (kbd "<C-S-iso-lefttab>") 'previous-buffer)
 
 ;;-----------------------------------------------------------------------------
 ;; Font size
@@ -496,8 +492,8 @@ then inserts a comment at the end of the line."
   (auto-fill-mode 1)
   (if (display-graphic-p)
 	  (font-lock-mode 1))
-  (setq octave-block-offset 4)
-  (setq indent-tabs-mode nil))
+  (setq octave-block-offset 4
+        indent-tabs-mode nil))
 (add-hook 'octave-mode-hook 'octave-my-setting)
 
 ;;-----------------------------------------------------------------------------
@@ -820,8 +816,8 @@ then inserts a comment at the end of the line."
 
 (use-package evil
   :init
-  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  (setq evil-want-keybinding nil)
+  (setq evil-want-integration t ;; This is optional since it's already set to t by default.
+        evil-want-keybinding nil)
   :custom
   (evil-disable-insert-state-bindings t)
   :config
@@ -833,7 +829,7 @@ then inserts a comment at the end of the line."
 
   (evil-define-key '(insert visual) 'global (kbd "C-å") 'evil-force-normal-state)
   (evil-define-key '(normal visual) 'global "q" 'my-comment-dwim)
-
+  (evil-define-key '(normal) 'global (kbd "M-.") 'xref-find-definitions)
   )
 
 (use-package evil-collection
