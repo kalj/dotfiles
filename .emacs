@@ -247,22 +247,30 @@ then inserts a comment at the end of the line."
 ;;-------------------------------------------------------------------
 ;; compile code using f12 and f11
 ;;-------------------------------------------------------------------
-(global-set-key [f12] 'compile)
-(global-set-key [f11] 'recompile)
 
-;; Close the compilation window if there was no error at all.
-(setq compilation-exit-message-function
-      (lambda (status code msg)
-        ;; If M-x compile exists with a 0
-        (when (and (eq status 'exit) (zerop code))
-          ;; then bury the *compilation* buffer, so that C-x b doesn't go there
-          (bury-buffer "*compilation*")
-          ;; and delete the window
-          (delete-window (get-buffer-window (get-buffer "*compilation*"))))
-        ;; and return to whatever were looking at before
-        ;; (replace-buffer-in-windows "*compilation*"))
-        ;; Always return the anticipated result of compilation-exit-message-function
-        (cons msg code)))
+(use-package compile
+  :bind (( [f12] . compile)
+         ([f11] . recompile))
+  :config
+  ; skip anything but errors
+  (setq compilation-skip-threshold 2)
+
+  (setq compilation-scroll-output t)
+
+  ;; Close the compilation window if there was no error at all.
+  (setq compilation-exit-message-function
+        (lambda (status code msg)
+          ;; If M-x compile exists with a 0
+          (when (and (eq status 'exit) (zerop code))
+            ;; then bury the *compilation* buffer, so that C-x b doesn't go there
+            (bury-buffer "*compilation*")
+            ;; and delete the window
+            (delete-window (get-buffer-window (get-buffer "*compilation*"))))
+          ;; and return to whatever were looking at before
+          ;; (replace-buffer-in-windows "*compilation*"))
+          ;; Always return the anticipated result of compilation-exit-message-function
+          (cons msg code)))
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; Font size
