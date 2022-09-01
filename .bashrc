@@ -415,7 +415,8 @@ function cbuild {
         if [ ${verbose} == 1 ] ; then
             echo "Removing existing build dir ${builddir}"
         fi
-        trash "${builddir}"
+        trash "${builddir}" \
+              || return $?
     fi
 
     if [[ $cmds =~ "g" ]]; then
@@ -451,7 +452,9 @@ function cbuild {
             echo "    cmake "${generator_arg}" -S "${sourcedir}" -B "${builddir}" ${buildtype_arg} ${toolchain_arg} ${config_arg} ${extra_args_for_cmake}"
         fi
 
-        cmake "${generator_arg}" -S "${sourcedir}" -B "${builddir}" ${buildtype_arg} ${toolchain_arg} ${config_arg} ${extra_args_for_cmake}
+        cmake "${generator_arg}" -S "${sourcedir}" -B "${builddir}" ${buildtype_arg} ${toolchain_arg} ${config_arg} ${extra_args_for_cmake} \
+            || return $?
+
     fi
 
     if [[ $cmds =~ "b" ]]; then
@@ -464,7 +467,8 @@ function cbuild {
             echo "    cmake --build "${builddir}" $target_arg"
         fi
 
-        cmake --build "${builddir}" $target_arg
+        cmake --build "${builddir}" $target_arg \
+              || return $?
     fi
 
     return 0
