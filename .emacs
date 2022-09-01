@@ -556,17 +556,8 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package tex
-  :ensure auctex)
-
-;; (use-package auctex)
-
-;; ;; these explicit loads are not so bad since they don't really load anything,
-;; ;; but rather set some autoloads
-;; (load "auctex.el" nil t t)
-
-;; (load "preview-latex.el" nil t t)
-
-;; ;; (setq tex-dvi-view-command "xdvi")
+  :ensure auctex
+  :config
 
 ;; (eval-after-load "latex"
 ;;   '(progn
@@ -605,19 +596,20 @@ then inserts a comment at the end of the line."
 ;;                                                  (output-dvi "xdvi") (output-pdf "xdg-open")
 ;;                                                  (output-html "xdg-open"))))
 
-;; (setq-default TeX-PDF-mode t)
-;; (setq-default TeX-command-default "Rubber")
+  (setq-default TeX-PDF-mode t)
+  (setq-default TeX-command-default "Rubber")
 
-;; (defun my-latex-mode-hook()
-;;   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
-;;   ;; (setq TeX-command-default "XeLaTeX")
-;;   (setq TeX-save-query nil)
-;;   ;; (setq TeX-show-compilation t)
-;;   (orgtbl-mode)
-;;   )
+  (defun my-latex-mode-hook()
+    (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+    ;; (setq TeX-command-default "XeLaTeX")
+    (setq TeX-save-query nil)
+    ;; (setq TeX-show-compilation t)
+    (orgtbl-mode)
+    )
+  (add-hook 'LaTeX-mode-hook 'my-latex-mode-hook)
+  )
 
 
-;; (add-hook 'LaTeX-mode-hook 'my-latex-mode-hook)
 
 ;;-----------------------------------------------------------------------------
 ;; use cperl-mode instead of perl-mode, or maybe not...
