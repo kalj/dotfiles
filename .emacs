@@ -452,7 +452,11 @@ then inserts a comment at the end of the line."
                                       ("\\.hxx\\'"
                                        (".cxx"))
                                       ("\\.cu\\'"
-                                       (".h"))))
+                                       (".h" ".cuh"))
+                                      ("\\.cuh\\'"
+                                       (".cu" ".cut"))
+                                      ("\\.cut\\'"
+                                       (".h" ".cuh"))))
   (setq ff-search-directories
         '("." "../src" "../source" "../../source" "../include" "../include/*"))
   )
@@ -466,7 +470,7 @@ then inserts a comment at the end of the line."
 (add-hook 'java-mode-hook 'my-java-mode-hook)
 
 (use-package cuda-mode
-  :mode "\\.cuh?$"
+  :mode "\\.cu[th]?$"
   )
 
 ;;-----------------------------------------------------------------------------
