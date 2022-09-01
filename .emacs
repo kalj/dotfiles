@@ -773,7 +773,12 @@ then inserts a comment at the end of the line."
 ;; cmake-mode
 ;;-----------------------------------------------------------------------------
 
-(use-package cmake-mode)
+(use-package cmake-mode
+  :init
+  (setq cmake-tab-width 4)
+  :hook
+  (cmake-mode . lsp-deferred)
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; rust-mode
@@ -804,6 +809,18 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package magit)
+
+;;-----------------------------------------------------------------------------
+;; lsp mode
+;;-----------------------------------------------------------------------------
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration)
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; vi emulation
