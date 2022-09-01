@@ -814,6 +814,23 @@ then inserts a comment at the end of the line."
   (lsp-enable-which-key-integration)
   )
 
+;; Enable LSP for some languages
+(add-hook 'c++-mode-hook #'lsp)
+(add-hook 'c-mode-hook #'lsp)
+(add-hook 'cuda-mode-hook #'lsp)
+(add-hook 'rust-mode-hook #'lsp)
+(add-hook 'python-mode-hook #'lsp)
+
+;;-----------------------------------------------------------------------------
+;; company mode
+;;-----------------------------------------------------------------------------
+
+(use-package company
+  :after lsp-mode
+  :config
+  (global-company-mode t)
+  )
+
 ;;-----------------------------------------------------------------------------
 ;; vi emulation
 ;;-----------------------------------------------------------------------------
