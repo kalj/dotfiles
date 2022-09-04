@@ -15,11 +15,11 @@ def get_email_address(key):
 
     return None
 
-def get_authinfo_password(machine, login, port):
+def get_authinfo_password(login):
     res = subprocess.run("cat ~/.authinfo", shell=True, stdout=subprocess.PIPE)
     authinfo = res.stdout.decode().splitlines()
 
-    r = re.compile(f"(?=.*machine {machine}.*)(?=.*port {port}.*)(?=.*{login}.*).*password ([^ ]*).*")
+    r = re.compile(f"(?=.*login {login}.*).*password ([^ ]*).*")
 
     for row in authinfo:
         if m := r.search(row):

@@ -16,7 +16,7 @@ localfolders = ~/.mail/main
 type = IMAP
 remotehost = mailcluster.loopia.se
 remoteusereval = get_email_address("kalj")
-remotepasseval = get_authinfo_password("mailcluster.loopia.se", get_email_address("kalj"), 993)
+remotepasseval = get_authinfo_password(get_email_address("kalj"))
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 [Account ubertek]
@@ -32,7 +32,7 @@ localfolders = ~/.mail/ubertek
 type = IMAP
 remotehost = mailcluster.loopia.se
 remoteusereval = get_email_address("ubertek")
-remotepasseval = get_authinfo_password("mailcluster.loopia.se", get_email_address("ubertek"), 993)
+remotepasseval = get_authinfo_password(get_email_address("ubertek"))
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 [Account hpc]
@@ -47,7 +47,7 @@ localfolders = ~/.mail/hpc
 type = IMAP
 remotehost = imap01.binero.se
 remoteusereval = get_email_address("hpc")
-remotepasseval = get_authinfo_password("imap01.binero.se", get_email_address("hpc"), 993)
+remotepasseval = get_authinfo_password(get_email_address("hpc"))
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 [Account gmail]
@@ -62,7 +62,7 @@ localfolders = ~/.mail/gmail
 type = Gmail
 folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Important']
 remoteusereval = get_email_address("k.*gmail")
-remotepasseval = get_authinfo_password("imap.gmail.com", get_email_address("k.*gmail"), 993)
+remotepasseval = get_authinfo_password(get_email_address("k.*gmail"))
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 [Account gmail2]
@@ -77,5 +77,5 @@ localfolders = ~/.mail/gmail2
 type = Gmail
 folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Important']
 remoteusereval = get_email_address("q.*gmail")
-remotepasseval = get_authinfo_password("imap.gmail.com", get_email_address("q.*gmail"), 993)
+remotepasseval = get_authinfo_password(get_email_address("q.*gmail"))
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
