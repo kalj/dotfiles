@@ -369,8 +369,8 @@ then inserts a comment at the end of the line."
   )
 
 ;; bind to keys
-(global-set-key "\C-x\M-r" 'reload-init-file)
-(global-set-key "\C-x\M-e" 'edit-init-file)
+(global-set-key (kbd "C-c r") 'reload-init-file)
+(global-set-key (kbd "C-c e") 'edit-init-file)
 
 ;;-----------------------------------------------------------------------------
 ;; org-mode
