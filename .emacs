@@ -1045,9 +1045,8 @@ then inserts a comment at the end of the line."
 (use-package evil
   :init
   (setq evil-want-integration t ;; This is optional since it's already set to t by default.
-        evil-want-keybinding nil)
-  :custom
-  (evil-disable-insert-state-bindings t)
+        evil-want-keybinding nil
+        evil-disable-insert-state-bindings t)
   :config
   (evil-mode 1)
 
