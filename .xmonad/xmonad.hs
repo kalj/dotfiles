@@ -96,18 +96,17 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , (f, mask) <- [(viewScreen horizontalScreenOrderer, ""), (sendToScreen horizontalScreenOrderer, "S-")]]
 
 myKPFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
-myKPFilter ((bm,apa),x) = case apa of
-  xK_Return     -> Just ((bm,xK_KP_Enter),x)
-  xK_1          -> Just ((bm,xK_KP_1),x)
-  xK_2          -> Just ((bm,xK_KP_2),x)
-  xK_3          -> Just ((bm,xK_KP_3),x)
-  xK_4          -> Just ((bm,xK_KP_4),x)
-  xK_5          -> Just ((bm,xK_KP_5),x)
-  xK_6          -> Just ((bm,xK_KP_6),x)
-  xK_7          -> Just ((bm,xK_KP_7),x)
-  xK_8          -> Just ((bm,xK_KP_8),x)
-  xK_9          -> Just ((bm,xK_KP_9),x)
-  otherwise     -> Nothing
+myKPFilter ((bm,apa),x) | apa==xK_Return     = Just ((bm,xK_KP_Enter),x)
+                        | apa==xK_1          = Just ((bm,xK_KP_1),x)
+                        | apa==xK_2          = Just ((bm,xK_KP_2),x)
+                        | apa==xK_3          = Just ((bm,xK_KP_3),x)
+                        | apa==xK_4          = Just ((bm,xK_KP_4),x)
+                        | apa==xK_5          = Just ((bm,xK_KP_5),x)
+                        | apa==xK_6          = Just ((bm,xK_KP_6),x)
+                        | apa==xK_7          = Just ((bm,xK_KP_7),x)
+                        | apa==xK_8          = Just ((bm,xK_KP_8),x)
+                        | apa==xK_9          = Just ((bm,xK_KP_9),x)
+                        | otherwise          = Nothing
 
 myAddKPs = fromList . (\x -> x ++ (mapMaybe myKPFilter x) ) . toList
 
