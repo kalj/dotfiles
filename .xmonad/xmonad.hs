@@ -215,7 +215,7 @@ iconsAppletFormatStack s = case s of
   Nothing -> ""
 
 iconsAppletPP :: PP
-iconsAppletPP = defaultPP {
+iconsAppletPP = def {
     ppTitle    = ("|" ++)
   , ppCurrent  = ("*" ++)
   , ppVisible  = ("+" ++)
