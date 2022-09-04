@@ -1,7 +1,5 @@
 ; .emacs --
 
-;; (defvar *emacs-load-start* (current-time))
-
 ;;-----------------------------------------------------------------------------
 ;; general behavior/appearance mods
 ;;-----------------------------------------------------------------------------
@@ -1072,10 +1070,7 @@ then inserts a comment at the end of the line."
 ;; Custom
 ;;-----------------------------------------------------------------------------
 
-;; (message "My .emacs loaded in %ds"
-;;       (destructuring-bind (hi lo us ps) (current-time)
-;;         (- (+ hi lo) (+ (first *emacs-load-start*)
-;;                         (second *emacs-load-start*)))))
+;; (message "emacs initialized in %s" (emacs-init-time))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
