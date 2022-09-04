@@ -7,7 +7,8 @@ TIMESTAMP=$(shell date +"%Y-%m-%d_%T")
 HOMEFILES=.bashrc .dircolors .emacs .inputrc .screenrc .templates \
 		.xmonad .vimperatorrc .vimrc .viper .Xresources \
 		.gitconfig .aspell.en.pws .aspell.en.prepl .aspell.sv.pws \
-		.aspell.sv.prepl .ncmpcpp .gdbinit .gdbscripts
+		.aspell.sv.prepl .ncmpcpp .gdbinit .gdbscripts \
+		.offlineimaprc .offlineimap.py
 
 EMACSFILES=plugins snippets
 VIMFILES=plugin

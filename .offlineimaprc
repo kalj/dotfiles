@@ -1,0 +1,81 @@
+[general]
+accounts = main, ubertek, hpc, gmail, gmail2
+maxsyncaccounts = 5
+pythonfile = ~/.offlineimap.py
+
+[Account main]
+localrepository = main-local
+remoterepository = main-remote
+utf8foldernames = yes
+
+[Repository main-local]
+type = Maildir
+localfolders = ~/.mail/main
+
+[Repository main-remote]
+type = IMAP
+remotehost = mailcluster.loopia.se
+remoteusereval = get_email_address("kalj")
+remotepasseval = get_authinfo_password("mailcluster.loopia.se", get_email_address("kalj"), 993)
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account ubertek]
+localrepository = ubertek-local
+remoterepository = ubertek-remote
+utf8foldernames = yes
+
+[Repository ubertek-local]
+type = Maildir
+localfolders = ~/.mail/ubertek
+
+[Repository ubertek-remote]
+type = IMAP
+remotehost = mailcluster.loopia.se
+remoteusereval = get_email_address("ubertek")
+remotepasseval = get_authinfo_password("mailcluster.loopia.se", get_email_address("ubertek"), 993)
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account hpc]
+localrepository = hpc-local
+remoterepository = hpc-remote
+
+[Repository hpc-local]
+type = Maildir
+localfolders = ~/.mail/hpc
+
+[Repository hpc-remote]
+type = IMAP
+remotehost = imap01.binero.se
+remoteusereval = get_email_address("hpc")
+remotepasseval = get_authinfo_password("imap01.binero.se", get_email_address("hpc"), 993)
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account gmail]
+localrepository = gmail-local
+remoterepository = gmail-remote
+
+[Repository gmail-local]
+type = Maildir
+localfolders = ~/.mail/gmail
+
+[Repository gmail-remote]
+type = Gmail
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Important']
+remoteusereval = get_email_address("k.*gmail")
+remotepasseval = get_authinfo_password("imap.gmail.com", get_email_address("k.*gmail"), 993)
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account gmail2]
+localrepository = gmail2-local
+remoterepository = gmail2-remote
+
+[Repository gmail2-local]
+type = Maildir
+localfolders = ~/.mail/gmail2
+
+[Repository gmail2-remote]
+type = Gmail
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Important']
+remoteusereval = get_email_address("q.*gmail")
+remotepasseval = get_authinfo_password("imap.gmail.com", get_email_address("q.*gmail"), 993)
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
