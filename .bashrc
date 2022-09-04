@@ -18,7 +18,7 @@ export VISUAL="$EDITOR"
 export ALTERNATE_EDITOR='vi'
 
 # mail address
-export EMAIL="$(cat ~/.email_address)"
+export EMAIL="$(head -n1 ~/.email_addresses)"
 export MAILDIR=~/.mail
 
 export PAGER=less

@@ -3,13 +3,6 @@
 ;; (defvar *emacs-load-start* (current-time))
 
 ;;-----------------------------------------------------------------------------
-;; User variables
-;;-----------------------------------------------------------------------------
-
-(setq user-mail-address (car (split-string (with-temp-buffer (insert-file-contents "~/.email_address")
-                                                             (buffer-string)))))
-
-;;-----------------------------------------------------------------------------
 ;; general behavior/appearance mods
 ;;-----------------------------------------------------------------------------
 
@@ -830,6 +823,27 @@ then inserts a comment at the end of the line."
   :config
   (global-company-mode t)
   )
+
+;;-----------------------------------------------------------------------------
+;; email
+;;-----------------------------------------------------------------------------
+
+;; get mail addresses
+(setq email-addresses (split-string (with-temp-buffer (insert-file-contents "~/.email_addresses")
+                                                             (buffer-string))))
+(defun kalj/get-match (key lst)
+  (seq-find (lambda (s) (string-match key s)) lst))
+(defun kalj/get-email (key)
+  (kalj/get-match key email-addresses))
+
+(setq kalj-mail-address (kalj/get-email "kalj"))
+(setq hpc-mail-address (kalj/get-email "hpc"))
+(setq ubertek-mail-address (kalj/get-email "ubertek"))
+(setq gmail-mail-address (kalj/get-email "k.*gmail"))
+(setq qgmail-mail-address (kalj/get-email "q.*gmail"))
+
+;; set main mail address
+(setq user-mail-address gmail-mail-address)
 
 ;;-----------------------------------------------------------------------------
 ;; vi emulation
