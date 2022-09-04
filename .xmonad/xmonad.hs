@@ -31,7 +31,6 @@ import qualified XMonad.StackSet as S
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Hooks.EwmhDesktops (ewmhDesktopsStartup)
 import XMonad.Hooks.SetWMName (setWMName)
-import XMonad.Hooks.ICCCMFocus (takeTopFocus)
 import XMonad.Actions.CycleWS
 import XMonad.Actions.PhysicalScreens
 import XMonad.Hooks.ManageDocks
@@ -240,7 +239,7 @@ myConfig dbus = mateConfig {
   modMask    = myModMask
   , manageHook = myManageHook <+> manageHook mateConfig
   , layoutHook = myLayoutHook
-  , logHook = logHook mateConfig >> takeTopFocus >> iconsAppletLog dbus
+  , logHook = logHook mateConfig >> iconsAppletLog dbus
   , startupHook = startupHook mateConfig >> setWMName "LG3D"
   , XMonad.keys = myAddKPs  . (XMonad.keys mateConfig)
   } `additionalKeysP` myKeys
