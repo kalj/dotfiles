@@ -420,41 +420,44 @@ function cbuild {
     fi
 
     if [[ $cmds =~ "g" ]]; then
-        if [ -n "$toolchain" ]; then
-            local toolchain_arg="-DCMAKE_TOOLCHAIN_FILE=$toolchain"
-        fi
-
+        local cmake_args="-S ${sourcedir} -B ${builddir}"
         if [ -n "$config" ]; then
-            local config_arg="-C $config"
+            cmake_args="${cmake_args} -C $config"
         fi
 
         if [ -n "$generator" ]; then
-            local generator_arg="-G $generator"
+            cmake_args="${cmake_args} -G $generator"
         fi
+
+        if [ -n "$toolchain" ]; then
+            cmake_args="${cmake_args} -DCMAKE_TOOLCHAIN_FILE=$toolchain"
+        fi
+
 
         if [ -n "$buildtype" ]; then
             case $buildtype in
                 rel)
-                    local buildtype=Release
+                    buildtype=Release
                     ;;
                 dbg|deb)
-                    local buildtype=Debug
+                    buildtype=Debug
                     ;;
                 rwd)
-                    local buildtype=RelWithDebInfo
+                    buildtype=RelWithDebInfo
                     ;;
             esac
-            local buildtype_arg="-DCMAKE_BUILD_TYPE=$buildtype"
+            cmake_args="${cmake_args} -DCMAKE_BUILD_TYPE=$buildtype"
         fi
+
+        cmake_args="${cmake_args} ${extra_args_for_cmake}"
 
         if [ ${verbose} == 1 ] ; then
             echo "Running CMake configure command:"
-            echo "    cmake "${generator_arg}" -S "${sourcedir}" -B "${builddir}" ${buildtype_arg} ${toolchain_arg} ${config_arg} ${extra_args_for_cmake}"
+            echo "    cmake ${cmake_args}"
         fi
 
-        cmake "${generator_arg}" -S "${sourcedir}" -B "${builddir}" ${buildtype_arg} ${toolchain_arg} ${config_arg} ${extra_args_for_cmake} \
+        cmake ${cmake_args} \
             || return $?
-
     fi
 
     if [[ $cmds =~ "b" ]]; then
