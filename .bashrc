@@ -582,13 +582,16 @@ make-completion-wrapper _apt_cache _ashowpkg ashowpkg apt-cache showpkg
 complete -F _ashowpkg ashowpkg
 
 # pacman
-alias pacyu='sudo pacman -Syu'
-alias pacu='sudo pacman -U'
-alias paci='sudo pacman -S'
-alias pacr='sudo pacman -Rsc'
-alias pacs='pacman -Ss'
-alias pacg='pacman -Q | grep'
-alias pacn='pacman -Si'
+alias p='pacman'
+alias sp='sudo pacman'
+alias pupgd='sudo pacman -Syu'
+alias psync='sudo pacman -Sy'
+alias pinst='sudo pacman -S'
+alias puninst='sudo pacman -Rsc'
+psrch() { pacman -Ss "$@" | while read package; do read description; printf "%-60s %s\n" "$package" "$description"; done }
+alias pshow='pacman -Si'
+alias pgrp='pacman -Q | grep'
+alias pfinst='sudo pacman -U'
 
 # ssh
 alias sshx='ssh -X -C'
