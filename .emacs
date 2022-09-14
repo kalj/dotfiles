@@ -600,8 +600,6 @@ then inserts a comment at the end of the line."
   (add-hook 'LaTeX-mode-hook 'my-latex-mode-hook)
   )
 
-
-
 ;;-----------------------------------------------------------------------------
 ;; use cperl-mode instead of perl-mode, or maybe not...
 ;;-----------------------------------------------------------------------------
@@ -627,6 +625,8 @@ then inserts a comment at the end of the line."
   ; personal snippets
   (add-to-list #'yas-snippet-dirs "~/.emacs.d/snippets")
   )
+
+(use-package yasnippet-snippets)
 
 ;;-----------------------------------------------------------------------------
 ;; shell mode customizations
@@ -792,6 +792,13 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package magit)
+
+;;-----------------------------------------------------------------------------
+;; flycheck
+;;-----------------------------------------------------------------------------
+
+(use-package flycheck
+  :init (global-flycheck-mode))
 
 ;;-----------------------------------------------------------------------------
 ;; lsp mode
