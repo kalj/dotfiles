@@ -469,12 +469,14 @@ function cbuild {
             local target_arg="--target $target"
         fi
 
+        verbose_arg=""
         if [ ${verbose} == 1 ] ; then
             echo "Running CMake build command:"
             echo "    cmake --build "${builddir}" $target_arg"
+            verbose_arg="--verbose"
         fi
 
-        cmake --build "${builddir}" $target_arg \
+        cmake --build "${builddir}" ${verbose_arg} $target_arg \
               || return $?
     fi
 
