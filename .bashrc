@@ -394,9 +394,11 @@ function cbuild {
     local cmds="$3"
     shift 3
 
+    local extra_args_for_cmake=()
     if [ $# -gt 0 ]; then
-        local extra_args_for_cmake=$@
+        extra_args_for_cmake+=("$@")
     fi
+    extra_args_for_cmake+=("-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
 
     if [ ${verbose} == 1 ] ; then
         echo "Settings:"
@@ -420,19 +422,18 @@ function cbuild {
     fi
 
     if [[ $cmds =~ "g" ]]; then
-        local cmake_args="-S ${sourcedir} -B ${builddir}"
+        local cmake_args=("-S" "${sourcedir}" "-B" "${builddir}")
         if [ -n "$config" ]; then
-            cmake_args="${cmake_args} -C $config"
+            cmake_args+=("-C" "$config")
         fi
 
         if [ -n "$generator" ]; then
-            cmake_args="${cmake_args} -G $generator"
+            cmake_args+=("-G" "$generator")
         fi
 
         if [ -n "$toolchain" ]; then
-            cmake_args="${cmake_args} -DCMAKE_TOOLCHAIN_FILE=$toolchain"
+            cmake_args+=("-DCMAKE_TOOLCHAIN_FILE=$toolchain")
         fi
-
 
         if [ -n "$buildtype" ]; then
             case $buildtype in
@@ -446,17 +447,17 @@ function cbuild {
                     buildtype=RelWithDebInfo
                     ;;
             esac
-            cmake_args="${cmake_args} -DCMAKE_BUILD_TYPE=$buildtype"
+            cmake_args+=("-DCMAKE_BUILD_TYPE=$buildtype")
         fi
 
-        cmake_args="${cmake_args} ${extra_args_for_cmake}"
+        cmake_args+=("${extra_args_for_cmake[@]}")
 
         if [ ${verbose} == 1 ] ; then
             echo "Running CMake configure command:"
-            echo "    cmake ${cmake_args}"
+            echo "    cmake ${cmake_args[@]}"
         fi
 
-        cmake ${cmake_args} \
+        cmake "${cmake_args[@]}" \
             || return $?
     fi
 
