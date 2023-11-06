@@ -881,8 +881,8 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 ;; get mail addresses
-(setq email-addresses (split-string (with-temp-buffer (insert-file-contents "~/.email_addresses")
-                                                             (buffer-string))))
+(defvar email-addresses (split-string (with-temp-buffer (insert-file-contents "~/.email_addresses")
+                                                        (buffer-string))))
 (defun kalj/get-match (key lst)
   (seq-find (lambda (s) (string-match key s)) lst))
 (defun kalj/get-email (key)
