@@ -240,7 +240,7 @@ then inserts a comment at the end of the line."
 ;;-------------------------------------------------------------------
 
 (defun my-compile (dir)
-    (interactive "DIn directory")
+    (interactive "DIn directory ")
   (let ((default-directory dir))
     (call-interactively #'compile)))
 
@@ -252,6 +252,8 @@ then inserts a comment at the end of the line."
   (setq compilation-skip-threshold 2)
 
   (setq compilation-scroll-output t)
+
+  (setq compile-command "ninja -k0 ")
 
   ;; Close the compilation window if there was no error at all.
   (setq compilation-exit-message-function
@@ -426,7 +428,7 @@ then inserts a comment at the end of the line."
                                       ("\\.c\\'"
                                        (".h"))
                                       ("\\.h\\'"
-                                       (".c" ".cc" ".C" ".CC" ".cxx" ".cpp" ".cu"))
+                                       (".c" ".cc" ".C" ".CC" ".cxx" ".cpp" ".cu" ".t"))
                                       ("\\.C\\'"
                                        (".H" ".hh" ".h"))
                                       ("\\.H\\'"
@@ -454,7 +456,7 @@ then inserts a comment at the end of the line."
                                       ("\\.cut\\'"
                                        (".h" ".cuh"))))
   (setq ff-search-directories
-        '("." "../src" "../source" "../../source" "../include" "../include/*"))
+        '("." "../src" "../../src" "../source" "../../source" "../include" "../include/*" "../inc" "../inc/*"))
   )
 
 ;; realize
@@ -850,6 +852,12 @@ then inserts a comment at the end of the line."
   :config
   (global-company-mode t)
   )
+
+;;-----------------------------------------------------------------------------
+;; writable grep buffers
+;;-----------------------------------------------------------------------------
+
+(use-package wgrep :ensure t)
 
 ;;-----------------------------------------------------------------------------
 ;; email (mu4e)
