@@ -23,6 +23,9 @@ export MAILDIR=~/.mail
 
 export PAGER=less
 
+# set tab width to 4
+tabs -4
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
