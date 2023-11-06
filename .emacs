@@ -1123,6 +1123,17 @@ then inserts a comment at the end of the line."
   (evil-collection-init)
   )
 
+;;-------------------------------------------------------------------
+;; ANSI colors
+;;-------------------------------------------------------------------
+
+(use-package ansi-color)
+
+(defun display-ansi-colors ()
+  (interactive)
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+
 ;;-----------------------------------------------------------------------------
 ;; Custom
 ;;-----------------------------------------------------------------------------
