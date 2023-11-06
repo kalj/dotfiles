@@ -1070,6 +1070,10 @@ then inserts a comment at the end of the line."
   ;; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
 
+  ;; Make vertical movement work on visual lines
+  (evil-define-key '(normal motion) 'global (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (evil-define-key '(normal motion) 'global (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+
   (evil-define-key '(insert visual) 'global (kbd "C-å") 'evil-force-normal-state)
   (evil-define-key '(normal visual) 'global "q" 'my-comment-dwim)
   (evil-define-key '(normal) 'global (kbd "M-.") 'xref-find-definitions)
