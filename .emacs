@@ -828,22 +828,28 @@ then inserts a comment at the end of the line."
 ;; lsp mode
 ;;-----------------------------------------------------------------------------
 
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :config
-  (lsp-enable-which-key-integration)
-  (setq lsp-rust-server "rust-analyzer")
-  )
+(setq-default lsp-rust-server "rust-analyzer")
+(setq-default lsp-enable-indentation nil)
 
-;; Enable LSP for some languages
-(add-hook 'c++-mode-hook #'lsp)
-(add-hook 'c-mode-hook #'lsp)
-(add-hook 'cuda-mode-hook #'lsp)
-(add-hook 'rust-mode-hook #'lsp)
-(add-hook 'python-mode-hook #'lsp)
-(add-hook 'haskell-mode-hook #'lsp)
+(use-package lsp-mode
+  :commands (lsp-mode lsp lsp-deferred)
+  :init
+  :hook (
+         (c++-mode . lsp)
+         (c-mode . lsp)
+         ;; (cuda-mode . lsp)
+         (rust-mode . lsp)
+         (python-mode . lsp)
+         (haskell-mode . lsp)
+         (cmake-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration)
+         ;; (lsp-mode . (lambda ()
+         ;;               (let ((lsp-keymap-prefix "C-c l"))
+         ;;                (lsp-enable-which-key-integration))))
+         )
+  :config
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; python formatting using apheleia + black
