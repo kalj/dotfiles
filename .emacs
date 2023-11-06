@@ -240,8 +240,8 @@ then inserts a comment at the end of the line."
 ;;-------------------------------------------------------------------
 
 (use-package compile
-  :bind (( [f12] . compile)
-         ([f11] . recompile))
+  :bind (( "C-c K" . compile)
+         ( "C-c k" . recompile))
   :config
   ; skip anything but errors
   (setq compilation-skip-threshold 2)
@@ -736,7 +736,7 @@ then inserts a comment at the end of the line."
     )
   )
 
-(global-set-key [f8] 'create-tags)
+(global-set-key (kbd "C-c t") 'create-tags)
 
 ;;-----------------------------------------------------------------------------
 ;; intel hex mode
