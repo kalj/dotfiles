@@ -1,4 +1,5 @@
 set print pretty 1
+set debuginfod enabled on
 
 python
 
