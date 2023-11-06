@@ -239,8 +239,13 @@ then inserts a comment at the end of the line."
 ;; compile code using f12 and f11
 ;;-------------------------------------------------------------------
 
+(defun my-compile (dir)
+    (interactive "DIn directory")
+  (let ((default-directory dir))
+    (call-interactively #'compile)))
+
 (use-package compile
-  :bind (( "C-c K" . compile)
+  :bind (( "C-c K" . my-compile)
          ( "C-c k" . recompile))
   :config
   ; skip anything but errors
