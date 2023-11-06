@@ -810,8 +810,6 @@ then inserts a comment at the end of the line."
   (setq lsp-keymap-prefix "C-c l")
   :config
   (lsp-enable-which-key-integration)
-  ; enable clangd for cuda-mode AKA "C++"
-  (add-to-list 'lsp-language-id-configuration '(cuda-mode . "cpp"))
   )
 
 ;; Enable LSP for some languages
