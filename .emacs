@@ -832,29 +832,44 @@ then inserts a comment at the end of the line."
 ;; lsp mode
 ;;-----------------------------------------------------------------------------
 
-(setq-default lsp-rust-server "rust-analyzer")
-(setq-default lsp-enable-indentation nil)
+;; (setq-default lsp-rust-server "rust-analyzer")
+;; (setq-default lsp-enable-indentation nil)
 
-(use-package lsp-mode
-  :commands (lsp-mode lsp lsp-deferred)
-  :init
-  :hook (
-         (c++-mode . lsp)
-         (c-mode . lsp)
-         ;; (cuda-mode . lsp)
-         (rust-mode . lsp)
-         (python-mode . lsp)
-         (haskell-mode . lsp)
-         (cmake-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration)
-         ;; (lsp-mode . (lambda ()
-         ;;               (let ((lsp-keymap-prefix "C-c l"))
-         ;;                (lsp-enable-which-key-integration))))
-         )
+;; (use-package lsp-mode
+;;   :commands (lsp-mode lsp lsp-deferred)
+;;   :init
+;;   :hook (
+;;          (c++-mode . lsp)
+;;          (c-mode . lsp)
+;;          ;; (cuda-mode . lsp)
+;;          (rust-mode . lsp)
+;;          (python-mode . lsp)
+;;          (haskell-mode . lsp)
+;;          (cmake-mode . lsp)
+;;          (lsp-mode . lsp-enable-which-key-integration)
+;;          ;; (lsp-mode . (lambda ()
+;;          ;;               (let ((lsp-keymap-prefix "C-c l"))
+;;          ;;                (lsp-enable-which-key-integration))))
+;;          )
+;;   :config
+;;   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+;;   )
+
+(use-package eglot
   :config
-  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
-  )
-
+  (add-to-list 'eglot-server-programs
+               '(cuda-mode "clangd")
+               )
+  :hook (
+         (c++-mode . eglot-ensure)
+         (c-mode . eglot-ensure)
+         (cmake-mode . eglot-ensure)
+         (python-mode . eglot-ensure)
+         (cuda-mode . eglot-ensure)
+         (rust-mode . eglot-ensure)
+         (sh-mode . eglot-ensure)
+         )
+)
 ;;-----------------------------------------------------------------------------
 ;; python formatting using apheleia + black
 ;;-----------------------------------------------------------------------------
