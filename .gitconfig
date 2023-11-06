@@ -35,6 +35,7 @@
     co = checkout
     sw = switch
     rr = restore
+    cp = cherry-pick
     df = diff --find-copies-harder --minimal
     wdf = diff --word-diff -w --find-copies-harder --minimal
     dfc = diff --find-copies-harder --minimal --cached
