@@ -624,6 +624,8 @@ export GTEST_COLOR=1
 export CMAKE_GENERATOR=Ninja
 # Export compile commands file by default (for LSP etc)
 export CMAKE_EXPORT_COMPILE_COMMANDS=ON
+# Use colored output for compiler warnings/errors
+export CMAKE_COLOR_DIAGNOSTICS=ON
 
 # for golang
 if which go &>/dev/null ; then
