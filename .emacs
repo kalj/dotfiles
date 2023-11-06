@@ -404,6 +404,7 @@ then inserts a comment at the end of the line."
 
 ;; use c++-mode as default for .h header files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.t\\'" . c++-mode))
 
 ;; make standard indentation offset :=4
 (setq-default c-basic-offset my-basic-offset)
