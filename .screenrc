@@ -1,4 +1,4 @@
-hardstatus alwayslastline "%{+r} %-w%{+bu I}%n-%t%{-}%+w %= %{+ b}| %D %d %LM %{+b I}%c "
+hardstatus alwayslastline "%{+r} %-w%{+bu I}%n-%t%{-}%+w %= %{+ b}| %H %D %d %LM %{+b I}%c "
 
 caption splitonly " %{B}%n %t%{-}"
 
