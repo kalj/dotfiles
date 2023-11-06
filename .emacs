@@ -790,6 +790,8 @@ then inserts a comment at the end of the line."
 
 (use-package haskell-mode)
 
+(use-package lsp-haskell)
+
 ;;-----------------------------------------------------------------------------
 ;; markdown-mode
 ;;-----------------------------------------------------------------------------
@@ -825,6 +827,7 @@ then inserts a comment at the end of the line."
   (setq lsp-keymap-prefix "C-c l")
   :config
   (lsp-enable-which-key-integration)
+  (setq lsp-rust-server "rust-analyzer")
   )
 
 ;; Enable LSP for some languages
@@ -833,6 +836,7 @@ then inserts a comment at the end of the line."
 (add-hook 'cuda-mode-hook #'lsp)
 (add-hook 'rust-mode-hook #'lsp)
 (add-hook 'python-mode-hook #'lsp)
+(add-hook 'haskell-mode-hook #'lsp)
 
 ;;-----------------------------------------------------------------------------
 ;; python formatting using apheleia + black
