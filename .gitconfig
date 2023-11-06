@@ -36,7 +36,7 @@
     sw = switch
     rr = restore
     cyp = cherry-pick
-    df = diff --find-copies-harder --minimal
+    df = diff --find-copies-harder --minimal --submodule=log
     wdf = diff --word-diff -w --find-copies-harder --minimal
     dfc = diff --find-copies-harder --minimal --cached
     lg = log -p
