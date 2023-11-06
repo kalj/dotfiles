@@ -350,10 +350,10 @@ then inserts a comment at the end of the line."
   (setq ido-case-fold t
         ido-use-faces t
         ido-enable-flex-matching t
+        ido-use-virtual-buffers t
         ido-auto-merge-work-directories-length -1)
 
   ;; (setq ido-use-filename-at-point nil)
-  ;; (setq ido-use-virtual-buffers t))
   ;; (ido-ubiquitous-mode 1)
   (ido-mode)
   (ido-everywhere)
