@@ -4,19 +4,19 @@
 !! -----------------------------------------------------------------------------
 !! (u)xterm
 !! -----------------------------------------------------------------------------
-XTerm*reverseVideo:                     True
-UXTerm*reverseVideo:                    True
-
-XTerm*metaSendsEscape:                  True
-UXTerm*metaSendsEscape:                 True
-
-XTerm*backarrowKey:                     false
-UXTerm*backarrowKey:                    false
-
-XTerm*ttyModes:                         erase ^?
-UXTerm*ttyModes:                        erase ^?
-XTerm*charClass:                        0-32:1,33-126:2,127-160:3,161-255:2
-UXTerm*charClass:                       0-32:1,33-126:2,127-160:3,161-255:2
+! XTerm*reverseVideo:                     True
+! UXTerm*reverseVideo:                    True
+! 
+! XTerm*metaSendsEscape:                  True
+! UXTerm*metaSendsEscape:                 True
+! 
+! XTerm*backarrowKey:                     false
+! UXTerm*backarrowKey:                    false
+! 
+! XTerm*ttyModes:                         erase ^?
+! UXTerm*ttyModes:                        erase ^?
+! XTerm*charClass:                        0-32:1,33-126:2,127-160:3,161-255:2
+! UXTerm*charClass:                       0-32:1,33-126:2,127-160:3,161-255:2
 
 !! -----------------------------------------------------------------------------
 !! urxvt
@@ -27,18 +27,18 @@ UXTerm*charClass:                       0-32:1,33-126:2,127-160:3,161-255:2
 ! URxvt.transparent:                    true
 ! URxvt.shading:                                50
 
-URxvt*depth:                            32
-urxvt*background:                       rgba:0111/0111/0111/dddd
-
-URxvt.iso14755_52:                      false
-URxvt.background:                       black
-URxvt.foreground:                       white
-
-urxvt*scrollBar:                        Off
-URxvt.perl-ext:                         default,matcher
-URxvt.urlLauncher:                      /usr/bin/firefox
-URxvt.matcher.button:                   1
-URxvt.urgentOnBell:                     true
+! URxvt*depth:                            32
+! urxvt*background:                       rgba:0111/0111/0111/dddd
+! 
+! URxvt.iso14755_52:                      false
+! URxvt.background:                       black
+! URxvt.foreground:                       white
+! 
+! urxvt*scrollBar:                        Off
+! URxvt.perl-ext:                         default,matcher
+! URxvt.urlLauncher:                      /usr/bin/firefox
+! URxvt.matcher.button:                   1
+! URxvt.urgentOnBell:                     true
 
 ! Urxvt.secondaryScroll:  true    ! Enable Shift-PageUp/Down in screen
 
@@ -46,13 +46,13 @@ URxvt.urgentOnBell:                     true
 !! Emacs
 !! -----------------------------------------------------------------------------
 
-Emacs24*toolBar:                          off
-Emacs24*verticalScrollBars:               off
-Emacs24*font:                             Monospace-8
+! Emacs24*toolBar:                          off
+! Emacs24*verticalScrollBars:               off
+! Emacs24*font:                             Monospace-8
 
-Emacs25*toolBar:                          off
-Emacs25*verticalScrollBars:               off
-Emacs25*font:                             Monospace-8
+! Emacs25*toolBar:                          off
+! Emacs25*verticalScrollBars:               off
+! Emacs25*font:                             Monospace-8
 
 Emacs*toolBar:                          off
 Emacs*verticalScrollBars:               off
@@ -61,13 +61,13 @@ Emacs*font:                             Monospace-8
 !Emacs23client*toolBar:                 off
 
 !! 'day mode'
-Emacs24*background:                       #ffffe0
-Emacs24*foreground:                       black
-Emacs24*modeline*attributeForeground:     black
-Emacs24*cursorColor:                      black
+! Emacs24*background:                       #ffffe0
+! Emacs24*foreground:                       black
+! Emacs24*modeline*attributeForeground:     black
+! Emacs24*cursorColor:                      black
 
 !! 'night mode'
-!Emacs*background:                      black
-!Emacs*foreground:                      lightgrey
-!Emacs*modeline*attributeForeground:    black
-!Emacs*cursorColor:                     lightgrey
+! Emacs*background:                      #303030
+! Emacs*foreground:                      white
+! Emacs*modeline*attributeForeground:    #303030
+! Emacs*cursorColor:                     white
