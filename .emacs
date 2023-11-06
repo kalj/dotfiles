@@ -39,7 +39,6 @@
 ;; inverse colors theme
 (defun my-black-mode ()
   (interactive)
-  (set-face-foreground 'modeline "black")
   (set-background-color "black")
   (set-foreground-color "#c7c4c4")
   (set-cursor-color "#c7c4c4")
@@ -47,7 +46,6 @@
 
 (defun my-white-mode ()
   (interactive)
-  (set-face-foreground 'modeline "black")
   (set-background-color "white")
   (set-foreground-color "black")
   (set-cursor-color "black")
@@ -55,7 +53,6 @@
 
 (defun my-light-mode ()
   (interactive)
-  (set-face-foreground 'modeline "black")
   (set-background-color "#ffffe0")
   (set-foreground-color "black")
   (set-cursor-color "black")
