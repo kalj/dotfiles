@@ -815,7 +815,7 @@ then inserts a comment at the end of the line."
 ;; Enable LSP for some languages
 (add-hook 'c++-mode-hook #'lsp)
 (add-hook 'c-mode-hook #'lsp)
-(add-hook 'cuda-mode-hook #'lsp)
+;; (add-hook 'cuda-mode-hook #'lsp)
 (add-hook 'rust-mode-hook #'lsp)
 (add-hook 'python-mode-hook #'lsp)
 
