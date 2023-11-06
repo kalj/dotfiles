@@ -485,6 +485,7 @@ then inserts a comment at the end of the line."
 ;;           (function (lambda ()
 ;;                       (add-hook 'before-save-hook
 ;;                                 'clang-format-buffer))))
+(global-set-key (kbd "C-c f") 'clang-format)
 
 ;;-----------------------------------------------------------------------------
 ;; Fortran
@@ -815,7 +816,12 @@ then inserts a comment at the end of the line."
 ;; magit
 ;;-----------------------------------------------------------------------------
 
-(use-package magit)
+(use-package magit
+  :bind (:map magit-file-section-map
+              ("RET" . magit-diff-visit-file-other-window)
+              :map magit-hunk-section-map
+              ("RET" . magit-diff-visit-file-other-window))
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; flycheck
