@@ -80,27 +80,30 @@
 (delete-selection-mode t)
 
 ;; enable standard mouse copy/paste behavior
-(setq x-select-enable-primary t)
+(setq select-enable-primary t)
 
 ;; remove annoying tooltips!
 (tooltip-mode -1)
 
-;; set the fill column to 80
-(setq default-fill-column 80)
+;; set the fill column
+(setq-default fill-column 100)
 
 ;; Only use spaces for indentation
 (setq-default indent-tabs-mode nil)
 
-(setq-default tab-width 4)
+(defvar my-basic-offset 4)
+
+(setq-default tab-width my-basic-offset)
 
 ;; trailing whitespaces are evil
 ;; therefore, delete them on save
 ;; BUT, only if .dir-local.el doesn't protest
 
-(setq dont-delete-trailing-whitespace nil)
+(defvar dont-delete-trailing-whitespace t)
 (make-variable-buffer-local 'dont-delete-trailing-whitespace)
 
-(defun maybe-delete-trailing-whitespace () ""
+(defun maybe-delete-trailing-whitespace ()
+  "Delete trailing whitespace if dont-delete-trailing-whitespace is unset."
   (or dont-delete-trailing-whitespace
        (progn
      (delete-trailing-whitespace)
@@ -364,13 +367,13 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (defun reload-init-file ()
-  "Reload emacs init file (~/.emacs)"
+  "Reload Emacs init file (~/.emacs)."
   (interactive)
   (load-file "~/.emacs")
   )
 
 (defun edit-init-file ()
-  "Opens emacs init file for editing (~/.emacs)"
+  "Open Emacs init file for editing (~/.emacs)."
   (interactive)
   (find-file "~/.emacs")
   )
@@ -390,7 +393,7 @@ then inserts a comment at the end of the line."
 ;;-------------------------------------------------------------------
 
 (defun to-snake-case (start end)
-  "Change selected text to snake case format"
+  "Change selected text (between START and END) to snake case format."
   (interactive "r")
   (if (use-region-p)
       (let ((camel-case-str (buffer-substring start end)))
@@ -405,10 +408,11 @@ then inserts a comment at the end of the line."
 ;; use c++-mode as default for .h header files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+;; make standard indentation offset :=4
+(setq-default c-basic-offset my-basic-offset)
+
 ;; customizations for all c-related modes
 (defun my-c-mode-common-hook ()
-  ;; make standard indentation offset :=4
-  (setq c-basic-offset 4)
 
   ;; make enums etc indent correctly
   (c-set-offset 'brace-list-intro '+)
@@ -455,15 +459,15 @@ then inserts a comment at the end of the line."
                                        (".cu" ".cut"))
                                       ("\\.cut\\'"
                                        (".h" ".cuh"))))
-  (setq ff-search-directories
-        '("." "../src" "../../src" "../source" "../../source" "../include" "../include/*" "../inc" "../inc/*"))
+  (setq-default ff-search-directories
+                '("." "../src" "../../src" "../source" "../../source" "../include" "../include/*" "../inc" "../inc/*"))
   )
 
 ;; realize
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 (defun my-java-mode-hook ()
-  ;; Changes the indentation of substatement parantheses
+  "Change the indentation of substatement parantheses."
   (c-set-offset 'substatement-open 0))
 (add-hook 'java-mode-hook 'my-java-mode-hook)
 
@@ -493,18 +497,21 @@ then inserts a comment at the end of the line."
 ;; octave
 ;;-----------------------------------------------------------------------------
 
-(setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
-
-(defun octave-my-setting ()
-  (setq octave-comment-char ?%)
-  (abbrev-mode 1)
-  (auto-fill-mode 1)
-  (if (display-graphic-p)
-	  (font-lock-mode 1))
-  (setq octave-block-offset 4
-        indent-tabs-mode nil))
-(add-hook 'octave-mode-hook 'octave-my-setting)
+(use-package octave
+  :commands octave-mode
+  :mode (("\\.m$" . octave-mode))
+  :hook (
+         (octave-mode . (lambda ()
+                          (abbrev-mode 1)
+                          (auto-fill-mode 1)
+                          (if (display-graphic-p)
+                              (font-lock-mode 1))
+                          (setq octave-block-offset my-basic-offset
+                                indent-tabs-mode nil
+                                octave-comment-char ?%)
+                          ))
+         )
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; matlab
@@ -518,7 +525,7 @@ then inserts a comment at the end of the line."
 ;; ;;       (setq fill-column 76)         ; where auto-fill should wrap
 ;; ;;       (turn-on-auto-fill)
 ;;          (local-unset-key (kbd "M-;"))
-;;          (setq matlab-indent-level 4)
+;;          (setq matlab-indent-level my-basic-offset)
 ;;          (local-set-key (kbd "C-j") 'matlab-return)
 ;;          ))
 
@@ -647,7 +654,7 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 ;; css mode customizations
-(setq cssm-indent-function #'cssm-c-style-indenter)
+(setq-default cssm-indent-function #'cssm-c-style-indenter)
 
 ;;-----------------------------------------------------------------------------
 ;; SGML mode customization
@@ -704,11 +711,13 @@ then inserts a comment at the end of the line."
 ;; Ediff
 ;;-----------------------------------------------------------------------------
 
-;; Disable the ediff popup and integrate it instead (Xmonad doesn't handle this
-;; very well).
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-;; Split horizontally by default
-(setq ediff-split-window-function 'split-window-horizontally)
+(use-package ediff
+  :config
+    ;; Disable the ediff popup and integrate it instead (Xmonad doesn't handle this very well).
+    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+    ;; Split horizontally by default
+    (setq ediff-split-window-function 'split-window-horizontally)
+    )
 
 ;;-----------------------------------------------------------------------------
 ;; ediff command-line switch
@@ -740,10 +749,10 @@ then inserts a comment at the end of the line."
 ;; ctags
 ;;-----------------------------------------------------------------------------
 
-(setq path-to-ctags "ctags-exuberant") ;; <- your ctags path here
+(defvar path-to-ctags "ctags")
 
 (defun create-tags (dir-name)
-  "Create tags file."
+  "Create tags file in directory DIR-NAME."
   (interactive "DDirectory: ")
   (let ((d (directory-file-name dir-name)))
     (shell-command
@@ -773,9 +782,7 @@ then inserts a comment at the end of the line."
 
 (use-package cmake-mode
   :init
-  (setq cmake-tab-width 4)
-  :hook
-  (cmake-mode . lsp-deferred)
+  (setq cmake-tab-width my-basic-offset)
   )
 
 ;;-----------------------------------------------------------------------------
