@@ -870,6 +870,18 @@ then inserts a comment at the end of the line."
          (sh-mode . eglot-ensure)
          )
 )
+
+;;-----------------------------------------------------------------------------
+;; projectile
+;;-----------------------------------------------------------------------------
+
+(use-package projectile
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (projectile-mode +1)
+  )
+
 ;;-----------------------------------------------------------------------------
 ;; python formatting using apheleia + black
 ;;-----------------------------------------------------------------------------
@@ -884,7 +896,7 @@ then inserts a comment at the end of the line."
 ;;-----------------------------------------------------------------------------
 
 (use-package company
-  :after lsp-mode
+  :after eglot
   :config
   (global-company-mode t)
   )
