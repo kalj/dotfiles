@@ -1163,6 +1163,12 @@ then inserts a comment at the end of the line."
   (evil-collection-init)
   )
 
+(use-package evil-mc
+  :after evil
+  :config
+  (global-evil-mc-mode t)
+  )
+
 ;;-------------------------------------------------------------------
 ;; ANSI colors
 ;;-------------------------------------------------------------------
