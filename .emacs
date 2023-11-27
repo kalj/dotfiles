@@ -860,6 +860,15 @@ then inserts a comment at the end of the line."
   (add-to-list 'eglot-server-programs
                '(cuda-mode "clangd")
                )
+  :bind (:map eglot-mode-map
+              ("C-c l r" . eglot-rename)
+              ("C-c l a" . eglot-code-actions)
+              ("C-c l o" . eglot-code-action-organize-imports)
+              ("C-c l q" . eglot-code-action-quickfix)
+              ("C-c l w" . eglot-code-action-rewrite)
+              ("C-c l i" . eglot-code-action-inline)
+              ("C-c l x" . eglot-code-action-extract)
+              )
   :hook (
          (c++-mode . eglot-ensure)
          (c-mode . eglot-ensure)
