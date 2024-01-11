@@ -134,6 +134,7 @@ myManageHook = composeAll
                , className =? "chromium-browser" --> doShift "7"
                , className =? "Skype" --> doShift "8"
                , className =? "Transmission-gtk" --> doShift "8"
+               , className =? "Element" --> doShift "8"
                , appName   =? "Mail" --> doShift "9"
                , className =? "Wrapper" --> doIgnore
                , className =? "Do" --> doIgnore
