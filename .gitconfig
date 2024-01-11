@@ -37,6 +37,7 @@
     rr = restore
     cyp = cherry-pick
     amend = commit --amend
+    fixup = commit --amend --no-edit
     df = diff --find-copies-harder --minimal --submodule=log
     wdf = diff --word-diff -w --find-copies-harder --minimal
     dfc = diff --find-copies-harder --minimal --cached
