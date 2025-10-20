@@ -317,10 +317,13 @@ function hexcalc {
 
 function cbuild {
 
-    local options=$(getopt -o vha:g:t:c:b: -l verbose,help,generator:,target:,toolchain:,config:,buildtype: -n "$0" -- "$@")
+    local options=$(getopt -o vha:g:t:c:b:D:k -l verbose,help,generator:,target:,toolchain:,config:,buildtype: -n "$0" -- "$@")
     eval set -- "$options"
 
     local verbose=0
+
+    local cmakedefs=()
+    local keep=0
 
     #now all short and long options are first
     while [[ $1 != -- ]]; do
@@ -348,6 +351,14 @@ function cbuild {
             -b|--buildtype)
                 local buildtype="$2"
                 shift 2
+                ;;
+            -D)
+                local cmakedefs+=("-D$2")
+                shift 2
+                ;;
+            -k)
+                local keep=1
+                shift 1
                 ;;
             -h|--help)
                 echo "Usage: $FUNCNAME [options] srcdir builddir cmds [-- cmake-extra-args]"
@@ -385,8 +396,6 @@ function cbuild {
     # remove trailing --
     shift
 
-    # now all the remaining options are positional and extra arguments
-
     if [ $# -lt 3 ]; then
         >&2 echo 'too few arguments!'
         return 1
@@ -413,7 +422,8 @@ function cbuild {
         echo "  toolchain: $toolchain"
         echo "  config:    $config"
         echo "  buildtype: $buildtype"
-        echo "  cmakeargs: $extra_args_for_cmake"
+        echo "  cmakedefs: ${cmakedefs[@]}"
+        echo "  cmakeargs: ${extra_args_for_cmake[@]}"
     fi
 
     if [[ $cmds =~ "c" ]] && [[ -e "${builddir}" ]]; then
@@ -453,6 +463,8 @@ function cbuild {
             cmake_args+=("-DCMAKE_BUILD_TYPE=$buildtype")
         fi
 
+        cmake_args+=("${cmakedefs[@]}")
+
         cmake_args+=("${extra_args_for_cmake[@]}")
 
         if [ ${verbose} == 1 ] ; then
@@ -465,19 +477,25 @@ function cbuild {
     fi
 
     if [[ $cmds =~ "b" ]]; then
+        cmd=(cmake --build "${builddir}")
         if [ -n "$target" ]; then
-            local target_arg="--target $target"
+            cmd+=(--target "$target")
         fi
 
-        verbose_arg=""
+        if [ ${verbose} == 1 ] ; then
+            cmd+=(--verbose)
+        fi
+
+        if [ ${keep} == 1 ] ; then
+            cmd+=(-- -k0)
+        fi
+
         if [ ${verbose} == 1 ] ; then
             echo "Running CMake build command:"
-            echo "    cmake --build "${builddir}" $target_arg"
-            verbose_arg="--verbose"
+            echo "    ${cmd[@]}"
         fi
 
-        cmake --build "${builddir}" ${verbose_arg} $target_arg \
-              || return $?
+        ${cmd[@]} || return $?
     fi
 
     return 0
