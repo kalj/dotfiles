@@ -32,9 +32,8 @@
     st = status
     ci = commit
     br = branch
-    co = checkout
     sw = switch
-    rr = restore
+    rs = restore
     cyp = cherry-pick
     amend = commit --amend
     fixup = commit --amend --no-edit
@@ -44,6 +43,8 @@
     dfc = diff --find-copies-harder --minimal --cached
     lg = log -p
     glog = log --oneline --graph --decorate
+    rss = restore --source
+    swd = switch --detach
     who = shortlog -s --
     ls = ls-files
     rh = reset HEAD
