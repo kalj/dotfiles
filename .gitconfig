@@ -54,6 +54,7 @@
     bsu = "!git branch --set-upstream-to \"origin/$(git rev-parse --abbrev-ref HEAD)\""
     addnw=!sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
     rgrep = grep --recurse-submodules
+    copysha = "!git rev-parse HEAD | tr -d '\n' | xclip -selection clipboard"
 
 [mergetool "ediff"]
     cmd = emacs --eval \" (progn (defun ediff-write-merge-buffer () (let ((file ediff-merge-store-file)) (set-buffer ediff-buffer-C) (write-region (point-min) (point-max) file) (message \\\"Merge buffer saved in: %s\\\" file) (set-buffer-modified-p nil) (sit-for 1))) (setq ediff-quit-hook 'kill-emacs ediff-quit-merge-hook 'ediff-write-merge-buffer) (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\"))\"
