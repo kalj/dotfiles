@@ -38,25 +38,16 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar.PP
 
 import Data.Map (fromList, toList)
-import Data.Maybe (isJust, catMaybes, mapMaybe, fromMaybe, listToMaybe)
+import Data.Maybe (mapMaybe)
 import Data.List (intercalate)
-import Data.Default
 
 import XMonad.Config.Mate
 import XMonad.Layout.NoBorders
-import XMonad.Layout.PerWorkspace
-import XMonad.Layout.IM
 import XMonad.Layout.ThreeColumns
-import XMonad.Layout.Reflect
 
 import qualified DBus as D
 import qualified DBus.Client as D
-import qualified Codec.Binary.UTF8.String as UTF8
-import Codec.Binary.UTF8.String (encodeString)
 import XMonad.Hooks.UrgencyHook
-import XMonad.Util.NamedWindows
-import XMonad.Hooks.DynamicLog
-import XMonad.Util.WorkspaceCompare (WorkspaceSort)
 
 -- =============================================================================
 -- Main
@@ -108,7 +99,7 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , ("M-S-s",            spawn "sleep 0.2 ; mate-screenshot -a")
          , ("<XF86Calculator>", runInTerm "octave -q")
          , ("M-c",              spawn "caja ~")
-         , ("C-M-S-q",          spawn "mate-session-save --shutdown-dialog")
+         , ("C-M-S-q",          mateShutdown)
          ]
          ++
          [("M-" ++ mask ++ key, f sc)
@@ -152,8 +143,7 @@ myManageHook = composeAll
                , className =? "Wrapper" --> doIgnore
                , className =? "Do" --> doIgnore
                , className =? "Timer-applet" --> doFloat
-               , className =? "Timer-applet" --> doFloat
-               , composeOne [ isFullscreen -?> doFullFloat ]
+               , isFullscreen --> doFullFloat
                ]
 
 
@@ -162,8 +152,8 @@ myManageHook = composeAll
 -- =============================================================================
 getWellKnownName :: D.Client -> IO ()
 getWellKnownName dbus = do
-  D.requestName dbus (D.busName_ "org.xmonad.Log")
-                [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
+  _ <- D.requestName dbus (D.busName_ "org.xmonad.Log")
+       [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
   return ()
 
 dbusOutput :: D.Client -> String -> IO ()
