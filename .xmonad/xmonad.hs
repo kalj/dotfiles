@@ -29,16 +29,17 @@
 import XMonad
 import qualified XMonad.StackSet as S
 import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Hooks.EwmhDesktops (ewmhDesktopsStartup)
+import XMonad.Hooks.EwmhDesktops (ewmhFullscreen)
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Actions.CycleWS
 import XMonad.Actions.PhysicalScreens
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.StatusBar.PP
 
 import Data.Map (fromList, toList)
 import Data.Maybe (isJust, catMaybes, mapMaybe, fromMaybe, listToMaybe)
-import Data.List (intersperse)
+import Data.List (intercalate)
 import Data.Default
 
 import XMonad.Config.Mate
@@ -57,7 +58,24 @@ import XMonad.Util.NamedWindows
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.WorkspaceCompare (WorkspaceSort)
 
-import MaxWidth
+-- =============================================================================
+-- Main
+-- =============================================================================
+
+myConfig dbus = mateConfig {
+  modMask    = myModMask
+  , manageHook = myManageHook <+> manageHook mateConfig
+  , layoutHook = myLayoutHook
+  , logHook = logHook mateConfig >> dynamicLogWithPP (appletPP dbus)
+  , startupHook = startupHook mateConfig >> setWMName "LG3D"
+  , XMonad.keys = myAddKPs  . (XMonad.keys mateConfig)
+  } `additionalKeysP` myKeys
+
+main :: IO ()
+main = do
+  dbus <- D.connectSession
+  getWellKnownName dbus
+  xmonad $ withUrgencyHook NoUrgencyHook $ ewmhFullscreen $ myConfig dbus
 
 -- =============================================================================
 -- Misc. variables
@@ -71,7 +89,6 @@ myModMask = mod4Mask
 
 runInTerm :: String -> X ()
 runInTerm command = asks (terminal . config) >>= \t -> spawn $ t  ++ " -x " ++ command
-
 
 myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , ("M-<Tab>",          toggleWS)
@@ -99,17 +116,17 @@ myKeys = [ ("M-`",              spawn (terminal mateConfig ))
          , (f, mask) <- [(viewScreen horizontalScreenOrderer, ""), (sendToScreen horizontalScreenOrderer, "S-")]]
 
 myKPFilter :: ((ButtonMask, KeySym), X()) -> Maybe ((ButtonMask, KeySym), X())
-myKPFilter ((bm,apa),x) | apa==xK_Return     = Just ((bm,xK_KP_Enter),x)
-                        | apa==xK_1          = Just ((bm,xK_KP_1),x)
-                        | apa==xK_2          = Just ((bm,xK_KP_2),x)
-                        | apa==xK_3          = Just ((bm,xK_KP_3),x)
-                        | apa==xK_4          = Just ((bm,xK_KP_4),x)
-                        | apa==xK_5          = Just ((bm,xK_KP_5),x)
-                        | apa==xK_6          = Just ((bm,xK_KP_6),x)
-                        | apa==xK_7          = Just ((bm,xK_KP_7),x)
-                        | apa==xK_8          = Just ((bm,xK_KP_8),x)
-                        | apa==xK_9          = Just ((bm,xK_KP_9),x)
-                        | otherwise          = Nothing
+myKPFilter ((bm,ks),x) | ks==xK_Return     = Just ((bm,xK_KP_Enter),x)
+                       | ks==xK_1         = Just ((bm,xK_KP_1),x)
+                       | ks==xK_2         = Just ((bm,xK_KP_2),x)
+                       | ks==xK_3         = Just ((bm,xK_KP_3),x)
+                       | ks==xK_4         = Just ((bm,xK_KP_4),x)
+                       | ks==xK_5         = Just ((bm,xK_KP_5),x)
+                       | ks==xK_6         = Just ((bm,xK_KP_6),x)
+                       | ks==xK_7         = Just ((bm,xK_KP_7),x)
+                       | ks==xK_8         = Just ((bm,xK_KP_8),x)
+                       | ks==xK_9         = Just ((bm,xK_KP_9),x)
+                       | otherwise        = Nothing
 
 myAddKPs = fromList . (\x -> x ++ (mapMaybe myKPFilter x) ) . toList
 
@@ -117,13 +134,9 @@ myAddKPs = fromList . (\x -> x ++ (mapMaybe myKPFilter x) ) . toList
 -- Layout Hook
 -- =============================================================================
 
-myLayoutHook = avoidStruts $ smartBorders $ ow "9" mailLayout $ standardLayouts
+myLayoutHook = avoidStruts $ smartBorders  $ standardLayouts
   where
     standardLayouts = Tall 1 (3/100) (0.573) ||| ThreeCol 1 (3/100) (1/2) ||| noBorders Full
---    standardLayouts = webLayout ||| ThreeCol 1 (3/100) (1/2) ||| noBorders Full
-    mailLayout = Tall 1 (3/100) (1/3)
---    webLayout = maxWidth [(ClassName "Firefox", 1100)] (Tall 1 (3/100) (0.573))
-    ow a b c = onWorkspace a b c
 
 -- =============================================================================
 -- Manage Hook
@@ -156,103 +169,24 @@ getWellKnownName dbus = do
 dbusOutput :: D.Client -> String -> IO ()
 dbusOutput dbus str = do
     let signal = (D.signal (D.objectPath_ "/org/xmonad/Log") (D.interfaceName_ "org.xmonad.Log") (D.memberName_ "Update")) {
---             D.signalBody = [D.toVariant ("<b>" ++ (UTF8.decodeString str) ++ "</b>")]
-            D.signalBody = [D.toVariant ((UTF8.decodeString str))]
+            D.signalBody = [D.toVariant str]
         }
     D.emit dbus signal
 
---
--- iconsAppletLog based on dynamicLogWithPP
--- (in addition to workspace numbers, it also outputs window id-s)
---
-
-iconsAppletLog :: D.Client -> X ()
-iconsAppletLog dbus = iconsAppletLogString >>= io . (dbusOutput dbus)
-
-iconsAppletLogString :: X String
-iconsAppletLogString = do
-
-    winset <- gets windowset
-    urgents <- readUrgents
-    sort' <- ppSort iconsAppletPP
-
-    -- layout description
-    let ld = description . S.layout . S.workspace . S.current $ winset
-
-    -- workspace list
-    let ws = iconsAppletWindowSet sort' urgents winset
-
-    -- window title
-    wt <- maybe (return "") (fmap show . getName) . S.peek $ winset
-
-    let maxlen = 137
-    let cropped_title = if (length wt) > maxlen then ((take (maxlen-1) wt)++"...") else wt
-
-    -- run extra loggers, ignoring any that generate errors.
-    extras <- mapM (flip catchX (return Nothing)) $ ppExtras iconsAppletPP
-
-    return $ encodeString . sepBy (ppSep iconsAppletPP) . ppOrder iconsAppletPP $
-                        [ ws
-                        , ppLayout iconsAppletPP ld
-                        , ppTitle iconsAppletPP cropped_title
-                        ]
-                        ++ catMaybes extras
-
-iconsAppletWindowSet :: WorkspaceSort -> [Window] -> WindowSet -> String
-iconsAppletWindowSet sort' urgents s = sepBy ";" . map fmt . sort' $
-            map S.workspace (S.current s : S.visible s) ++ S.hidden s
-   where this     = S.currentTag s
-         visibles = map (S.tag . S.workspace) (S.visible s)
-
-         fmt w = printer iconsAppletPP (iconsAppletFormatWorkspace w)
-          where printer | any (\x -> maybe False (== S.tag w) (S.findTag x s)) urgents  = ppUrgent
-                        | S.tag w == this                                               = ppCurrent
-                        | S.tag w `elem` visibles                                       = ppVisible
-                        | isJust (S.stack w)                                            = ppHidden
-                        | otherwise                                                     = ppHiddenNoWindows
-
-iconsAppletFormatWorkspace :: S.Workspace WorkspaceId (Layout Window) Window -> String
-iconsAppletFormatWorkspace w = (S.tag w) ++ ":" ++ (iconsAppletFormatStack . S.stack $ w)
-
-iconsAppletFormatStack :: Maybe (S.Stack Window) -> String
-iconsAppletFormatStack s = case s of
-  Just value -> sepBy "," . map show $ (reverse (S.up value) ++ [S.focus value] ++ S.down value)
-  Nothing -> ""
-
-iconsAppletPP :: PP
-iconsAppletPP = def {
-    ppTitle    = ("|" ++)
-  , ppCurrent  = ("*" ++)
-  , ppVisible  = ("+" ++)
-  , ppHidden   = ("-" ++)
-  , ppUrgent   = ("!" ++)
-  , ppLayout   = const ""
-  , ppSep      = ";"
+appletPP :: D.Client -> PP
+appletPP dbus = def
+  { ppCurrent       = ("*" ++)
+  , ppVisible       = ("+" ++)
+  , ppHidden        = ("-" ++)
+  , ppUrgent        = ("!" ++)
+  , ppRename        = \name ws -> name ++ ":" ++ windowIds ws
+  , ppWsSep         = ";"
+  , ppSep           = ";"
+  , ppLayout        = const ""
+  , ppTitle         = ("|" ++) . cropTitle 137
+  , ppTitleSanitize = id
+  , ppOutput        = dbusOutput dbus
   }
+  where windowIds = intercalate "," . map show . S.integrate' . S.stack
 
-sepBy :: String   -- ^ separator
-      -> [String] -- ^ fields to output
-      -> String
-sepBy sep = concat . intersperse sep . filter (not . null)
-
-
--- =============================================================================
--- Main
--- =============================================================================
-
-myConfig dbus = mateConfig {
-  modMask    = myModMask
-  , manageHook = myManageHook <+> manageHook mateConfig
-  , layoutHook = myLayoutHook
-  , logHook = logHook mateConfig >> iconsAppletLog dbus
-  , startupHook = startupHook mateConfig >> setWMName "LG3D"
-  , XMonad.keys = myAddKPs  . (XMonad.keys mateConfig)
-  } `additionalKeysP` myKeys
-
--- . (Data.Map.union (mkKeymap gnomeConfig myKeys))
-
-main :: IO ()
-main = do
-  dbus <- D.connectSession
-  getWellKnownName dbus
-  xmonad $ myConfig dbus
+cropTitle maxlen wt =  if (length wt) > maxlen then ((take (maxlen-1) wt)++"...") else wt
