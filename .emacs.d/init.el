@@ -1,4 +1,4 @@
-; init.el --
+; init.el -- -*- lexical-binding: t -*-
 
 ;; The configuration lives in ~/.emacs.d/lisp/, one file per topic.
 ;; They are loaded in this order.
