@@ -1,4 +1,4 @@
-;;; kalj-completion.el --- which-key, ido, yasnippet, company
+;;; kalj-completion.el --- which-key, ido, yasnippet, company -*- lexical-binding: t -*-
 
 ;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
