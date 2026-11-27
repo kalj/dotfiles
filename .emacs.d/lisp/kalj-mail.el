@@ -6,6 +6,8 @@
 ;; email (mu4e)
 ;;-----------------------------------------------------------------------------
 
+(require 'cl-lib)
+
 ;; get mail addresses
 (defvar email-addresses (split-string (with-temp-buffer (insert-file-contents "~/.email_addresses")
                                                         (buffer-string))))
@@ -22,6 +24,29 @@
 
 ;; set main mail address
 (setq user-mail-address gmail-mail-address)
+
+(cl-defun kalj/mu4e-make-context (name address &key sent drafts trash smtp-server
+                                       (smtp-stream 'starttls) (smtp-port 587))
+  "Make a mu4e context NAME for ADDRESS.
+SENT, DRAFTS and TRASH are maildir paths.  SMTP-SERVER, SMTP-STREAM
+and SMTP-PORT describe the server used to send mail."
+  (make-mu4e-context
+   :name name
+   :enter-func (lambda () (mu4e-message (concat "Entering context " name)))
+   :leave-func (lambda () (mu4e-message (concat "Leaving context " name)))
+   :match-func (lambda (msg)
+                 (when msg
+                   (mu4e-message-contact-field-matches
+                    msg '(:from :to :cc :bcc) address)))
+   :vars `((user-mail-address . ,address)
+           (mu4e-sent-folder . ,sent)
+           (mu4e-drafts-folder . ,drafts)
+           (mu4e-trash-folder . ,trash)
+           (smtpmail-smtp-user . ,address)
+           (smtpmail-smtp-server . ,smtp-server)
+           (smtpmail-stream-type . ,smtp-stream)
+           (smtpmail-smtp-service . ,smtp-port)
+           (mu4e-user-mail-address-list . (,address)))))
 
 (use-package mu4e
   :ensure nil
@@ -72,97 +97,33 @@
         )
   (setq mu4e-contexts
         (list
-         (make-mu4e-context
-          :name "main"
-          :enter-func (lambda () (mu4e-message "Entering context main"))
-          :leave-func (lambda () (mu4e-message "Leaving context main"))
-          :match-func `(lambda (msg)
-                        (when msg
-                          (mu4e-message-contact-field-matches
-                           msg '(:from :to :cc :bcc) ,kalj-mail-address)))
-          :vars `((user-mail-address . ,kalj-mail-address)
-                  (mu4e-sent-folder . "/main/INBOX.Sent")
-                  (mu4e-drafts-folder . "/main/INBOX.Drafts")
-                  (mu4e-trash-folder . "/main/INBOX.Trash")
-                  (smtpmail-smtp-user . ,kalj-mail-address)
-                  (smtpmail-smtp-server . "mailcluster.loopia.se")
-                  (smtpmail-stream-type . starttls)
-                  (smtpmail-smtp-service . 587)
-                  (mu4e-user-mail-address-list . (,kalj-mail-address))
-                  ))
-         (make-mu4e-context
-          :name "ubertek"
-          :enter-func (lambda () (mu4e-message "Entering context ubertek"))
-          :leave-func (lambda () (mu4e-message "Leaving context ubertek"))
-          :match-func `(lambda (msg)
-                        (when msg
-                          (mu4e-message-contact-field-matches
-                           msg '(:from :to :cc :bcc) ,ubertek-mail-address)))
-          :vars `((user-mail-address . ,ubertek-mail-address)
-                  (mu4e-sent-folder . "/ubertek/INBOX.Sent")
-                  (mu4e-drafts-folder . "/ubertek/INBOX.Drafts")
-                  (mu4e-trash-folder . "/ubertek/INBOX.Trash")
-                  (smtpmail-smtp-user . ,ubertek-mail-address)
-                  (smtpmail-smtp-server . "mailcluster.loopia.se")
-                  (smtpmail-stream-type . starttls)
-                  (smtpmail-smtp-service . 587)
-                  (mu4e-user-mail-address-list . (,ubertek-mail-address))
-                  ))
-         (make-mu4e-context
-          :name "hpc"
-          :enter-func (lambda () (mu4e-message "Entering context hpc"))
-          :leave-func (lambda () (mu4e-message "Leaving context hpc"))
-          :match-func (lambda (msg)
-                        (when msg
-                          (mu4e-message-contact-field-matches
-                           msg '(:from :to :cc :bcc) hpc-mail-address)))
-          :vars `((user-mail-address . ,hpc-mail-address)
-                  (mu4e-sent-folder . "/hpc/Sent")
-                  (mu4e-drafts-folder . "/hpc/Drafts")
-                  (mu4e-trash-folder . "/hpc/Trash")
-                  (smtpmail-smtp-user . ,hpc-mail-address)
-                  (smtpmail-smtp-server . "smtp01.binero.se")
-                  (smtpmail-stream-type . ssl)
-                  (smtpmail-smtp-service . 465)
-                  (mu4e-user-mail-address-list . (,hpc-mail-address))
-                  ))
-         (make-mu4e-context
-          :name "gmail"
-          :enter-func (lambda () (mu4e-message "Entering context gmail"))
-          :leave-func (lambda () (mu4e-message "Leaving context gmail"))
-          :match-func `(lambda (msg)
-                        (when msg
-                          (mu4e-message-contact-field-matches
-                           msg '(:from :to :cc :bcc) ,gmail-mail-address)))
-          :vars `((user-mail-address . ,gmail-mail-address)
-                  (mu4e-sent-folder . "/gmail/[Gmail].Sent Mail")
-                  (mu4e-drafts-folder . "/gmail/[Gmail].Drafts")
-                  (mu4e-trash-folder . "/gmail/[Gmail].Trash")
-                  (smtpmail-smtp-user . ,gmail-mail-address)
-                  (smtpmail-smtp-server . "smtp.gmail.com")
-                  (smtpmail-stream-type . starttls)
-                  (smtpmail-smtp-service . 587)
-                  (mu4e-user-mail-address-list . (,gmail-mail-address))
-                  ))
-         (make-mu4e-context
-          :name "qgmail"
-          :enter-func (lambda () (mu4e-message "Entering context qgmail"))
-          :leave-func (lambda () (mu4e-message "Leaving context qgmail"))
-          :match-func `(lambda (msg)
-                        (when msg
-                          (mu4e-message-contact-field-matches
-                           msg '(:from :to :cc :bcc) ,qgmail-mail-address)))
-          :vars `((user-mail-address . ,qgmail-mail-address)
-                  (mu4e-sent-folder . "/gmail2/[Gmail].Sent Mail")
-                  (mu4e-drafts-folder . "/gmail2/[Gmail].Drafts")
-                  (mu4e-trash-folder . "/gmail2/[Gmail].Trash")
-                  (smtpmail-smtp-user . ,qgmail-mail-address)
-                  (smtpmail-smtp-server . "smtp.gmail.com")
-                  (smtpmail-stream-type . starttls)
-                  (smtpmail-smtp-service . 587)
-                  (mu4e-user-mail-address-list . (,qgmail-mail-address))
-                  ))
-        ))
+         (kalj/mu4e-make-context "main" kalj-mail-address
+                                 :sent "/main/INBOX.Sent"
+                                 :drafts "/main/INBOX.Drafts"
+                                 :trash "/main/INBOX.Trash"
+                                 :smtp-server "mailcluster.loopia.se")
+         (kalj/mu4e-make-context "ubertek" ubertek-mail-address
+                                 :sent "/ubertek/INBOX.Sent"
+                                 :drafts "/ubertek/INBOX.Drafts"
+                                 :trash "/ubertek/INBOX.Trash"
+                                 :smtp-server "mailcluster.loopia.se")
+         (kalj/mu4e-make-context "hpc" hpc-mail-address
+                                 :sent "/hpc/Sent"
+                                 :drafts "/hpc/Drafts"
+                                 :trash "/hpc/Trash"
+                                 :smtp-server "smtp01.binero.se"
+                                 :smtp-stream 'ssl
+                                 :smtp-port 465)
+         (kalj/mu4e-make-context "gmail" gmail-mail-address
+                                 :sent "/gmail/[Gmail].Sent Mail"
+                                 :drafts "/gmail/[Gmail].Drafts"
+                                 :trash "/gmail/[Gmail].Trash"
+                                 :smtp-server "smtp.gmail.com")
+         (kalj/mu4e-make-context "qgmail" qgmail-mail-address
+                                 :sent "/gmail2/[Gmail].Sent Mail"
+                                 :drafts "/gmail2/[Gmail].Drafts"
+                                 :trash "/gmail2/[Gmail].Trash"
+                                 :smtp-server "smtp.gmail.com")))
   (defun mu4e-message-contact-field-matches-me-current (msg cfield)
     (cl-find-if (lambda (cell) (mu4e-current-personal-address-p (cdr cell)))
                 (mu4e-message-field msg cfield)))
