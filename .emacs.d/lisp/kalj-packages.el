@@ -1,4 +1,4 @@
-;;; kalj-packages.el --- package.el and use-package setup
+;;; kalj-packages.el --- package.el and use-package setup -*- lexical-binding: t -*-
 
 ;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
