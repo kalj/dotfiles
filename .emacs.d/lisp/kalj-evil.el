@@ -1,4 +1,4 @@
-;;; kalj-evil.el --- Vi emulation
+;;; kalj-evil.el --- Vi emulation -*- lexical-binding: t -*-
 
 ;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
