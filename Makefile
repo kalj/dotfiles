@@ -10,7 +10,7 @@ HOMEFILES=.bashrc .dircolors .emacs .inputrc .screenrc .templates \
 		.aspell.sv.prepl .ncmpcpp .gdbinit .gdbscripts \
 		.offlineimaprc .offlineimap.py
 
-EMACSFILES=plugins snippets
+EMACSFILES=lisp plugins snippets
 VIMFILES=plugin
 
 install:
