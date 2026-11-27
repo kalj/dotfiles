@@ -1,6 +1,6 @@
 ;;; kalj-evil.el --- Vi emulation
 
-;; Split verbatim from ~/.emacs; loaded from there.
+;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
 ;;-----------------------------------------------------------------------------
 ;; vi emulation

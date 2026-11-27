@@ -4,16 +4,20 @@
 
 TIMESTAMP=$(shell date +"%Y-%m-%d_%T")
 
-HOMEFILES=.bashrc .dircolors .emacs .inputrc .screenrc .templates \
+HOMEFILES=.bashrc .dircolors .inputrc .screenrc .templates \
 		.xmonad .vimperatorrc .vimrc .viper .Xresources \
 		.gitconfig .aspell.en.pws .aspell.en.prepl .aspell.sv.pws \
 		.aspell.sv.prepl .ncmpcpp .gdbinit .gdbscripts \
 		.offlineimaprc .offlineimap.py
 
-EMACSFILES=lisp plugins snippets
+EMACSFILES=init.el lisp plugins snippets
 VIMFILES=plugin
 
 install:
+	@# Emacs ignores ~/.emacs.d/init.el while ~/.emacs exists, so drop the
+	@# symlink left over from when the config was a single ~/.emacs.
+	@if [ -L ~/.emacs ] && [ "$$(readlink ~/.emacs)" = "$$HOME/.dotfiles/.emacs" ]; then \
+		rm ~/.emacs && echo "Removed old ~/.emacs symlink"; fi
 	@python3 setup.py -timestamp ${TIMESTAMP} $(HOMEFILES)
 	@python3 setup.py -timestamp ${TIMESTAMP} -dir ".emacs.d" $(EMACSFILES)
 	@python3 setup.py -timestamp ${TIMESTAMP} -dir ".vim" $(VIMFILES)

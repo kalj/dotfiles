@@ -1,21 +1,21 @@
 ;;; kalj-utils.el --- Small interactive commands
 
-;; Split verbatim from ~/.emacs; loaded from there.
+;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
 ;;-----------------------------------------------------------------------------
 ;; Command for reloading this file
 ;;-----------------------------------------------------------------------------
 
 (defun reload-init-file ()
-  "Reload Emacs init file (~/.emacs)."
+  "Reload Emacs init file (~/.emacs.d/init.el)."
   (interactive)
-  (load-file "~/.emacs")
+  (load-file "~/.emacs.d/init.el")
   )
 
 (defun edit-init-file ()
-  "Open Emacs init file for editing (~/.emacs)."
+  "Open Emacs init file for editing (~/.emacs.d/init.el)."
   (interactive)
-  (find-file "~/.emacs")
+  (find-file "~/.emacs.d/init.el")
   )
 
 ;; bind to keys

@@ -1,6 +1,6 @@
 ;;; kalj-prog.el --- Compile, formatting, ediff, git, LSP, projects
 
-;; Split verbatim from ~/.emacs; loaded from there.
+;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
 ;;-------------------------------------------------------------------
 ;; compile code using f12 and f11

@@ -1,6 +1,6 @@
 ;;; kalj-languages.el --- Language-specific modes and settings
 
-;; Split verbatim from ~/.emacs; loaded from there.
+;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
 ;;-----------------------------------------------------------------------------
 ;; org-mode

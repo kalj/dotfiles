@@ -1,4 +1,4 @@
-; .emacs --
+; init.el --
 
 ;; The configuration lives in ~/.emacs.d/lisp/, one file per topic.
 ;; They are loaded in this order.

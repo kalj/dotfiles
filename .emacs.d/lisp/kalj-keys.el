@@ -1,6 +1,6 @@
 ;;; kalj-keys.el --- Global keybindings and font size
 
-;; Split verbatim from ~/.emacs; loaded from there.
+;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
 ;;-----------------------------------------------------------------------------
 ;; Global key bindings

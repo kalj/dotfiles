@@ -1,6 +1,6 @@
 ;;; kalj-core.el --- Basic behaviour, appearance, encoding, backups
 
-;; Split verbatim from ~/.emacs; loaded from there.
+;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
 ;;-----------------------------------------------------------------------------
 ;; general behavior/appearance mods

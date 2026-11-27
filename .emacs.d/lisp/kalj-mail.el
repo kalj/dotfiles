@@ -1,6 +1,6 @@
 ;;; kalj-mail.el --- Email with mu4e
 
-;; Split verbatim from ~/.emacs; loaded from there.
+;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
 ;;-----------------------------------------------------------------------------
 ;; email (mu4e)

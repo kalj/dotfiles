@@ -1,6 +1,6 @@
 ;;; kalj-completion.el --- which-key, ido, yasnippet, company
 
-;; Split verbatim from ~/.emacs; loaded from there.
+;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
 ;;-----------------------------------------------------------------------------
 ;; which-key
