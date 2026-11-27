@@ -1,4 +1,4 @@
-;;; kalj-core.el --- Basic behaviour, appearance, encoding, backups
+;;; kalj-core.el --- Basic behaviour, appearance, encoding, backups -*- lexical-binding: t -*-
 
 ;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
