@@ -1,4 +1,4 @@
-;;; kalj-prog.el --- Compile, formatting, ediff, git, LSP, projects
+;;; kalj-prog.el --- Compile, formatting, ediff, git, LSP, projects -*- lexical-binding: t -*-
 
 ;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 

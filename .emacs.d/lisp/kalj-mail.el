@@ -1,4 +1,4 @@
-;;; kalj-mail.el --- Email with mu4e
+;;; kalj-mail.el --- Email with mu4e -*- lexical-binding: t -*-
 
 ;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 

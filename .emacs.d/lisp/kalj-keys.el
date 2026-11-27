@@ -1,4 +1,4 @@
-;;; kalj-keys.el --- Global keybindings and font size
+;;; kalj-keys.el --- Global keybindings and font size -*- lexical-binding: t -*-
 
 ;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 

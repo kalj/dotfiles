@@ -1,4 +1,4 @@
-;;; kalj-languages.el --- Language-specific modes and settings
+;;; kalj-languages.el --- Language-specific modes and settings -*- lexical-binding: t -*-
 
 ;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
