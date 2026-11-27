@@ -25,6 +25,20 @@
 ;; set main mail address
 (setq user-mail-address gmail-mail-address)
 
+(defvar kalj/mail-inboxes
+  '("/main/INBOX" "/ubertek/INBOX" "/hpc/INBOX" "/gmail/INBOX" "/gmail2/INBOX")
+  "Inboxes shown by the \"All inboxes\" bookmark.")
+
+(defvar kalj/mail-spam-and-trash
+  '("/gmail/[Gmail].Spam" "/gmail2/[Gmail].Spam" "/hpc/Spam"
+    "/gmail/[Gmail].Trash" "/gmail2/[Gmail].Trash"
+    "/main/INBOX.Trash" "/hpc/Trash" "/ubertek/INBOX.Trash")
+  "Folders left out of the \"Unread messages\" bookmark.")
+
+(defun kalj/maildir-query (maildirs)
+  "Return a mu query matching any of MAILDIRS."
+  (mapconcat (lambda (m) (concat "maildir:" m)) maildirs " OR "))
+
 (cl-defun kalj/mu4e-make-context (name address &key sent drafts trash smtp-server
                                        (smtp-stream 'starttls) (smtp-port 587))
   "Make a mu4e context NAME for ADDRESS.
@@ -75,11 +89,13 @@ and SMTP-PORT describe the server used to send mail."
           (:subject))
 
         mu4e-bookmarks
-        '(( :name  "Unread messages (excl. spam & trash)"
-                   :query "flag:unread AND NOT ( maildir:/gmail/[Gmail].Spam OR maildir:/gmail2/[Gmail].Spam OR maildir:/hpc/Spam OR maildir:/gmail/[Gmail].Trash OR maildir:/gmail2/[Gmail].Trash OR maildir:/main/INBOX.Trash OR maildir:/hpc/Trash OR maildir:/ubertek/INBOX.Trash )"
+        `(( :name  "Unread messages (excl. spam & trash)"
+                   :query ,(concat "flag:unread AND NOT ( "
+                                   (kalj/maildir-query kalj/mail-spam-and-trash)
+                                   " )")
                    :key ?u)
           ( :name "All inboxes"
-                  :query "maildir:/main/INBOX OR maildir:/ubertek/INBOX OR maildir:/hpc/INBOX OR maildir:/gmail/INBOX OR maildir:/gmail2/INBOX"
+                  :query ,(kalj/maildir-query kalj/mail-inboxes)
                   :key ?i)
           ( :name "Today's messages"
                   :query "date:today..now"
