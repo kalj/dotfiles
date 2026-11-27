@@ -1,4 +1,4 @@
-;;; kalj-utils.el --- Small interactive commands
+;;; kalj-utils.el --- Small interactive commands -*- lexical-binding: t -*-
 
 ;; Split verbatim from the old ~/.emacs; loaded from ~/.emacs.d/init.el.
 
