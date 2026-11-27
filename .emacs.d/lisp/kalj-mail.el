@@ -14,11 +14,11 @@
 (defun kalj/get-email (key)
   (kalj/get-match key email-addresses))
 
-(setq kalj-mail-address (kalj/get-email "kalj"))
-(setq hpc-mail-address (kalj/get-email "hpc"))
-(setq ubertek-mail-address (kalj/get-email "ubertek"))
-(setq gmail-mail-address (kalj/get-email "k.*gmail"))
-(setq qgmail-mail-address (kalj/get-email "q.*gmail"))
+(defvar kalj-mail-address (kalj/get-email "kalj"))
+(defvar hpc-mail-address (kalj/get-email "hpc"))
+(defvar ubertek-mail-address (kalj/get-email "ubertek"))
+(defvar gmail-mail-address (kalj/get-email "k.*gmail"))
+(defvar qgmail-mail-address (kalj/get-email "q.*gmail"))
 
 ;; set main mail address
 (setq user-mail-address gmail-mail-address)
